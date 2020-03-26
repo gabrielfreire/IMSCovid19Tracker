@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:IMSCovidTracker.Converters"
+             mc:Ignorable="d" HorizontalOptions="FillAndExpand"
+             x:Name="LargeCovidCardView"
+             x:Class="IMSCovidTracker.Components.LargeCovidInformationCard">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:BoolInvertConverter x:Key="BoolInvert"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+  <ContentView.Content>
+        <Frame Padding="5" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label FontSize="14" Text="{Binding Source={x:Reference LargeCovidCardView}, Path=CountryName}" FontAttributes="Bold"/>
+                </StackLayout>
+
+                <Frame Margin="5" Padding="10" BackgroundColor="#fefbd7" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+                    <StackLayout>
+                        <Label  TextColor="Orange"
+                                    Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Confirmed}" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                        <Label Text="Confirmed" TextColor="Orange" HorizontalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Margin="5" Padding="10" BackgroundColor="#fff5f5" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+                    <StackLayout>
+                        <Label  TextColor="Red"
+                                    Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Deaths}" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                        <Label Text="Deaths" TextColor="Red" HorizontalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Margin="5" Padding="10" BackgroundColor="#f0fff4" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+                    <StackLayout>
+                        <Label  TextColor="Green"
+                                    Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Recovered}" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                        <Label Text="Recovered" TextColor="Green" HorizontalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Frame>
+  </ContentView.Content>
+</ContentView>

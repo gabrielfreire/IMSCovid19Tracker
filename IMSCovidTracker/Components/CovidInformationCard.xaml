@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:IMSCovidTracker.Converters"
+             mc:Ignorable="d" HorizontalOptions="FillAndExpand"
+             x:Name="CovidCardView"
+             x:Class="IMSCovidTracker.Components.CovidInformationCard">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:BoolInvertConverter x:Key="BoolInvert"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+  <ContentView.Content>
+        <Frame Padding="5" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label FontSize="14" Text="{Binding Source={x:Reference CovidCardView}, Path=CountryName}" FontAttributes="Bold"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="warning.png" Aspect="AspectFit" WidthRequest="20" HorizontalOptions="StartAndExpand"
+                           IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small}"/>
+                    <Label IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}" Text="Confirmed:" TextColor="Orange" HorizontalOptions="FillAndExpand"/>
+                    <Label  TextColor="Orange" FontAttributes="Bold"
+                                Text="{Binding Source={x:Reference CovidCardView}, Path=Confirmed}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="death.png" Aspect="AspectFit" WidthRequest="20" HorizontalOptions="StartAndExpand"
+                           IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small}"/>
+                    <Label IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}" Text="Deaths:" TextColor="Red" HorizontalOptions="FillAndExpand"/>
+                    <Label TextColor="Red" FontAttributes="Bold"
+                                Text="{Binding Source={x:Reference CovidCardView}, Path=Deaths}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="heal.png" Aspect="AspectFit" WidthRequest="20" HorizontalOptions="StartAndExpand"
+                           IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small}"/>
+                    <Label IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}" Text="Recovered:" TextColor="Green" HorizontalOptions="FillAndExpand"/>
+                    <Label TextColor="Green" FontAttributes="Bold"
+                               Text="{Binding Source={x:Reference CovidCardView}, Path=Recovered}"/>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

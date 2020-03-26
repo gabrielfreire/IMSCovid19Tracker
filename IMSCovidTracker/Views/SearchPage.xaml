@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:IMSCovidTracker.ViewModels"
+             xmlns:components="clr-namespace:IMSCovidTracker.Components"
+             mc:Ignorable="d"
+             BackgroundColor="#eee"
+             x:Name="SearchPageView"
+             x:Class="IMSCovidTracker.Views.SearchPage">
+    <Shell.TitleView>
+        <StackLayout HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Image Source="coronavirus.png" Aspect="AspectFit" WidthRequest="25"/>
+                <Label Text="IMS COVID-19 Tracker" FontSize="20" FontAttributes="Bold"/>
+            </StackLayout>
+        </StackLayout>
+    </Shell.TitleView>
+    <ContentPage.Content>
+        <ScrollView Padding="10">
+            <Frame Padding="5" BackgroundColor="#ddd" HasShadow="{OnPlatform iOS=false, Default=true}">
+                <!--Search-->
+                <StackLayout>
+                    <Frame BackgroundColor="White" Padding="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+                        <StackLayout>
+                            <Label Text="Search for a country" FontAttributes="Bold" TextColor="Gray"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Entry HorizontalOptions="FillAndExpand"
+                                            Placeholder="Country name"
+                                            Text="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SearchQuery, Mode=TwoWay}"/>
+                                <ImageButton Source="search.png" 
+                                                        Aspect="AspectFit" 
+                                                        WidthRequest="30" 
+                                                     Clicked="SearchButton_Clicked"
+                                                        BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <!--Result-->
+                    <StackLayout 
+                                IsVisible="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SearchSuccess}">
+                        <components:LargeCovidInformationCard CountryName="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.ResultCountry.Country}" 
+                                    Confirmed="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.ResultCountry.Confirmed}"
+                                    Deaths="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.ResultCountry.Deaths}"
+                                    Recovered="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.ResultCountry.Recovered}"/>
+
+                    </StackLayout>
+
+                </StackLayout>
+            </Frame>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
