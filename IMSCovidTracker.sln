@@ -7,7 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMSCovidTracker.Android", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMSCovidTracker.iOS", "IMSCovidTracker.iOS\IMSCovidTracker.iOS.csproj", "{4F3F8C48-B09D-48F2-82D7-912302F9C542}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMSCovidTracker", "IMSCovidTracker\IMSCovidTracker.csproj", "{2947A45D-39D3-4C9C-8228-BB14006D4DB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IMSCovidTracker", "IMSCovidTracker\IMSCovidTracker.csproj", "{2947A45D-39D3-4C9C-8228-BB14006D4DB2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{04E75593-BB47-4E8A-90B9-A29AFEC00028}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

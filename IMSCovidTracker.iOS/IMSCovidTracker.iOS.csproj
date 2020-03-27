@@ -178,4 +178,13 @@
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\wreath_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\wreath_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\wreath_nc_gray.png" />
+  </ItemGroup>
 </Project>

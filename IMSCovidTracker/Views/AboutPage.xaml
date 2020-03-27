@@ -31,7 +31,7 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
             <Label Text="Developed by IMS MAXIMS" HorizontalTextAlignment="Center"/>
-            <Label Text="version 1.0.0" HorizontalTextAlignment="Center"/>
+            <Label Text="version 1.0.1" HorizontalTextAlignment="Center"/>
         </StackLayout>
     </ContentPage.Content>
     

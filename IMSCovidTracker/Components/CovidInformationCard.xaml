@@ -27,10 +27,10 @@
                                 Text="{Binding Source={x:Reference CovidCardView}, Path=Confirmed}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Image Source="death.png" Aspect="AspectFit" WidthRequest="20" HorizontalOptions="StartAndExpand"
+                    <Image Source="wreath_nc_gray.png" Aspect="AspectFit" WidthRequest="20" HorizontalOptions="StartAndExpand"
                            IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small}"/>
-                    <Label IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}" Text="Deaths:" TextColor="Red" HorizontalOptions="FillAndExpand"/>
-                    <Label TextColor="Red" FontAttributes="Bold"
+                    <Label IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}" Text="Deaths:" TextColor="Gray" HorizontalOptions="FillAndExpand"/>
+                    <Label TextColor="Gray" FontAttributes="Bold"
                                 Text="{Binding Source={x:Reference CovidCardView}, Path=Deaths}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
