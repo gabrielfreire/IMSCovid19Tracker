@@ -27,7 +27,7 @@
                             <Label Text="Search for a country" FontAttributes="Bold" TextColor="Gray"/>
                             <StackLayout Orientation="Horizontal">
                                 <Entry x:Name="SearchField" x:FieldModifier="public" HorizontalOptions="FillAndExpand"
-                                            Placeholder="Country name" BackgroundColor="White" PlaceholderColor="#ccc"
+                                            Placeholder="Country name" BackgroundColor="White" PlaceholderColor="#ccc" TextColor="Gray"
                                             Text="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SearchQuery, Mode=TwoWay}"/>
                                 <ImageButton Source="search.png" 
                                                         Aspect="AspectFit" 
@@ -39,7 +39,7 @@
                                 <CollectionView IsVisible="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.IsSearching, Mode=TwoWay}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SearchPartialResults}">
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
-                                            <Label Text="{Binding Country}" FontSize="20" HorizontalOptions="FillAndExpand">
+                                            <Label Text="{Binding Country}" FontSize="20" HorizontalOptions="FillAndExpand" TextColor="Gray">
                                                 <Label.GestureRecognizers>
                                                     <TapGestureRecognizer Command="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SelectCountryCommand}" CommandParameter="{Binding Country}"/>
                                                 </Label.GestureRecognizers>
