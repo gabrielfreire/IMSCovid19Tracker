@@ -102,5 +102,11 @@ namespace IMSCovidTracker.Services
             }
             return _final;
         }
+
+        public IEnumerable<CovidLocation> FindPartial(string searchQuery)
+        {
+            var _results = CovidLocations.Where(l => l.Country.ToLower().Contains(searchQuery.ToLower()));
+            return _results;
+        }
     }
 }

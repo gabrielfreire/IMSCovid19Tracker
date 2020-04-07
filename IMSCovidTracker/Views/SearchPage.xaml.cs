@@ -17,8 +17,15 @@ namespace IMSCovidTracker.Views
 
         public SearchPage()
         {
-            BindingContext = _viewModel = new SearchViewModel();
+            BindingContext = _viewModel = new SearchViewModel(this);
             InitializeComponent();
+            SearchField.TextChanged -= SearchField_TextChanged;
+            SearchField.TextChanged += SearchField_TextChanged;
+        }
+
+        public void SearchField_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           _viewModel.SearchPartial();
         }
 
         private void SearchButton_Clicked(object sender, EventArgs e)

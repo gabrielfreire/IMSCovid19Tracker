@@ -21,3 +21,5 @@ You should now be able to download the app directly onto your mobile
   - **1.0.1** 
     - Fix bug where query for U.S.A provinces were incomplete
     - Change Death icon to something more sensitive
+  - **1.0.2** 
+    - Added auto-complete on search page

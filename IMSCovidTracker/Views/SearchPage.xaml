@@ -26,14 +26,27 @@
                         <StackLayout>
                             <Label Text="Search for a country" FontAttributes="Bold" TextColor="Gray"/>
                             <StackLayout Orientation="Horizontal">
-                                <Entry HorizontalOptions="FillAndExpand"
-                                            Placeholder="Country name"
+                                <Entry x:Name="SearchField" x:FieldModifier="public" HorizontalOptions="FillAndExpand"
+                                            Placeholder="Country name" BackgroundColor="White" PlaceholderColor="#ccc"
                                             Text="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SearchQuery, Mode=TwoWay}"/>
                                 <ImageButton Source="search.png" 
                                                         Aspect="AspectFit" 
                                                         WidthRequest="30" 
                                                      Clicked="SearchButton_Clicked"
                                                         BackgroundColor="Transparent"/>
+                            </StackLayout>
+                            <StackLayout IsVisible="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.IsSearching, Mode=TwoWay}">
+                                <CollectionView IsVisible="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.IsSearching, Mode=TwoWay}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SearchPartialResults}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Text="{Binding Country}" FontSize="20" HorizontalOptions="FillAndExpand">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SelectCountryCommand}" CommandParameter="{Binding Country}"/>
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
                             </StackLayout>
                         </StackLayout>
                     </Frame>

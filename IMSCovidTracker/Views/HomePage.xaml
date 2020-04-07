@@ -14,7 +14,7 @@
         <StackLayout HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                 <Image Source="coronavirus.png" Aspect="AspectFit" WidthRequest="25"/>
-                <Label Text="IMS COVID-19 Tracker" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="IMS COVID-19 Tracker" FontSize="20" FontAttributes="Bold" TextColor="Gray"/>
             </StackLayout>
         </StackLayout>
     </Shell.TitleView>
@@ -31,7 +31,7 @@
 
                         <StackLayout Orientation="Horizontal">
                             <Image Source="important.png" Aspect="AspectFit" WidthRequest="20" HorizontalOptions="StartAndExpand"/>
-                            <Label Text="COVID-19 Case tracker" FontAttributes="Bold" FontSize="20" HorizontalOptions="FillAndExpand"/>
+                            <Label Text="COVID-19 Case tracker" FontAttributes="Bold" FontSize="20" HorizontalOptions="FillAndExpand" TextColor="Gray"/>
                             <ImageButton Aspect="AspectFit" WidthRequest="20" Source="refresh.png" Clicked="RefreshButton_Clicked"/>
                         </StackLayout>
 
