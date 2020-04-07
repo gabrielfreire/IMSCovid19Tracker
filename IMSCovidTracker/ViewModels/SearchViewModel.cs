@@ -97,7 +97,7 @@ namespace IMSCovidTracker.ViewModels
                     SearchPartialResults.Clear();
                     foreach ( var result in _results )
                     {
-                        if (SearchPartialResults.FirstOrDefault((r) => r.Country == result.Country) != null) return;
+                        if (SearchPartialResults.FirstOrDefault((r) => r.Country == result.Country) != null) continue;
                         SearchPartialResults.Add(result);
                     }
                 });

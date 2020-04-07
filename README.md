@@ -23,3 +23,4 @@ You should now be able to download the app directly onto your mobile
     - Change Death icon to something more sensitive
   - **1.0.2** 
     - Added auto-complete on search page
+    - Fix bug in country search
