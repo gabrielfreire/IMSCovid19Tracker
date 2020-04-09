@@ -24,5 +24,10 @@ namespace IMSCovidTracker.Services
                 await App.Current.MainPage.DisplayAlert(Title, Message, "Ok");
             });
         }
+
+        public Task<string> PromptUser(string Title, string Message)
+        {
+            return App.Current.MainPage.DisplayPromptAsync(Title, Message);
+        }
     }
 }

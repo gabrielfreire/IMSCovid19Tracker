@@ -12,9 +12,10 @@
              x:Class="IMSCovidTracker.Views.HomePage">
     <Shell.TitleView>
         <StackLayout HorizontalOptions="FillAndExpand">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                <Image Source="coronavirus.png" Aspect="AspectFit" WidthRequest="25"/>
-                <Label Text="IMS COVID-19 Tracker" FontSize="20" FontAttributes="Bold" TextColor="Gray"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                <Image Source="coronavirus.png" Aspect="AspectFit" WidthRequest="25" HorizontalOptions="Center"/>
+                <Label Text="IMS COVID-19 Tracker" FontSize="20" FontAttributes="Bold" TextColor="Gray" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                
             </StackLayout>
         </StackLayout>
     </Shell.TitleView>
@@ -40,8 +41,40 @@
                                               Deaths="{Binding Source={x:Reference HomePageView}, Path=BindingContext.TotalCases.Deaths}"
                                               Recovered="{Binding Source={x:Reference HomePageView}, Path=BindingContext.TotalCases.Recovered}"/>
 
+                        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                            <Label FontSize="14" HorizontalOptions="StartAndExpand" FontAttributes="Bold" TextColor="Gray" VerticalOptions="CenterAndExpand"
+                                   Text="{Binding Source={x:Reference HomePageView}, Path=BindingContext.CountryWidgets.Count, StringFormat='{0} of 6 widgets'}"/>
+                            <Image Source="plus.png" Aspect="AspectFit" WidthRequest="30" BackgroundColor="Transparent" HorizontalOptions="End">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference HomePageView}, Path=BindingContext.AddWidgetCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                        <CollectionView BackgroundColor="Transparent" x:Name="WidgetCollection" x:FieldModifier="public" HeightRequest="260" ItemsSource="{Binding Source={x:Reference HomePageView}, Path=BindingContext.CountryWidgets}" ItemSizingStrategy="MeasureAllItems">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="5" VerticalItemSpacing="5" Span="3"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <SwipeView BackgroundColor="Transparent">
+                                        <SwipeView.LeftItems>
+                                            <SwipeItems Mode="Execute">
+                                                <SwipeItem Text="Delete"
+                                                           Command="{Binding Source={x:Reference HomePageView}, Path=BindingContext.DeleteWidgetCommand}"
+                                                           CommandParameter="{Binding .}"
+                                                           BackgroundColor="Red"/>
+                                            </SwipeItems>
+                                        </SwipeView.LeftItems>
+                                        <components:CovidInformationCard CountryName="{Binding Country}" Small="True"
+                                            Confirmed="{Binding Confirmed}"
+                                            Deaths="{Binding Deaths}"
+                                            Recovered="{Binding Recovered}"/>
+                                    </SwipeView>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                         <!--Row 1-->
-                        <StackLayout Spacing="5" Orientation="Horizontal">
+                        <!--<StackLayout Spacing="5" Orientation="Horizontal">
                             <components:CovidInformationCard CountryName="Ireland" Small="True"
                                             Confirmed="{Binding Source={x:Reference HomePageView}, Path=BindingContext.Ireland.Confirmed}"
                                             Deaths="{Binding Source={x:Reference HomePageView}, Path=BindingContext.Ireland.Deaths}"
@@ -55,10 +88,10 @@
                                             Deaths="{Binding Source={x:Reference HomePageView}, Path=BindingContext.Romania.Deaths}"
                                             Recovered="{Binding Source={x:Reference HomePageView}, Path=BindingContext.Romania.Recovered}"/>
 
-                        </StackLayout>
+                        </StackLayout>-->
                         
                         <!--Row 2-->
-                        <StackLayout Spacing="5" Orientation="Horizontal">
+                        <!--<StackLayout Spacing="5" Orientation="Horizontal">
                             <components:CovidInformationCard CountryName="Italy" Small="True"
                                             Confirmed="{Binding Source={x:Reference HomePageView}, Path=BindingContext.Italy.Confirmed}"
                                             Deaths="{Binding Source={x:Reference HomePageView}, Path=BindingContext.Italy.Deaths}"
@@ -72,7 +105,7 @@
                                             Deaths="{Binding Source={x:Reference HomePageView}, Path=BindingContext.USA.Deaths}"
                                             Recovered="{Binding Source={x:Reference HomePageView}, Path=BindingContext.USA.Recovered}"/>
 
-                        </StackLayout>
+                        </StackLayout>-->
                     </StackLayout>
                     <ActivityIndicator IsRunning="{Binding Source={x:Reference HomePageView}, Path=BindingContext.IsBusy}"
                                        IsVisible="{Binding Source={x:Reference HomePageView}, Path=BindingContext.IsBusy}"

@@ -17,14 +17,22 @@ namespace IMSCovidTracker.Views
 
         public HomePage()
         {
-            BindingContext = _viewModel = new HomeViewModel();
-            _ = _viewModel.LoadCovidData();
+            BindingContext = _viewModel = new HomeViewModel(this);
             InitializeComponent();
+            _ = Task.Run(async () =>
+            {
+                await _viewModel.LoadCovidData();
+                await _viewModel.LoadDefaultWidgets();
+            });
         }
 
         private void RefreshButton_Clicked(object sender, EventArgs e)
         {
-            _ = _viewModel.LoadCovidData();
+            _ = Task.Run(async () =>
+            {
+                await _viewModel.LoadCovidData();
+                await _viewModel.LoadDefaultWidgets();
+            });
         }
 
         

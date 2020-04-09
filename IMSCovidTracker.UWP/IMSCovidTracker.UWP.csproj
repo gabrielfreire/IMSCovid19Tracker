@@ -181,6 +181,7 @@
     <Content Include="death.png" />
     <Content Include="heal.png" />
     <Content Include="important.png" />
+    <Content Include="plus.png" />
     <Content Include="refresh.png" />
     <Content Include="search.png" />
     <Content Include="tab_about.png" />

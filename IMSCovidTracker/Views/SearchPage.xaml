@@ -36,12 +36,12 @@
                                                         BackgroundColor="Transparent"/>
                             </StackLayout>
                             <StackLayout IsVisible="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.IsSearching, Mode=TwoWay}">
-                                <CollectionView IsVisible="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.IsSearching, Mode=TwoWay}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SearchPartialResults}">
+                                <CollectionView HorizontalOptions="FillAndExpand" ItemsSource="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SearchPartialResults}">
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
-                                            <Label Text="{Binding Country}" FontSize="20" HorizontalOptions="FillAndExpand" TextColor="Gray">
+                                            <Label Text="{Binding .}" FontSize="20" HorizontalOptions="FillAndExpand" TextColor="Gray">
                                                 <Label.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SelectCountryCommand}" CommandParameter="{Binding Country}"/>
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SelectCountryCommand}" CommandParameter="{Binding .}"/>
                                                 </Label.GestureRecognizers>
                                             </Label>
                                         </DataTemplate>

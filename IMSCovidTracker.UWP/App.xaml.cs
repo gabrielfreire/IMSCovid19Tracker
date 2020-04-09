@@ -48,7 +48,7 @@ namespace IMSCovidTracker.UWP
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
-                global::Xamarin.Forms.Forms.SetFlags("Shell_UWP_Experimental", "CollectionView_Experimental");
+                global::Xamarin.Forms.Forms.SetFlags("Shell_UWP_Experimental", "CollectionView_Experimental", "SwipeView_Experimental");
                 global::Xamarin.Forms.Forms.Init(e);
 
                 rootFrame.NavigationFailed += OnNavigationFailed;

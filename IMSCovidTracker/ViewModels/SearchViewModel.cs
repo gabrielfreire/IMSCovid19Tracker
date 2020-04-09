@@ -13,7 +13,7 @@ namespace IMSCovidTracker.ViewModels
     {
 
         private CovidLocation _resultCountry;
-        private ObservableCollection<CovidLocation> _searchPartialResults = new ObservableCollection<CovidLocation>();
+        private ObservableCollection<string> _searchPartialResults = new ObservableCollection<string>();
         private string _searchQuery;
         private bool _searchSuccess = false;
         private bool _isSearching = false;
@@ -23,7 +23,7 @@ namespace IMSCovidTracker.ViewModels
         public bool SearchSuccess { get => _searchSuccess; set => RaiseIfPropertyChanged(ref _searchSuccess, value); }
         public string SearchQuery { get => _searchQuery; set => RaiseIfPropertyChanged(ref _searchQuery, value); }
         public CovidLocation ResultCountry { get => _resultCountry; set => RaiseIfPropertyChanged(ref _resultCountry, value); }
-        public ObservableCollection<CovidLocation> SearchPartialResults { get => _searchPartialResults; set => RaiseIfPropertyChanged(ref _searchPartialResults, value); }
+        public ObservableCollection<string> SearchPartialResults { get => _searchPartialResults; set => RaiseIfPropertyChanged(ref _searchPartialResults, value); }
         public bool IsSearching { get => _isSearching; set => RaiseIfPropertyChanged(ref _isSearching, value); }
 
         public ICommand SelectCountryCommand => new Command<string>(async (countryName) => await SearchCommand(countryName));
@@ -91,14 +91,17 @@ namespace IMSCovidTracker.ViewModels
 
                 var _results = App.CovidService.FindPartial(SearchQuery);
 
-                Device.BeginInvokeOnMainThread(() =>
+                Device.BeginInvokeOnMainThread(async() =>
                 {
                     IsSearching = true;
                     SearchPartialResults.Clear();
+
+                    await Task.Delay(10);
+
                     foreach ( var result in _results )
                     {
-                        if (SearchPartialResults.FirstOrDefault((r) => r.Country == result.Country) != null) continue;
-                        SearchPartialResults.Add(result);
+                        if (SearchPartialResults.Contains(result.Country)) continue;
+                        SearchPartialResults.Add(result.Country);
                     }
                 });
             }

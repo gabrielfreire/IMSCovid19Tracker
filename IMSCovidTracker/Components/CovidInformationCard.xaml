@@ -16,29 +16,29 @@
         <Frame Padding="5" BackgroundColor="White" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
             <StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Label FontSize="14" Text="{Binding Source={x:Reference CovidCardView}, Path=CountryName}" FontAttributes="Bold" TextColor="Gray"/>
+                    <Label FontSize="12" Text="{Binding Source={x:Reference CovidCardView}, Path=CountryName}" FontAttributes="Bold" TextColor="Gray"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal">
                     <Image Source="warning.png" Aspect="AspectFit" WidthRequest="20" HorizontalOptions="StartAndExpand"
                            IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small}"/>
                     <Label IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}" Text="Confirmed:" TextColor="Orange" HorizontalOptions="FillAndExpand"/>
-                    <Label  TextColor="Orange" FontAttributes="Bold"
-                                Text="{Binding Source={x:Reference CovidCardView}, Path=Confirmed}"/>
+                    <Label  TextColor="Orange" FontAttributes="Bold" FontSize="12"
+                                Text="{Binding Source={x:Reference CovidCardView}, Path=Confirmed, StringFormat='{0:#,##0}'}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="wreath_nc_gray.png" Aspect="AspectFit" WidthRequest="20" HorizontalOptions="StartAndExpand"
                            IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small}"/>
                     <Label IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}" Text="Deaths:" TextColor="Gray" HorizontalOptions="FillAndExpand"/>
-                    <Label TextColor="Gray" FontAttributes="Bold"
-                                Text="{Binding Source={x:Reference CovidCardView}, Path=Deaths}"/>
+                    <Label TextColor="Gray" FontAttributes="Bold" FontSize="12"
+                                Text="{Binding Source={x:Reference CovidCardView}, Path=Deaths, StringFormat='{0:#,##0}'}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="heal.png" Aspect="AspectFit" WidthRequest="20" HorizontalOptions="StartAndExpand"
                            IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small}"/>
                     <Label IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}" Text="Recovered:" TextColor="Green" HorizontalOptions="FillAndExpand"/>
-                    <Label TextColor="Green" FontAttributes="Bold"
-                               Text="{Binding Source={x:Reference CovidCardView}, Path=Recovered}"/>
+                    <Label TextColor="Green" FontAttributes="Bold" FontSize="12"
+                               Text="{Binding Source={x:Reference CovidCardView}, Path=Recovered, StringFormat='{0:#,##0}'}"/>
                 </StackLayout>
             </StackLayout>
         </Frame>
