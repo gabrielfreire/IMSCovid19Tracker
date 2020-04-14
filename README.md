@@ -27,3 +27,7 @@ You should now be able to download the app directly onto your mobile
   - **2.0.0** 
     - Include dynamic versioning in About page
     - Make main page country panels as editable widgets
+  - **2.0.1** 
+    - Fix collection bug on refresh
+  - **2.0.2** 
+    - Fix bug where widget values do not update properly

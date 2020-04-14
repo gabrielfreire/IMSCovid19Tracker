@@ -1,0 +1,10 @@
+﻿<linker>
+  <assembly fullname="IMSCovidTracker.Wasm" />
+  <assembly fullname="Uno.UI" />
+  <assembly fullname="IMSCovidTracker" />
+
+  <assembly fullname="System.Core">
+	<!-- This is required by Json.NET and any expression.Compile caller -->
+	<type fullname="System.Linq.Expressions*" />
+  </assembly>
+</linker>

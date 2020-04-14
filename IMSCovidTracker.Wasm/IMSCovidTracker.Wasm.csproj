@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<WasmHead>true</WasmHead>
+		<DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
+		<NoWarn>NU1701</NoWarn>
+    <MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
+    <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
+		<DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
+		<DebugType>portable</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="..\IMSCovidTracker.UWP\Assets\*.png" Link="Assets\%(FileName)%(Extension)" />
+		<Content Include="..\IMSCovidTracker.UWP\*.png" Link="%(FileName)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="WasmCSS\*.css" />
+		<EmbeddedResource Include="WasmScripts\*.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<LinkerDescriptor Include="LinkerConfig.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\IMSCovidTracker\IMSCovidTracker.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="../IMSCovidTracker.UWP/*.xaml.cs">
+			<DependentUpon>%(FileName)</DependentUpon>
+		</Compile>
+		<Page Include="../IMSCovidTracker.UWP/*.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- Note that for WebAssembly version 1.1.1 of the console logger required -->
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
+		<PackageReference Include="Uno.UI" Version="2.2.0-dev.445" />
+		<PackageReference Include="Uno.Xamarin.Forms.Platform" Version="4.5.0-uno.569" />
+		<PackageReference Include="Uno.Wasm.Bootstrap" Version="1.0.10" />
+		<DotNetCliToolReference Include="Uno.Wasm.Bootstrap.Cli" Version="1.0.10" />
+	</ItemGroup>
+</Project>

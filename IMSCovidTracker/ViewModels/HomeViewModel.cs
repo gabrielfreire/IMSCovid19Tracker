@@ -3,6 +3,7 @@ using IMSCovidTracker.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -65,24 +66,24 @@ namespace IMSCovidTracker.ViewModels
 
         public async Task LoadDefaultWidgets()
         {
+            ObservableCollection<CovidLocation> _storedWidgets = new ObservableCollection< CovidLocation>();
+            IEnumerable<string> _storedCountries = new List<string>();
             try
             {
                 SetBusy(true);
 
-                var _storedWidgets = await App.StorageService.GetWidgetPreferences();
-                if (_storedWidgets == null)
+                _storedCountries = await App.StorageService.GetWidgetPreferences();
+                
+                if (_storedCountries != null)
                 {
-
-                    CountryWidgets.Add(App.CovidService.Find("Ireland"));
-                    CountryWidgets.Add(App.CovidService.Find("United Kingdom"));
-                    CountryWidgets.Add(App.CovidService.Find("Brazil"));
-                    CountryWidgets.Add(App.CovidService.Find("Italy"));
-                    CountryWidgets.Add(App.CovidService.Find("Romania"));
-                    CountryWidgets.Add(App.CovidService.Find("us"));
-                }
-                else
-                {
-                    CountryWidgets = _storedWidgets;
+                    foreach (var country in _storedCountries)
+                    {
+                        var _countryLocation = App.CovidService.Find(country);
+                        if (_countryLocation != null)
+                        {
+                            _storedWidgets.Add(_countryLocation);
+                        }
+                    }
                 }
 
             }
@@ -92,6 +93,26 @@ namespace IMSCovidTracker.ViewModels
             }
             finally
             {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    CountryWidgets.Clear();
+
+                    await Task.Delay(10);
+
+                    if (_storedWidgets.Count == 0)
+                    {
+                        CountryWidgets.Add(App.CovidService.Find("Ireland"));
+                        CountryWidgets.Add(App.CovidService.Find("United Kingdom"));
+                        CountryWidgets.Add(App.CovidService.Find("Brazil"));
+                        CountryWidgets.Add(App.CovidService.Find("Italy"));
+                        CountryWidgets.Add(App.CovidService.Find("Romania"));
+                        CountryWidgets.Add(App.CovidService.Find("us"));
+                    }
+                    else
+                    {
+                        CountryWidgets = _storedWidgets;
+                    }
+                });
                 SetBusy(false);
             }
         }
@@ -121,15 +142,13 @@ namespace IMSCovidTracker.ViewModels
                 return;
             }
 
-
-
             MessagingCenter.Unsubscribe<SearchModalViewModel, string>(this, "receivedCountryName");
             Device.BeginInvokeOnMainThread(async () =>
             {
                 await Task.Delay(500);
 
                 CountryWidgets.Add(_country);
-                await App.StorageService.StoreWidgetPreferences(CountryWidgets);
+                await App.StorageService.StoreWidgetPreferences(CountryWidgets.Select(c => c.Country).ToList());
                 _homePage.ForceLayout();
             });
         }
@@ -139,7 +158,7 @@ namespace IMSCovidTracker.ViewModels
             try
             {
                 CountryWidgets.Remove(cLoc);
-                _ = App.StorageService.StoreWidgetPreferences(CountryWidgets);
+                _ = App.StorageService.StoreWidgetPreferences(CountryWidgets.Select(c => c.Country).ToList());
                 
             }
             catch (Exception ex)
