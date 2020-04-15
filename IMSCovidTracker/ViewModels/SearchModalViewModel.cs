@@ -66,6 +66,8 @@ namespace IMSCovidTracker.ViewModels
                     
                     await Task.Delay(10);
 
+                    if (_results == null) return;
+
                     foreach (var result in _results)
                     {
                         if (SearchPartialResults.Contains(result.Country)) continue;

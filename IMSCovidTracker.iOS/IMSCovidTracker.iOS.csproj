@@ -66,8 +66,10 @@
     <BuildIpa>true</BuildIpa>
     <CodesignProvision>match InHouse com.imsmaxims.imscovidtracker</CodesignProvision>
     <MtouchLink>SdkOnly</MtouchLink>
-    <DeviceSpecificBuild>true</DeviceSpecificBuild>
+    <DeviceSpecificBuild>false</DeviceSpecificBuild>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <MtouchFastDev>false</MtouchFastDev>
+    <MtouchNoSymbolStrip>false</MtouchNoSymbolStrip>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />

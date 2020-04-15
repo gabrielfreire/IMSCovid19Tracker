@@ -33,6 +33,13 @@ namespace IMSCovidTracker.Views
             _viewModel.Search();
         }
 
+        protected override void OnAppearing()
+        {
+            SearchField.TextChanged -= SearchField_TextChanged;
+            SearchField.TextChanged += SearchField_TextChanged;
+            base.OnAppearing();
+        }
+
         protected override void OnDisappearing()
         {
             _viewModel.ResetSearch(resetQuery: true);

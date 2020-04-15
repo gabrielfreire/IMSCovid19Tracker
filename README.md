@@ -34,3 +34,5 @@ You should now be able to download the app directly onto your mobile
   - **2.0.3** 
     - Swipe left in a widget to display it bigger in a second page
     - Reset search criteria when leaving Search Page
+  - **2.0.4** 
+    - Bug fix where search box would crash app sometimes
