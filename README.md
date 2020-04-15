@@ -31,3 +31,6 @@ You should now be able to download the app directly onto your mobile
     - Fix collection bug on refresh
   - **2.0.2** 
     - Fix bug where widget values do not update properly
+  - **2.0.3** 
+    - Swipe left in a widget to display it bigger in a second page
+    - Reset search criteria when leaving Search Page
