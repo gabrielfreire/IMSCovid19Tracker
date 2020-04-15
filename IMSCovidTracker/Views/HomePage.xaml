@@ -65,6 +65,14 @@
                                                            BackgroundColor="Red"/>
                                             </SwipeItems>
                                         </SwipeView.LeftItems>
+                                        <SwipeView.RightItems>
+                                            <SwipeItems Mode="Execute">
+                                                <SwipeItem Text="View" 
+                                                           Command="{Binding Source={x:Reference HomePageView}, Path=BindingContext.ViewWidgetCommand}" 
+                                                           CommandParameter="{Binding .}"
+                                                           BackgroundColor="Green"/>
+                                            </SwipeItems>
+                                        </SwipeView.RightItems>
                                         <components:CovidInformationCard CountryName="{Binding Country}" Small="True"
                                             Confirmed="{Binding Confirmed}"
                                             Deaths="{Binding Deaths}"

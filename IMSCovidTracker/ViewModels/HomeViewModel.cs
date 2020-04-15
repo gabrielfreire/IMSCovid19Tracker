@@ -32,8 +32,10 @@ namespace IMSCovidTracker.ViewModels
 
         public ICommand DeleteWidgetCommand => new Command<CovidLocation>((cLoc) => DeleteWidget(cLoc));
         public ICommand AddWidgetCommand => new Command(async () => await AddWidget());
+        public ICommand ViewWidgetCommand => new Command<CovidLocation>(async (loc) => await ViewWidget(loc));
 
-        
+
+
         #endregion
 
 
@@ -175,6 +177,10 @@ namespace IMSCovidTracker.ViewModels
             }
         }
 
+        private async Task ViewWidget(CovidLocation location)
+        {
+            await App.NavigationService.Navigate(_homePage, new ViewWidgetPage(location), false);
+        }
     }
 
 }

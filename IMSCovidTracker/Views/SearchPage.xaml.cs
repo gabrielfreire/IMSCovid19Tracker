@@ -32,5 +32,11 @@ namespace IMSCovidTracker.Views
         {
             _viewModel.Search();
         }
+
+        protected override void OnDisappearing()
+        {
+            _viewModel.ResetSearch(resetQuery: true);
+            base.OnDisappearing();
+        }
     }
 }

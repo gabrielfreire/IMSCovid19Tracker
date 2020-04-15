@@ -37,12 +37,7 @@ namespace IMSCovidTracker.ViewModels
         private Task SearchCommand(string countryName)
         {
             searchPage.SearchField.TextChanged -= searchPage.SearchField_TextChanged;
-            Device.BeginInvokeOnMainThread(() => {
-                ResultCountry = null;
-                SearchSuccess = false;
-                SearchPartialResults.Clear();
-                IsSearching = false;
-            });
+            ResetSearch();
             SearchQuery = countryName;
             return Task.CompletedTask;
         }
@@ -91,6 +86,8 @@ namespace IMSCovidTracker.ViewModels
 
                 var _results = App.CovidService.FindPartial(SearchQuery);
 
+                if (_results == null) return;
+
                 Device.BeginInvokeOnMainThread(async() =>
                 {
                     IsSearching = true;
@@ -109,6 +106,21 @@ namespace IMSCovidTracker.ViewModels
             {
                 App.MessageDialogService.Display("Error", $"Something weird has happened: {ex.Message}");   
             }
+        }
+
+        public void ResetSearch(bool resetQuery = false)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                ResultCountry = null;
+                SearchSuccess = false;
+                SearchPartialResults.Clear();
+                IsSearching = false;
+                if (resetQuery)
+                {
+                    SearchQuery = null;
+                }
+            });
         }
     }
 }

@@ -105,6 +105,7 @@ namespace IMSCovidTracker.Services
 
         public IEnumerable<CovidLocation> FindPartial(string searchQuery)
         {
+            if (string.IsNullOrEmpty(searchQuery)) return null;
             var _results = CovidLocations.Where(l => l.Country.ToLower().Contains(searchQuery.ToLower()));
             return _results;
         }

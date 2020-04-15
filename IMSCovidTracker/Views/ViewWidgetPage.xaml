@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:components="clr-namespace:IMSCovidTracker.Components"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Name="viewWidgetPage"
+             x:Class="IMSCovidTracker.Views.ViewWidgetPage">
+    <Shell.TitleView>
+        <StackLayout HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                <Label Text="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget.Country}" FontSize="20" FontAttributes="Bold" TextColor="Gray"  
+                       HorizontalTextAlignment="Start" 
+                       VerticalOptions="CenterAndExpand"/>
+            </StackLayout>
+        </StackLayout>
+    </Shell.TitleView>
+    <ContentPage.Content>
+        <ScrollView Padding="10">
+            <Frame Padding="5" BackgroundColor="#ddd" HasShadow="{OnPlatform iOS=false, Default=true}">
+                <StackLayout>
+                    <components:LargeCovidInformationCard CountryName="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget.Country}" 
+                                Confirmed="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget.Confirmed}"
+                                Deaths="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget.Deaths}"
+                                Recovered="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget.Recovered}"/>
+                </StackLayout>
+            </Frame>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
