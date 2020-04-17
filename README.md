@@ -36,3 +36,5 @@ You should now be able to download the app directly onto your mobile
     - Reset search criteria when leaving Search Page
   - **2.0.4** 
     - Bug fix where search box would crash app sometimes
+  - **2.0.5** 
+    - Fix small flickering when poping a page (Android only)
