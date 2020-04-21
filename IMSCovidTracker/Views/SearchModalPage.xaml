@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:components="clr-namespace:IMSCovidTracker.Components"
              mc:Ignorable="d"
              x:Name="SearchModalPageView"
              x:Class="IMSCovidTracker.Views.SearchModalPage">
@@ -14,32 +15,8 @@
                     <Frame BackgroundColor="White" Padding="5" HasShadow="{OnPlatform iOS=false, Default=true}">
                         <StackLayout>
                             <Label Text="Search for a country" FontAttributes="Bold" TextColor="Gray"/>
-                            <StackLayout >
-                                <Entry x:Name="SearchField" x:FieldModifier="public" HorizontalOptions="FillAndExpand"
-                                            Placeholder="Country name" BackgroundColor="White" PlaceholderColor="#ccc" TextColor="Gray"
-                                            Text="{Binding Source={x:Reference SearchModalPageView}, Path=BindingContext.SearchQuery, Mode=TwoWay}"/>
-                                <Image Source="plus.png" 
-                                    Aspect="AspectFit" 
-                                    WidthRequest="50"
-                                    BackgroundColor="Transparent">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={x:Reference SearchModalPageView}, Path=BindingContext.SendResultCommand}"/>
-                                    </Image.GestureRecognizers>
-                                </Image>
-                            </StackLayout>
-                            <StackLayout IsVisible="{Binding Source={x:Reference SearchModalPageView}, Path=BindingContext.IsSearching, Mode=TwoWay}">
-                                <CollectionView HorizontalOptions="FillAndExpand" ItemsSource="{Binding Source={x:Reference SearchModalPageView}, Path=BindingContext.SearchPartialResults}">
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Label Text="{Binding .}" FontSize="20" HorizontalOptions="FillAndExpand" TextColor="Gray">
-                                                <Label.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference SearchModalPageView}, Path=BindingContext.SelectCountryCommand}" CommandParameter="{Binding .}"/>
-                                                </Label.GestureRecognizers>
-                                            </Label>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-                            </StackLayout>
+                            <components:CovidLocationSearchBox x:Name="locationSearchField" x:FieldModifier="public"/>
+                                
                         </StackLayout>
                     </Frame>
 

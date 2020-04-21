@@ -1,4 +1,6 @@
-﻿using IMSCovidTracker.ViewModels;
+﻿using IMSCovidTracker.Components;
+using IMSCovidTracker.Models;
+using IMSCovidTracker.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,35 +16,31 @@ namespace IMSCovidTracker.Views
     public partial class SearchPage : ContentPage
     {
         private SearchViewModel _viewModel;
-
+        
         public SearchPage()
         {
             BindingContext = _viewModel = new SearchViewModel(this);
             InitializeComponent();
-            SearchField.TextChanged -= SearchField_TextChanged;
-            SearchField.TextChanged += SearchField_TextChanged;
         }
 
-        public void SearchField_TextChanged(object sender, TextChangedEventArgs e)
+        private void SearchField_OnCountrySelected(string countryName)
         {
-           _viewModel.SearchPartial();
-        }
-
-        private void SearchButton_Clicked(object sender, EventArgs e)
-        {
-            _viewModel.Search();
+            _viewModel.ResetSearch();
+            _ = _viewModel.DisplaySearchResult(countryName);
         }
 
         protected override void OnAppearing()
         {
-            SearchField.TextChanged -= SearchField_TextChanged;
-            SearchField.TextChanged += SearchField_TextChanged;
+            SearchField.Clear();
+            SearchField.OnCountrySelected -= SearchField_OnCountrySelected;
+            SearchField.OnCountrySelected += SearchField_OnCountrySelected;
             base.OnAppearing();
         }
 
         protected override void OnDisappearing()
         {
-            _viewModel.ResetSearch(resetQuery: true);
+            _viewModel.ResetSearch();
+            SearchField.Clear();
             base.OnDisappearing();
         }
     }

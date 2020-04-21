@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:converters="clr-namespace:IMSCovidTracker.Converters"
-             mc:Ignorable="d" HorizontalOptions="FillAndExpand"
+             mc:Ignorable="d" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent"
              x:Name="CovidCardView"
              x:Class="IMSCovidTracker.Components.CovidInformationCard">
     <ContentView.Resources>
@@ -20,10 +20,10 @@
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal">
-                    <Image Source="warning.png" Aspect="AspectFit" WidthRequest="20" HorizontalOptions="StartAndExpand"
+                    <Image Source="confirmed.png" Aspect="AspectFit" WidthRequest="20" HorizontalOptions="StartAndExpand"
                            IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small}"/>
                     <Label IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}" Text="Confirmed:" TextColor="Orange" HorizontalOptions="FillAndExpand"/>
-                    <Label  TextColor="Orange" FontAttributes="Bold" FontSize="12"
+                    <Label  TextColor="CadetBlue" FontAttributes="Bold" FontSize="12"
                                 Text="{Binding Source={x:Reference CovidCardView}, Path=Confirmed, StringFormat='{0:#,##0}'}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">

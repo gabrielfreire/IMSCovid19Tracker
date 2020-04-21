@@ -10,6 +10,7 @@ namespace IMSCovidTracker
     {
         public static MessageDialogService MessageDialogService { get; set; }
         public static CovidService CovidService { get; set; }
+        public static CountryService CountryService { get; set; }
         public static NavigationService NavigationService{ get; set; }
         public static StorageService StorageService { get; set; }
         public App()
@@ -20,11 +21,13 @@ namespace IMSCovidTracker
             DependencyService.Register<CovidService>();
             DependencyService.Register<NavigationService>();
             DependencyService.Register<StorageService>();
+            DependencyService.Register<CountryService>();
 
             MessageDialogService = DependencyService.Get<MessageDialogService>();
             CovidService = DependencyService.Get<CovidService>();
             NavigationService = DependencyService.Get<NavigationService>();
             StorageService = DependencyService.Get<StorageService>();
+            CountryService = DependencyService.Get<CountryService>();
 
             MainPage = new AppShell();
         }

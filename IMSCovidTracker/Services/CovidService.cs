@@ -32,21 +32,25 @@ namespace IMSCovidTracker.Services
                 if (result.IsSuccessStatusCode)
                 {
                     var content = await result.Content.ReadAsStringAsync();
-                    // TODO: parse to JSON
-                    dynamic _jsonData = JObject.Parse(content);
-                    var features = _jsonData["features"];
-
+                    
+                    var _data = JObject.Parse(content);
+                    
+                    var features = _data.Value<JArray>("features");
                     if (features != null)
                     {
                         foreach (var feature in features)
                         {
+                            var attributes = feature.Value<JObject>("attributes");
+                            var countryName = attributes.Value<string>("Country_Region");
                             locations.Add(new CovidLocation
                             {
-                                Country = feature["attributes"]["Country_Region"],
-                                Province = feature["attributes"]["Province_State"],
-                                Deaths = feature["attributes"]["Deaths"],
-                                Confirmed = feature["attributes"]["Confirmed"],
-                                Recovered = feature["attributes"]["Recovered"]
+                                Country = countryName,
+                                Province = attributes.Value<string>("Province_State"),
+                                Deaths = attributes.Value<int>("Deaths"),
+                                Confirmed = attributes.Value<int>("Confirmed"),
+                                Recovered = attributes.Value<int>("Recovered"),
+                                Active = attributes.Value<int>("Active")
+                                
                             });
                         }
                     }
@@ -67,7 +71,7 @@ namespace IMSCovidTracker.Services
             }
         }
 
-        public CovidLocation GetTotalCases(IEnumerable<CovidLocation> locations)
+        public async Task<CovidLocation> GetTotalCases(IEnumerable<CovidLocation> locations)
         {
             var _totalCases = new CovidLocation
             {
@@ -81,7 +85,13 @@ namespace IMSCovidTracker.Services
                 _totalCases.Confirmed += location.Confirmed;
                 _totalCases.Deaths += location.Deaths;
                 _totalCases.Recovered += location.Recovered;
+                _totalCases.Active += location.Active;
             }
+
+            _totalCases.TotalPopulation = await App.CountryService.GetTotalPopulation();
+            var deathsPerPop = (double)_totalCases.Deaths / _totalCases.TotalPopulation;
+            _totalCases.DeathsPerMillion = (int)(deathsPerPop * 1000000d);
+
             return _totalCases;
         }
 
@@ -99,14 +109,16 @@ namespace IMSCovidTracker.Services
                 _final.Confirmed += res.Confirmed;
                 _final.Deaths += res.Deaths;
                 _final.Recovered += res.Recovered;
+                _final.Active += res.Active;
             }
             return _final;
         }
 
         public IEnumerable<CovidLocation> FindPartial(string searchQuery)
         {
-            if (string.IsNullOrEmpty(searchQuery)) return null;
-            var _results = CovidLocations.Where(l => l.Country.ToLower().Contains(searchQuery.ToLower()));
+            var _results = new List<CovidLocation>();
+            if (string.IsNullOrEmpty(searchQuery)) return _results;
+            _results = CovidLocations.Where(l => l.Country.ToLower().Contains(searchQuery.ToLower())).ToList();
             return _results;
         }
     }

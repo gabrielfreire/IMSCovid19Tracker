@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Name="searchBoxView"
+             x:Class="IMSCovidTracker.Components.CovidLocationSearchBox">
+  <ContentView.Content>
+      <StackLayout>
+            <Entry x:Name="SearchField" x:FieldModifier="public" HorizontalOptions="FillAndExpand"
+                    Placeholder="Country name" BackgroundColor="White" PlaceholderColor="#ccc" TextColor="Gray"
+                    Text="{Binding Source={x:Reference searchBoxView}, Path=BindingContext.SearchQuery, Mode=TwoWay}"/>
+
+            <CollectionView IsVisible="{Binding Source={x:Reference searchBoxView}, Path=BindingContext.IsSearching, Mode=TwoWay}" 
+                            HorizontalOptions="FillAndExpand" ItemsSource="{Binding Source={x:Reference searchBoxView}, Path=BindingContext.SearchPartialResults}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="3" VerticalItemSpacing="3" Span="1"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="#ddd" CornerRadius="4" Padding="5,13" HasShadow="{OnPlatform iOS=false, Default=true}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference searchBoxView}, Path=BindingContext.SelectCountryCommand}" CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            <StackLayout Orientation="Horizontal">
+                                <!--<Image Source="coronavirus.png" Aspect="AspectFit" WidthRequest="15"/>-->
+                                <BoxView BackgroundColor="DarkOliveGreen" HeightRequest="5" WidthRequest="3"/>
+                                <Label Text="{Binding .}" FontSize="18" HorizontalOptions="FillAndExpand" TextColor="#777"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                
+            </CollectionView>
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

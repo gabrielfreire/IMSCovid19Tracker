@@ -20,46 +20,30 @@
     <ContentPage.Content>
         <ScrollView Padding="10">
             <Frame Padding="5" BackgroundColor="#ddd" HasShadow="{OnPlatform iOS=false, Default=true}">
-                <!--Search-->
+
                 <StackLayout>
+
+                    <!--Search box-->
                     <Frame BackgroundColor="White" Padding="5" HasShadow="{OnPlatform iOS=false, Default=true}">
                         <StackLayout>
                             <Label Text="Search for a country" FontAttributes="Bold" TextColor="Gray"/>
-                            <StackLayout Orientation="Horizontal">
-                                <Entry x:Name="SearchField" x:FieldModifier="public" HorizontalOptions="FillAndExpand"
-                                            Placeholder="Country name" BackgroundColor="White" PlaceholderColor="#ccc" TextColor="Gray"
-                                            Text="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SearchQuery, Mode=TwoWay}"/>
-                                <ImageButton Source="search.png" 
-                                                        Aspect="AspectFit" 
-                                                        WidthRequest="30" 
-                                                     Clicked="SearchButton_Clicked"
-                                                        BackgroundColor="Transparent"/>
-                            </StackLayout>
-                            <StackLayout IsVisible="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.IsSearching, Mode=TwoWay}">
-                                <CollectionView HorizontalOptions="FillAndExpand" ItemsSource="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SearchPartialResults}">
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Label Text="{Binding .}" FontSize="20" HorizontalOptions="FillAndExpand" TextColor="Gray">
-                                                <Label.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SelectCountryCommand}" CommandParameter="{Binding .}"/>
-                                                </Label.GestureRecognizers>
-                                            </Label>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-                            </StackLayout>
+                            <components:CovidLocationSearchBox HorizontalOptions="FillAndExpand" x:Name="SearchField" x:FieldModifier="public"/>
                         </StackLayout>
                     </Frame>
-                    <!--Result-->
-                    <StackLayout 
-                                IsVisible="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SearchSuccess}">
-                        <components:LargeCovidInformationCard CountryName="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.ResultCountry.Country}" 
-                                    Confirmed="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.ResultCountry.Confirmed}"
-                                    Deaths="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.ResultCountry.Deaths}"
-                                    Recovered="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.ResultCountry.Recovered}"/>
+                    
+                    <!--Result display-->
+                    <Frame Margin="0" Padding="0" IsVisible="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SearchSuccess}" BackgroundColor="Transparent" HasShadow="False">
+                        
+                        <components:LargeCovidInformationCard Small="False"
+                            CountryName="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.ResultCountry.Country}" 
+                            Country="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.ResultCountry}"/>
+                    </Frame>
 
-                    </StackLayout>
-
+                    <ActivityIndicator IsRunning="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.IsBusy}"
+                            IsVisible="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.IsBusy}"
+                            HorizontalOptions="CenterAndExpand" 
+                            VerticalOptions="CenterAndExpand" 
+                            Color="Black"/>
                 </StackLayout>
             </Frame>
         </ScrollView>

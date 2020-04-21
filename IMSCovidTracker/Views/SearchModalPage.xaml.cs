@@ -19,13 +19,24 @@ namespace IMSCovidTracker.Views
         {
             BindingContext = _viewModel = new SearchModalViewModel(this);
             InitializeComponent();
-            SearchField.TextChanged -= SearchField_TextChanged;
-            SearchField.TextChanged += SearchField_TextChanged;
         }
 
-        public void SearchField_TextChanged(object sender, TextChangedEventArgs e)
+        //public void SearchField_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    //_viewModel.SearchPartial();
+        //}
+
+        protected override void OnAppearing()
         {
-            _viewModel.SearchPartial();
+            locationSearchField.Clear();
+            locationSearchField.OnCountrySelected -= LocationSearchField_OnCountrySelected;
+            locationSearchField.OnCountrySelected += LocationSearchField_OnCountrySelected;
+            base.OnAppearing();
+        }
+
+        private void LocationSearchField_OnCountrySelected(string countryName)
+        {
+            _viewModel.SendResult(countryName);
         }
     }
 }

@@ -23,6 +23,7 @@ namespace IMSCovidTracker.Views
             {
                 await _viewModel.LoadCovidData();
                 await _viewModel.LoadDefaultWidgets();
+                await App.MessageDialogService.DisplayTutorial(countryWidgetInfo);
             });
         }
 
@@ -35,6 +36,11 @@ namespace IMSCovidTracker.Views
             });
         }
 
-        
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
+
     }
 }

@@ -18,14 +18,20 @@
     </Shell.TitleView>
     <ContentPage.Content>
         <ScrollView Padding="10">
-            <Frame Padding="5" BackgroundColor="#ddd" HasShadow="{OnPlatform iOS=false, Default=true}">
-                <StackLayout>
-                    <components:LargeCovidInformationCard CountryName="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget.Country}" 
-                                Confirmed="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget.Confirmed}"
-                                Deaths="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget.Deaths}"
-                                Recovered="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget.Recovered}"/>
-                </StackLayout>
-            </Frame>
+            <StackLayout>
+                
+                <Frame Padding="5"  VerticalOptions="Fill" BackgroundColor="#ddd" HasShadow="{OnPlatform iOS=false, Default=true}">
+                    <components:LargeCovidInformationCard Small="False"
+                        CountryName="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget.Country}" 
+                        Country="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget}"/>
+                </Frame>
+                <ActivityIndicator IsRunning="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.IsBusy}"
+                            IsVisible="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.IsBusy}"
+                            HorizontalOptions="CenterAndExpand" 
+                            VerticalOptions="CenterAndExpand" 
+                            Color="Black"/>
+            </StackLayout>
+            
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

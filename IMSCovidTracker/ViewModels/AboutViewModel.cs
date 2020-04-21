@@ -16,7 +16,7 @@ namespace IMSCovidTracker.ViewModels
 
         private string GetCurrentVersion()
         {
-            if (Device.RuntimePlatform == Device.UWP) return "2.0.2";
+            if (Device.RuntimePlatform == Device.UWP) return "2.0.5";
             return VersionTracking.CurrentVersion;
         }
 

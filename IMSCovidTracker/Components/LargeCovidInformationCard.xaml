@@ -4,40 +4,162 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:converters="clr-namespace:IMSCovidTracker.Converters"
-             mc:Ignorable="d" HorizontalOptions="FillAndExpand"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
+             mc:Ignorable="d" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent"
              x:Name="LargeCovidCardView"
              x:Class="IMSCovidTracker.Components.LargeCovidInformationCard">
     <ContentView.Resources>
         <ResourceDictionary>
             <converters:BoolInvertConverter x:Key="BoolInvert"/>
+            <converters:IsZeroConverter x:Key="IsZero"/>
+            <converters:IsNotZeroConverter x:Key="NotZero"/>
         </ResourceDictionary>
     </ContentView.Resources>
   <ContentView.Content>
         <Frame Padding="5" BackgroundColor="White" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
             <StackLayout>
+                
                 <StackLayout Orientation="Horizontal">
-                    <Label FontSize="14" Text="{Binding Source={x:Reference LargeCovidCardView}, Path=CountryName}" FontAttributes="Bold" TextColor="Gray"/>
-                </StackLayout>
+                    <StackLayout Spacing="6" HorizontalOptions="FillAndExpand">
 
-                <Frame Margin="5" Padding="10" BackgroundColor="#fefbd7" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
-                    <StackLayout>
-                        <Label  TextColor="Orange"
-                                    Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Confirmed, StringFormat='{0:#,##0}'}" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
-                        <Label Text="Confirmed" TextColor="Orange" HorizontalOptions="CenterAndExpand"/>
+                        <Label FontSize="14" Text="{Binding Source={x:Reference LargeCovidCardView}, Path=CountryName, StringFormat='{0}'}" FontAttributes="Bold" TextColor="Gray"/>
+                   
+
+                        <Frame Padding="9" BackgroundColor="#f0f4ff" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+                            <StackLayout>
+                                <Label  TextColor="CadetBlue"
+                                            Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Confirmed, StringFormat='{0:#,##0}'}" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                                <Label Text="Confirmed" TextColor="CadetBlue" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Padding="9" BackgroundColor="#fefbd7" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+                            <StackLayout>
+                                <Label  TextColor="Orange"
+                                            Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Active, StringFormat='{0:#,##0}'}" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                                <Label Text="Active cases" TextColor="Orange" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Padding="9" BackgroundColor="#eee" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+                            <StackLayout>
+                                <Label  TextColor="Gray"
+                                            Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Deaths, StringFormat='{0:#,##0}'}" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                                <Label Text="Deaths" TextColor="Gray" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Padding="9" BackgroundColor="#f0fff4" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+                            <StackLayout>
+                                <Label  TextColor="Green"
+                                            Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Recovered, StringFormat='{0:#,##0}'}" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                                <Label Text="Recovered" TextColor="Green" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        </Frame>
                     </StackLayout>
-                </Frame>
-                <Frame Margin="5" Padding="10" BackgroundColor="#eee" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
-                    <StackLayout>
-                        <Label  TextColor="Gray"
-                                    Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Deaths, StringFormat='{0:#,##0}'}" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
-                        <Label Text="Deaths" TextColor="Gray" HorizontalOptions="CenterAndExpand"/>
+
+                    <StackLayout HorizontalOptions="End" Spacing="3">
+                        <Label FontSize="14" Text="Ratios" FontAttributes="Bold" TextColor="Gray"/>
+
+                        <Frame Padding="3" BackgroundColor="#333" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+                            <StackLayout>
+                                <Label Text="Population" TextColor="White" HorizontalOptions="CenterAndExpand" FontSize="12"/>
+                                <Label TextColor="White" Padding="0" Margin="0"
+                                       IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.TotalPopulation, Converter={StaticResource NotZero}}"
+                                       Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.TotalPopulation, StringFormat='{0:#,##0}'}"  FontSize="16" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                                <Label IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.TotalPopulation, Converter={StaticResource IsZero}}"
+                                       TextColor="LightSkyBlue" Text="N/A" FontSize="17" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Padding="3" BackgroundColor="#333" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+                            <StackLayout>
+                                <Label Text="Confirmed / Recovered" TextColor="GreenYellow" HorizontalOptions="CenterAndExpand" FontSize="11" Padding="0" Margin="0"/>
+                                <Label TextColor="GreenYellow" Padding="0" Margin="0"
+                                       IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.ConfirmedPerRecovered, Converter={StaticResource NotZero}}"
+                                       Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.ConfirmedPerRecovered, StringFormat='{0:f2} %'}" 
+                                       FontSize="17" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                                <Label IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.ConfirmedPerRecovered, Converter={StaticResource IsZero}}"
+                                       TextColor="#eee" Text="N/A" FontSize="17" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                                <Label Text="Recovered" TextColor="GreenYellow" HorizontalOptions="CenterAndExpand" FontSize="12" Padding="0" Margin="0"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Padding="3" BackgroundColor="#333" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+                            <StackLayout>
+                                <Label Text="Confirmed / Deaths" TextColor="#eee" HorizontalOptions="CenterAndExpand" FontSize="11"/>
+                                <Label TextColor="#eee"
+                                       IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.ConfirmedPerDeaths, Converter={StaticResource NotZero}}"
+                                       Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.ConfirmedPerDeaths, StringFormat='{0:f2} %'}" FontSize="17" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                                <Label IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.ConfirmedPerDeaths, Converter={StaticResource IsZero}}"
+                                       TextColor="#eee" Text="N/A" FontSize="17" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                                <Label Text="Deceased" TextColor="#eee" HorizontalOptions="CenterAndExpand" FontSize="12"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Padding="3" BackgroundColor="#333" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+                            <StackLayout>
+                                <Label Text="Recovered / Deaths" TextColor="#eee" HorizontalOptions="CenterAndExpand" FontSize="11"/>
+                            
+                                <microcharts:ChartView x:Name="donutView" BackgroundColor="Transparent" HeightRequest="40"
+                                                       IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.RecoveredPerDeaths, Converter={StaticResource NotZero}}"/>
+                            
+                                <!--<Label TextColor="#eee"
+                                       IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.RecoveredPerDeaths, Converter={StaticResource NotZero}}"
+                                       Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.RecoveredPerDeaths, StringFormat='{0:f2} %'}" FontSize="17" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>-->
+                                <Label IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.RecoveredPerDeaths, Converter={StaticResource IsZero}}"
+                                       TextColor="#eee" Text="N/A" FontSize="17" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                                <Label Text="Deceased" TextColor="#eee" HorizontalOptions="CenterAndExpand" FontSize="12"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Padding="3" BackgroundColor="#333" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+                            <StackLayout>
+                                <Label Text="Deaths per Million" TextColor="LightSkyBlue" HorizontalOptions="CenterAndExpand" FontSize="12"/>
+                                <Label x:Name="DeathsPerMillionLabel" TextColor="LightSkyBlue"
+                                       IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.DeathsPerMillion, Converter={StaticResource NotZero}}"
+                                       Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.DeathsPerMillion, StringFormat='{0}'}" FontSize="17" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                                <Label IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.DeathsPerMillion, Converter={StaticResource IsZero}}"
+                                       TextColor="LightSkyBlue" Text="N/A" FontSize="17" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        </Frame>
                     </StackLayout>
-                </Frame>
-                <Frame Margin="5" Padding="10" BackgroundColor="#f0fff4" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
+                </StackLayout>
+                <Frame BackgroundColor="#333" CornerRadius="5"
+                    IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}">
                     <StackLayout>
-                        <Label  TextColor="Green"
-                                    Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Recovered, StringFormat='{0:#,##0}'}" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
-                        <Label Text="Recovered" TextColor="Green" HorizontalOptions="CenterAndExpand"/>
+
+                        <StackLayout Orientation="Horizontal" 
+                                     IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.RecoveredPerDeaths, Converter={StaticResource NotZero}}">
+                        
+                            <StackLayout Orientation="Horizontal">
+                                <BoxView WidthRequest="8" HeightRequest="8" BackgroundColor="PaleVioletRed"/>
+                                <Label FontSize="11" TextColor="White" Text="Deaths"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <BoxView WidthRequest="8" HeightRequest="8" BackgroundColor="LightGreen"/>
+                                <Label FontSize="11" TextColor="White" Text="Recovered"/>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <microcharts:ChartView x:Name="donutViewBigger" BackgroundColor="Transparent" HeightRequest="200"
+                                                        IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.RecoveredPerDeaths, Converter={StaticResource NotZero}}"/>
+
+                        <StackLayout Orientation="Horizontal" Spacing="8">
+
+                            <StackLayout Orientation="Horizontal">
+                                <BoxView WidthRequest="8" HeightRequest="8" BackgroundColor="Orange"/>
+                                <Label FontSize="11" TextColor="White" Text="Confirmed"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <BoxView WidthRequest="8" HeightRequest="8" BackgroundColor="Yellow"/>
+                                <Label FontSize="11" TextColor="White" Text="Active"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <BoxView WidthRequest="8" HeightRequest="8" BackgroundColor="PaleVioletRed"/>
+                                <Label FontSize="11" TextColor="White" Text="Deaths"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <BoxView WidthRequest="8" HeightRequest="8" BackgroundColor="LightGreen"/>
+                                <Label FontSize="11" TextColor="White" Text="Recovered"/>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <microcharts:ChartView x:Name="barViewBigger" BackgroundColor="Transparent" HeightRequest="200"
+                                                        IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Confirmed, Converter={StaticResource NotZero}}"/>
                     </StackLayout>
                 </Frame>
             </StackLayout>

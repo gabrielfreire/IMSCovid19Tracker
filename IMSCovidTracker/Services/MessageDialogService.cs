@@ -29,5 +29,16 @@ namespace IMSCovidTracker.Services
         {
             return App.Current.MainPage.DisplayPromptAsync(Title, Message);
         }
+
+        public async Task DisplayTutorial(Frame countryWidgetInfo, int displayTime = 4000)
+        {
+            await Device.InvokeOnMainThreadAsync(async () =>
+            {
+                await Task.Delay(500);
+                await countryWidgetInfo.FadeTo(0.8, 300);
+                await Task.Delay(displayTime);
+                await countryWidgetInfo.FadeTo(0, 300);
+            });
+        }
     }
 }

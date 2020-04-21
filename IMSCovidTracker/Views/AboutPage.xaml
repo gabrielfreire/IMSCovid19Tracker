@@ -29,10 +29,43 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-            <Label TextColor="Gray" Text="Developed by IMS MAXIMS" HorizontalTextAlignment="Center"/>
-            <Label TextColor="Gray" Text="{Binding CurrentVersion, StringFormat='Version {0}'}" HorizontalTextAlignment="Center"/>
-        </StackLayout>
+        <ScrollView>
+            
+            <StackLayout>
+                <Frame BackgroundColor="White" Padding="15" Margin="10">
+                
+                    <StackLayout Spacing="20">
+                        <Label FontSize="18" Text="Custom Country Widgets" TextColor="Black" FontAttributes="Bold"/>
+                        <Label FontSize="13" Text="This configuration is store locally and removed when the app is uninstalled" TextColor="Gray"/>
+                        <Image Source="country_widgets.jpg" Aspect="AspectFit" WidthRequest="180"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="swipeleft.png" Aspect="AspectFit" WidthRequest="30"/>
+                            <Label FontSize="16" TextColor="Black" Text="Swipe left in a widget to view details"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="swiperight.png" Aspect="AspectFit" WidthRequest="30"/>
+                            <Label FontSize="16" TextColor="Black" Text="Swipe right in a widget to remove it"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="plus.png" Aspect="AspectFit" WidthRequest="30"/>
+                            <Label FontSize="16" TextColor="Black" Text="Tap the '+' button to add a new widget"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame BackgroundColor="White" Padding="15" Margin="10">
+                
+                    <StackLayout Spacing="20">
+                        <Label FontSize="18" Text="Sources" TextColor="Black" FontAttributes="Bold"/>
+                        <Label FontSize="16" TextColor="Black" Text="The data comes from the following sources"/>
+                        <Label FontSize="16" TextColor="Black" Text="WHO, US CDC, China NHC, ECDC, and DXY"/>
+                    </StackLayout>
+                </Frame>
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Label TextColor="Gray" Text="Developed by IMS MAXIMS" HorizontalTextAlignment="Center"/>
+                    <Label TextColor="Gray" Text="{Binding CurrentVersion, StringFormat='Version {0}'}" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
     
 </ContentPage>

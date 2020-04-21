@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace IMSCovidTracker.ViewModels
 {
@@ -9,9 +10,35 @@ namespace IMSCovidTracker.ViewModels
     {
         private CovidLocation _countryWidget;
         public CovidLocation CountryWidget { get => _countryWidget; set => RaiseIfPropertyChanged(ref _countryWidget, value); }
-        public ViewWidgetViewModel(CovidLocation countryWidget)
+        public ViewWidgetViewModel(CovidLocation country)
         {
-            CountryWidget = countryWidget;
+            _ = Init(country);
+        }
+
+        public async Task Init(CovidLocation country)
+        {
+            try
+            {
+                SetBusy(true);
+
+                country.TotalPopulation = await App.CountryService.GetTotalPopulation(country.Country);
+                var deathsPerPop = (double)country.Deaths / country.TotalPopulation;
+                country.DeathsPerMillion = (int)(deathsPerPop * 1000000d);
+            }
+            catch
+            {
+                // App.MessageDialogService.Display("Population", "Failed to get total population");
+            }
+            finally
+            {
+
+                Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                {
+                    CountryWidget = country;
+                });
+                SetBusy(false);
+            }
+
         }
     }
 }

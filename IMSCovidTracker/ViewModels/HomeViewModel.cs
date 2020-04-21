@@ -33,6 +33,7 @@ namespace IMSCovidTracker.ViewModels
         public ICommand DeleteWidgetCommand => new Command<CovidLocation>((cLoc) => DeleteWidget(cLoc));
         public ICommand AddWidgetCommand => new Command(async () => await AddWidget());
         public ICommand ViewWidgetCommand => new Command<CovidLocation>(async (loc) => await ViewWidget(loc));
+        public ICommand ShowTutorialCommand => new Command(async () => await ShowTutorial());
 
 
 
@@ -47,13 +48,18 @@ namespace IMSCovidTracker.ViewModels
         }
         #endregion
 
+        private async Task ShowTutorial()
+        {
+            await App.MessageDialogService.DisplayTutorial(_homePage.countryWidgetInfo);
+        }
+
         public async Task LoadCovidData()
         {
             try
             {
                 SetBusy(true);
                 var _covidLocations = await App.CovidService.GetLocationsAsync();
-                TotalCases = App.CovidService.GetTotalCases(_covidLocations);
+                TotalCases = await App.CovidService.GetTotalCases(_covidLocations);
                 
             }
             catch (Exception ex)

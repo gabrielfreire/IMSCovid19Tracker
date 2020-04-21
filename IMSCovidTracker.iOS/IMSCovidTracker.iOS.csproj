@@ -198,4 +198,19 @@
   <ItemGroup>
     <BundleResource Include="Resources\plus.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\confirmed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\swipeleft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\swiperight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\country_widgets.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\questionmark.png" />
+  </ItemGroup>
 </Project>
