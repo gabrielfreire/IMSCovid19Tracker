@@ -30,9 +30,13 @@
 
     <ContentPage.Content>
         <ScrollView>
-            
+
             <StackLayout>
-                <Frame BackgroundColor="White" Padding="15" Margin="10">
+                <StackLayout Margin="2" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Label TextColor="Gray" Text="Developed by IMS MAXIMS" HorizontalTextAlignment="Center"/>
+                    <Label TextColor="Gray" Text="{Binding CurrentVersion, StringFormat='Version {0}'}" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+                <Frame BackgroundColor="White" Padding="15" Margin="10" HasShadow="{OnPlatform iOS=false, Default=true}">
                 
                     <StackLayout Spacing="20">
                         <Label FontSize="18" Text="Custom Country Widgets" TextColor="Black" FontAttributes="Bold"/>
@@ -52,7 +56,7 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-                <Frame BackgroundColor="White" Padding="15" Margin="10">
+                <Frame BackgroundColor="White" Padding="15" Margin="10" HasShadow="{OnPlatform iOS=false, Default=true}">
                 
                     <StackLayout Spacing="20">
                         <Label FontSize="18" Text="Sources" TextColor="Black" FontAttributes="Bold"/>
@@ -60,10 +64,6 @@
                         <Label FontSize="16" TextColor="Black" Text="WHO, US CDC, China NHC, ECDC, and DXY"/>
                     </StackLayout>
                 </Frame>
-                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                    <Label TextColor="Gray" Text="Developed by IMS MAXIMS" HorizontalTextAlignment="Center"/>
-                    <Label TextColor="Gray" Text="{Binding CurrentVersion, StringFormat='Version {0}'}" HorizontalTextAlignment="Center"/>
-                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

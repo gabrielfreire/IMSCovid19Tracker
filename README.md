@@ -38,3 +38,10 @@ You should now be able to download the app directly onto your mobile
     - Bug fix where search box would crash app sometimes
   - **2.0.5** 
     - Fix small flickering when poping a page (Android only)
+  - **2.1.0** 
+    - More data and statistics being displayed
+    - Added Donut Chart and Bar Chart on Widget Detail view
+    - Added small tutorial toast to explain widget usage
+    - Add "help" button to display widget tutorial
+    - Add Sources information in the About page
+    - Get total population, population per country and new calculation on deaths per million

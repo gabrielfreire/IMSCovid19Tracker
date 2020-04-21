@@ -20,8 +20,7 @@
                         <TapGestureRecognizer Command="{Binding Source={x:Reference HomePageView}, Path=BindingContext.ShowTutorialCommand}"/>
                     </Frame.GestureRecognizers>
                     <StackLayout Spacing="1">
-                        
-                        <Image Source="questionmark.png" Aspect="AspectFit" WidthRequest="25"/>
+                        <Image Source="questionmark.png" Aspect="AspectFit" WidthRequest="20"/>
                         <Label Text="Help" FontSize="11" TextColor="Black"/>
                     </StackLayout>
                 </Frame>
@@ -140,8 +139,9 @@
                    Padding="15,20" 
                    CornerRadius="5" 
                    Opacity="0" 
+                   HasShadow="False"
                    InputTransparent="True" 
-                   AbsoluteLayout.LayoutBounds="0.9, 0.1, 280, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
+                   AbsoluteLayout.LayoutBounds="{OnPlatform Android='0.9, 0.1, 280, AutoSize', iOS='0.9, 0.2, 280, AutoSize'}" AbsoluteLayout.LayoutFlags="PositionProportional">
                 <StackLayout Spacing="6">
                     <Label Text="Custom Country Widgets" TextColor="White" FontAttributes="Bold"/>
                     <StackLayout Orientation="Horizontal">

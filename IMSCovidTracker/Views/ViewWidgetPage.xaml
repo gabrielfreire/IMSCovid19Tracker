@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:components="clr-namespace:IMSCovidTracker.Components"
+             xmlns:converters="clr-namespace:IMSCovidTracker.Converters"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Name="viewWidgetPage"
@@ -16,20 +17,27 @@
             </StackLayout>
         </StackLayout>
     </Shell.TitleView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolInvertConverter x:Key="BoolInvert"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView Padding="10">
             <StackLayout>
-                
-                <Frame Padding="5"  VerticalOptions="Fill" BackgroundColor="#ddd" HasShadow="{OnPlatform iOS=false, Default=true}">
-                    <components:LargeCovidInformationCard Small="False"
-                        CountryName="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget.Country}" 
-                        Country="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget}"/>
-                </Frame>
+
                 <ActivityIndicator IsRunning="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.IsBusy}"
                             IsVisible="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.IsBusy}"
                             HorizontalOptions="CenterAndExpand" 
                             VerticalOptions="CenterAndExpand" 
                             Color="Black"/>
+                <Frame Padding="5"  VerticalOptions="Fill" BackgroundColor="#ddd" HasShadow="{OnPlatform iOS=false, Default=true}"
+                       IsVisible="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.IsBusy, Converter={StaticResource BoolInvert}}">
+                    <components:LargeCovidInformationCard Small="False"
+                        CountryName="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget.Country}" 
+                        Country="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget}"/>
+                </Frame>
             </StackLayout>
             
         </ScrollView>
