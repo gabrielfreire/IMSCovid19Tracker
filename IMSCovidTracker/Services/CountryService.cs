@@ -17,7 +17,7 @@ namespace IMSCovidTracker.Services
         
         private HttpClient _httpClient;
         private string _apiEndpoint = "https://restcountries.eu/rest/v2";
-        private string _queryParams = "?fulltext=true";
+        private string _queryParams = "?fullText=true";
 
         public IEnumerable<Country> Countries { get; set; } = new List<Country>();
 
@@ -83,6 +83,7 @@ namespace IMSCovidTracker.Services
             {
                 return "Korea (Republic of)";
             }
+            else if (countryName.ToLower().Contains("kosovo")) return "Republic of Kosovo";
             return countryName;
         }
 

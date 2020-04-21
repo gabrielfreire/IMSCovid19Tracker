@@ -45,3 +45,5 @@ You should now be able to download the app directly onto your mobile
     - Add "help" button to display widget tutorial
     - Add Sources information in the About page
     - Get total population, population per country and new calculation on deaths per million
+  - **2.1.1** 
+    - Fix bug where the population for US is wrong
