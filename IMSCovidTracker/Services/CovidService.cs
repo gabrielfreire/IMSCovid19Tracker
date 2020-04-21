@@ -2,6 +2,8 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -10,6 +12,7 @@ namespace IMSCovidTracker.Services
 {
     public class CovidService
     {
+        private Dictionary<string, string> CountryCodeMap = new Dictionary<string, string>();
         private HttpClient _httpClient;
         private string _apiEndpoint = "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/ncov_cases/FeatureServer/1/query";
         private string _queryParams = "?f=json&where=(Confirmed%3E%200)%20OR%20(Deaths%3E0)%20OR%20(Recovered%3E0)&returnGeometry=false&outFields=*&orderByFields=Country_Region%20asc,Province_State%20asc&resultOffset=0";
@@ -21,10 +24,43 @@ namespace IMSCovidTracker.Services
         {
             _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+
+            CreateCountryMap();
+        }
+
+        public void CreateCountryMap()
+        {
+            Console.WriteLine(String.Format("{0,-30}\t{1}\t{2}\t{3}"
+                                  , "Name"
+                                  , "ISO-2"
+                                  , "ISO-3"
+                                  , "GeoId"));
+
+            foreach (CultureInfo ci in CultureInfo.GetCultures(CultureTypes.AllCultures))
+            {
+                RegionInfo ri = null;
+
+                try
+                {
+                    ri = new RegionInfo(ci.Name);
+
+                    CountryCodeMap.Add(ri.EnglishName.ToLower(), ri.TwoLetterISORegionName);
+                    Console.WriteLine(String.Format("{0,-30}\t{1}\t{2}\t{3}"
+                      , ri.EnglishName
+                      , ri.TwoLetterISORegionName
+                      , ri.ThreeLetterISORegionName
+                      , ri.GeoId));
+                }
+                catch
+                {
+                    continue;
+                }
+            }
         }
 
         public async Task<IEnumerable<CovidLocation>> GetLocationsAsync()
         {
+            
             var locations = new List<CovidLocation>();
             try
             {
@@ -42,9 +78,18 @@ namespace IMSCovidTracker.Services
                         {
                             var attributes = feature.Value<JObject>("attributes");
                             var countryName = attributes.Value<string>("Country_Region");
+                            //ISO3166
+                            //var countryCode = cultures.Where(c => c.EnglishName == countryName);
+                            string countryCode = "";
+                            if (CountryCodeMap.ContainsKey(countryName.ToLower()))
+                            {
+                                countryCode = CountryCodeMap[countryName.ToLower()]; 
+                            }
+
                             locations.Add(new CovidLocation
                             {
                                 Country = countryName,
+                                CountryCode = countryCode,
                                 Province = attributes.Value<string>("Province_State"),
                                 Deaths = attributes.Value<int>("Deaths"),
                                 Confirmed = attributes.Value<int>("Confirmed"),
@@ -97,6 +142,7 @@ namespace IMSCovidTracker.Services
 
         public CovidLocation Find(string countryName)
         {
+            if (CovidLocations == null) return default(CovidLocation);
             if (string.IsNullOrEmpty(countryName)) return default(CovidLocation);
             var _results = CovidLocations.Where(l => l.Country.ToLower() == countryName.ToLower());
             var _final = new CovidLocation() { Country = countryName };
@@ -104,6 +150,7 @@ namespace IMSCovidTracker.Services
             if (_results.Count() == 0) return default(CovidLocation);
 
             _final.Country = _results.First().Country;
+            _final.CountryCode = _results.First().CountryCode;
             foreach (var res in _results)
             {
                 _final.Confirmed += res.Confirmed;

@@ -56,17 +56,36 @@ namespace IMSCovidTracker.Services
         }
         
 
-        public async Task<int> GetTotalPopulation(string countryName)
+        public async Task<int> GetTotalPopulation(CovidLocation country)
         {
             try
             {
-                var _result = await _httpClient.GetAsync($"{_apiEndpoint}/name/{ParseCountryName(countryName)}{_queryParams}");
+                string url = "";
+                if (!string.IsNullOrEmpty(country.CountryCode))
+                {
+                    url += $"/alpha/{country.CountryCode.ToLower()}";
+                } 
+                else
+                {
+                    url += $"/name/{ParseCountryName(country.Country)}?fullText=true";
+                }
+
+                var _result = await _httpClient.GetAsync($"{_apiEndpoint}{url}");
                 var _content = await _result.Content.ReadAsStringAsync();
                 if (_result.IsSuccessStatusCode)
                 {
-                    var _data = JArray.Parse(_content);
-                    var _population = _data[0].Value<int>("population");
-                    return _population;
+                    try
+                    {
+                        var _data = JObject.Parse(_content);
+                        var _population = _data.Value<int>("population");
+                        return _population;
+                    } 
+                    catch
+                    {
+                        var _data = JArray.Parse(_content);
+                        var _population = _data[0].Value<int>("population");
+                        return _population;
+                    }
                 }
                 throw new Exception(_content);
             }
@@ -79,11 +98,9 @@ namespace IMSCovidTracker.Services
         public string ParseCountryName(string countryName)
         {
             if (string.IsNullOrEmpty(countryName)) return "";
-            if (countryName.ToLower().Contains("korea") && countryName.ToLower().Contains("south"))
-            {
-                return "Korea (Republic of)";
-            }
+            if (countryName.ToLower().Contains("korea") && countryName.ToLower().Contains("south")) return "Korea (Republic of)";
             else if (countryName.ToLower().Contains("kosovo")) return "Republic of Kosovo";
+            else if (countryName.ToLower().Contains("macedonia")) return "Macedonia (the former Yugoslav Republic of)";
             return countryName;
         }
 

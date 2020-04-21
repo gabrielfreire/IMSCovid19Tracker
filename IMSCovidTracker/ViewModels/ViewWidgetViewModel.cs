@@ -21,7 +21,7 @@ namespace IMSCovidTracker.ViewModels
             {
                 SetBusy(true);
 
-                country.TotalPopulation = await App.CountryService.GetTotalPopulation(country.Country);
+                country.TotalPopulation = await App.CountryService.GetTotalPopulation(country);
                 var deathsPerPop = (double)country.Deaths / country.TotalPopulation;
                 country.DeathsPerMillion = (int)(deathsPerPop * 1000000d);
             }

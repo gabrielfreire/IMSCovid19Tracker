@@ -11,6 +11,7 @@ namespace IMSCovidTracker.Models
         public string Province { get; set; }
         [JsonProperty("Country_Region")]
         public string Country { get; set; }
+        public string CountryCode { get; set; }
         public int Deaths { get; set; }
         public int Confirmed { get; set; }
         public int Recovered { get; set; }
