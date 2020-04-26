@@ -6,19 +6,21 @@
              xmlns:vm="clr-namespace:IMSCovidTracker.ViewModels"
              mc:Ignorable="d"
              BackgroundColor="#eee"
+             
              x:Class="IMSCovidTracker.Views.AboutPage"
              Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    
     <Shell.TitleView>
         <StackLayout HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                 <Image Source="coronavirus.png" Aspect="AspectFit" WidthRequest="25"/>
-                <Label Text="IMS COVID-19 Tracker" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="Corona Meter" FontSize="20" FontAttributes="Bold"/>
             </StackLayout>
         </StackLayout>
     </Shell.TitleView>
-    <ContentPage.BindingContext>
-        <vm:AboutViewModel />
-    </ContentPage.BindingContext>
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -33,14 +35,19 @@
 
             <StackLayout>
                 <StackLayout Margin="2" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                    <Label TextColor="Gray" Text="Developed by IMS MAXIMS" HorizontalTextAlignment="Center"/>
+                    <Label TextColor="Gray" Text="Developed by Gabriel Freire" HorizontalTextAlignment="Center"/>
+                    <Label TextColor="CornflowerBlue" Text="https://gabrielfreire.github.io" HorizontalTextAlignment="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenWebsiteCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                     <Label TextColor="Gray" Text="{Binding CurrentVersion, StringFormat='Version {0}'}" HorizontalTextAlignment="Center"/>
                 </StackLayout>
                 <Frame BackgroundColor="White" Padding="15" Margin="10" HasShadow="{OnPlatform iOS=false, Default=true}">
                 
                     <StackLayout Spacing="20">
                         <Label FontSize="18" Text="Custom Country Widgets" TextColor="Black" FontAttributes="Bold"/>
-                        <Label FontSize="13" Text="This configuration is store locally and removed when the app is uninstalled" TextColor="Gray"/>
+                        <Label FontSize="15" Text="Your widget configuration will be stored locally and removed when the app is uninstalled" TextColor="Gray"/>
                         <Image Source="country_widgets.jpg" Aspect="AspectFit" WidthRequest="180"/>
                         <StackLayout Orientation="Horizontal">
                             <Image Source="swipeleft.png" Aspect="AspectFit" WidthRequest="30"/>
@@ -56,14 +63,14 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-                <Frame BackgroundColor="White" Padding="15" Margin="10" HasShadow="{OnPlatform iOS=false, Default=true}">
+                <!--<Frame BackgroundColor="White" Padding="15" Margin="10" HasShadow="{OnPlatform iOS=false, Default=true}">
                 
                     <StackLayout Spacing="20">
                         <Label FontSize="18" Text="Sources" TextColor="Black" FontAttributes="Bold"/>
                         <Label FontSize="16" TextColor="Black" Text="The data comes from the following sources"/>
                         <Label FontSize="16" TextColor="Black" Text="WHO, US CDC, China NHC, ECDC, and DXY"/>
                     </StackLayout>
-                </Frame>
+                </Frame>-->
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

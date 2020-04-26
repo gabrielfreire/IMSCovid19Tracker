@@ -13,7 +13,7 @@
         <StackLayout HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                 <Image Source="coronavirus.png" Aspect="AspectFit" WidthRequest="25"/>
-                <Label Text="IMS COVID-19 Tracker" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="Corona Meter" FontSize="20" FontAttributes="Bold"/>
             </StackLayout>
         </StackLayout>
     </Shell.TitleView>

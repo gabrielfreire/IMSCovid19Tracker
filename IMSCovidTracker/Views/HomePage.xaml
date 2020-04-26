@@ -14,7 +14,7 @@
         <StackLayout HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                 <Image Source="coronavirus.png" Aspect="AspectFit" WidthRequest="25" HorizontalOptions="Center"/>
-                <Label Text="IMS COVID-19 Tracker" FontSize="20" FontAttributes="Bold" TextColor="Gray" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                <Label Text="Corona Meter" FontSize="20" FontAttributes="Bold" TextColor="Gray" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                 <Frame Padding="10" Margin="0" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="CenterAndExpand">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding Source={x:Reference HomePageView}, Path=BindingContext.ShowTutorialCommand}"/>
@@ -43,7 +43,7 @@
 
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="important.png" Aspect="AspectFit" WidthRequest="20" HorizontalOptions="StartAndExpand"/>
-                                <Label Text="COVID-19 Case tracker" FontAttributes="Bold" FontSize="20" HorizontalOptions="FillAndExpand" TextColor="Gray"/>
+                                <Label Text="COVID-19 Cases" FontAttributes="Bold" FontSize="20" HorizontalOptions="FillAndExpand" TextColor="Gray"/>
                                 <ImageButton Aspect="AspectFit" WidthRequest="20" Source="refresh.png" Clicked="RefreshButton_Clicked"/>
                             </StackLayout>
 

@@ -8,6 +8,7 @@ namespace IMSCovidTracker
 {
     public partial class App : Application
     {
+        public static string AppTitle = "Corona Meter";
         public static MessageDialogService MessageDialogService { get; set; }
         public static CovidService CovidService { get; set; }
         public static CountryService CountryService { get; set; }
@@ -31,6 +32,8 @@ namespace IMSCovidTracker
 
             MainPage = new AppShell();
         }
+
+        public static string GetTitle() => AppTitle;
 
         protected override void OnStart()
         {

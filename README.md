@@ -49,3 +49,5 @@ You should now be able to download the app directly onto your mobile
     - Fix bug where the population for US is wrong
   - **2.1.2** 
     - Fix population bugs and improve population by country API.
+  - **2.1.3** 
+    - Change country population API.

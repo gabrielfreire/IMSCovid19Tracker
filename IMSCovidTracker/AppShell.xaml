@@ -31,10 +31,10 @@
 
     <!-- Your Pages -->
     <TabBar>
-        <Tab Title="World Tracker" Icon="tab_feed.png">
+        <Tab Title="Total cases" Icon="tab_feed.png">
             <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
         </Tab>
-        <Tab Title="Search" Icon="tab_about.png">
+        <Tab Title="Search" Icon="search.png">
             <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
         </Tab>
         <Tab Title="About" Icon="tab_about.png">

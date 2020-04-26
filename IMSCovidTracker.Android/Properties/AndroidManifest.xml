@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="212" android:versionName="2.1.2" package="com.companyname.imscovidtracker" android:installLocation="internalOnly">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="213" android:versionName="2.1.3" package="com.gabrielfreire.coronameter" android:installLocation="internalOnly">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
-	<application android:label="IMS COVID-19" android:icon="@drawable/coronavirus" android:allowBackup="true"></application>
+	<application android:label="CoronaMeter" android:icon="@drawable/coronavirus" android:allowBackup="true"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>
