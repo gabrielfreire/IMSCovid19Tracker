@@ -40,7 +40,7 @@
                 
                     <StackLayout Spacing="20">
                         <Label FontSize="18" Text="Custom Country Widgets" TextColor="Black" FontAttributes="Bold"/>
-                        <Label FontSize="13" Text="This configuration is store locally and removed when the app is uninstalled" TextColor="Gray"/>
+                        <Label FontSize="15" Text="Your widget configuration will be stored locally and removed when the app is uninstalled" TextColor="Gray"/>
                         <Image Source="country_widgets.jpg" Aspect="AspectFit" WidthRequest="180"/>
                         <StackLayout Orientation="Horizontal">
                             <Image Source="swipeleft.png" Aspect="AspectFit" WidthRequest="30"/>
