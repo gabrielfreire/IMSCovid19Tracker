@@ -43,7 +43,7 @@
 
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="important.png" Aspect="AspectFit" WidthRequest="20" HorizontalOptions="StartAndExpand"/>
-                                <Label Text="COVID-19 Cases" FontAttributes="Bold" FontSize="20" HorizontalOptions="FillAndExpand" TextColor="Gray"/>
+                                <Label Text="Total Cases" FontAttributes="Bold" FontSize="20" HorizontalOptions="FillAndExpand" TextColor="Gray"/>
                                 <ImageButton Aspect="AspectFit" WidthRequest="20" Source="refresh.png" Clicked="RefreshButton_Clicked"/>
                             </StackLayout>
 
