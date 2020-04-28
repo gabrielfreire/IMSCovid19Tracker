@@ -33,7 +33,7 @@
 
             <StackLayout>
                 <StackLayout Margin="2" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                    <Label TextColor="Gray" Text="Developed by IMS MAXIMS" HorizontalTextAlignment="Center"/>
+                    <Label TextColor="Gray" Text="Developed by Gabriel Freire @ IMS MAXIMS" HorizontalTextAlignment="Center"/>
                     <Label TextColor="Gray" Text="{Binding CurrentVersion, StringFormat='Version {0}'}" HorizontalTextAlignment="Center"/>
                 </StackLayout>
                 <Frame BackgroundColor="White" Padding="15" Margin="10" HasShadow="{OnPlatform iOS=false, Default=true}">

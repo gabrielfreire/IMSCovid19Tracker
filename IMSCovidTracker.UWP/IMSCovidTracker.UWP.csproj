@@ -192,6 +192,7 @@
     <Content Include="tab_about.png" />
     <Content Include="tab_feed.png" />
     <Content Include="warning.png" />
+    <Content Include="world.png" />
     <Content Include="wreath_gray.png" />
     <Content Include="wreath_nc_gray.png" />
     <Content Include="wreath_red.png" />

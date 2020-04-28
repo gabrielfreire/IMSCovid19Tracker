@@ -8416,16 +8416,19 @@ namespace IMSCovidTracker.Droid
 			public const int warning = 2131165318;
 			
 			// aapt resource value: 0x7F070087
-			public const int wreath_gray = 2131165319;
+			public const int world = 2131165319;
 			
 			// aapt resource value: 0x7F070088
-			public const int wreath_nc_gray = 2131165320;
+			public const int wreath_gray = 2131165320;
 			
 			// aapt resource value: 0x7F070089
-			public const int wreath_red = 2131165321;
+			public const int wreath_nc_gray = 2131165321;
 			
 			// aapt resource value: 0x7F07008A
-			public const int xamarin_logo = 2131165322;
+			public const int wreath_red = 2131165322;
+			
+			// aapt resource value: 0x7F07008B
+			public const int xamarin_logo = 2131165323;
 			
 			static Drawable()
 			{

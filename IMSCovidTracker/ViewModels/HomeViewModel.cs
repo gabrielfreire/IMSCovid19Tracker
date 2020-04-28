@@ -3,9 +3,11 @@ using IMSCovidTracker.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace IMSCovidTracker.ViewModels
@@ -31,7 +33,7 @@ namespace IMSCovidTracker.ViewModels
         public CovidLocation ResultCountry { get => _resultCountry; set => RaiseIfPropertyChanged(ref _resultCountry, value); }
 
         public ICommand DeleteWidgetCommand => new Command<CovidLocation>((cLoc) => DeleteWidget(cLoc));
-        public ICommand AddWidgetCommand => new Command(async () => await AddWidget());
+        public ICommand AddWidgetCommand => new Command(async () => await OpenAddWidgetModal());
         public ICommand ViewWidgetCommand => new Command<CovidLocation>(async (loc) => await ViewWidget(loc));
         public ICommand ShowTutorialCommand => new Command(async () => await ShowTutorial());
 
@@ -53,18 +55,34 @@ namespace IMSCovidTracker.ViewModels
             await App.MessageDialogService.DisplayTutorial(_homePage.countryWidgetInfo);
         }
 
-        public async Task LoadCovidData()
+        public async Task LoadCovidData(bool isRefresh=false)
         {
             try
             {
                 SetBusy(true);
-                var _covidLocations = await App.CovidService.GetLocationsAsync();
-                TotalCases = await App.CovidService.GetTotalCases(_covidLocations);
-                
+
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    App.MessageDialogService.Display("No Connection", "Sorry, you're not connected to the internet.");
+                    return;
+                }
+
+                if (isRefresh)
+                    _ = App.LoadData();
+
+                while (!App.DataLoaded) await Task.Delay(10);
+
+                // Get total covid cases in the world
+                TotalCases = await App.CovidService.GetTotalCases();
+                TotalCases.FlagImageUrl = "world.png";
+
+                await LoadDefaultWidgets();
+
             }
             catch (Exception ex)
             {
-                App.MessageDialogService.Display("Error", ex.Message);
+                Debug.WriteLine(ex.ToString());
+                App.MessageDialogService.Display("Error", "Failed to load COVID-19 Data, check your internet connection.");
             }
             finally
             {
@@ -79,6 +97,12 @@ namespace IMSCovidTracker.ViewModels
             try
             {
                 SetBusy(true);
+
+                if (!App.CovidService.CovidLocations.Any())
+                {
+                    App.MessageDialogService.Display("Error", "Failed to load widgets, check your internet connection");
+                    return;
+                }
 
                 _storedCountries = await App.StorageService.GetWidgetPreferences();
                 
@@ -97,6 +121,7 @@ namespace IMSCovidTracker.ViewModels
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.ToString());
                 App.MessageDialogService.Display("Error", ex.ToString());
             }
             finally
@@ -110,31 +135,35 @@ namespace IMSCovidTracker.ViewModels
                     if (_storedWidgets.Count == 0)
                     {
                         CountryWidgets.Add(App.CovidService.Find("Ireland"));
-                        CountryWidgets.Add(App.CovidService.Find("United Kingdom"));
+                        CountryWidgets.Add(App.CovidService.Find("united kingdom"));
                         CountryWidgets.Add(App.CovidService.Find("Brazil"));
                         CountryWidgets.Add(App.CovidService.Find("Italy"));
                         CountryWidgets.Add(App.CovidService.Find("Romania"));
-                        CountryWidgets.Add(App.CovidService.Find("us"));
+                        CountryWidgets.Add(App.CovidService.Find("usa"));
                     }
                     else
                     {
                         CountryWidgets = _storedWidgets;
                     }
+
+
+                    _homePage.WidgetCollection.HeightRequest = 3 * 120;
                 });
                 SetBusy(false);
             }
         }
 
-        private async Task AddWidget()
+        private async Task OpenAddWidgetModal()
         {
             if (CountryWidgets.Count >= 6)
             {
-                App.MessageDialogService.Display("Maximum number reached", "Reached the maximum number of Widgets");
+                App.MessageDialogService.Display("Maximum number reached", "You can only have 6 widgets.");
                 return;
             }
 
             MessagingCenter.Unsubscribe<SearchModalViewModel, string>(this, "receivedCountryName");
             MessagingCenter.Subscribe<SearchModalViewModel, string>(this, "receivedCountryName", AddCountryWidget);
+
             await App.NavigationService.Navigate(_homePage, new SearchModalPage(), true);
         }
 
@@ -151,13 +180,16 @@ namespace IMSCovidTracker.ViewModels
             }
 
             MessagingCenter.Unsubscribe<SearchModalViewModel, string>(this, "receivedCountryName");
+
             Device.BeginInvokeOnMainThread(async () =>
             {
                 await Task.Delay(500);
 
                 CountryWidgets.Add(_country);
                 await App.StorageService.StoreWidgetPreferences(CountryWidgets.Select(c => c.Country).ToList());
-                _homePage.ForceLayout();
+
+                // force layout of collectionview
+                _ = ForceCollectionLayout();
             });
         }
 
@@ -165,27 +197,38 @@ namespace IMSCovidTracker.ViewModels
         {
             try
             {
+                if (!CountryWidgets.Any()) return;
+
                 CountryWidgets.Remove(cLoc);
                 _ = App.StorageService.StoreWidgetPreferences(CountryWidgets.Select(c => c.Country).ToList());
-                
+
+                // force layout of collectionview
+                _ = ForceCollectionLayout();
+
             }
             catch (Exception ex)
             {
                 App.MessageDialogService.Display("Error", ex.ToString());
-            }
-            finally
-            {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await Task.Delay(500);
-                    _homePage.ForceLayout();
-                });
             }
         }
 
         private async Task ViewWidget(CovidLocation location)
         {
             await App.NavigationService.Navigate(_homePage, new ViewWidgetPage(location), false);
+        }
+
+        /// <summary>
+        /// Force layout for collectionview
+        /// </summary>
+        /// <returns></returns>
+        private async Task ForceCollectionLayout()
+        {
+            await Device.InvokeOnMainThreadAsync(async () =>
+            {
+                await Task.Delay(400);
+                _homePage.WidgetCollection.ItemsSource = null;
+                _homePage.WidgetCollection.ItemsSource = CountryWidgets;
+            });
         }
     }
 

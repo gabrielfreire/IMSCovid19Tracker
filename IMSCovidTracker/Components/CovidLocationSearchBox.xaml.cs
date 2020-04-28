@@ -46,9 +46,13 @@ namespace IMSCovidTracker.Components
 
         public void Clear()
         {
-            SearchQuery = "";
-            IsSearching = false;
-            SearchPartialResults.Clear();
+            Device.BeginInvokeOnMainThread(() =>
+            {
+
+                SearchQuery = "";
+                IsSearching = false;
+                SearchPartialResults.Clear();
+            });
         }
 
         private void SearchField_TextChanged(object sender, TextChangedEventArgs e)

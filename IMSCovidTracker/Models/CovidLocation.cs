@@ -12,11 +12,12 @@ namespace IMSCovidTracker.Models
         [JsonProperty("Country_Region")]
         public string Country { get; set; }
         public string CountryCode { get; set; }
+        public string FlagImageUrl { get; set; }
         public int Deaths { get; set; }
         public int Confirmed { get; set; }
         public int Recovered { get; set; }
         public int Active { get; set; }
-        public int DeathsPerMillion { get; set; } = 0;
+        public double DeathsPerMillion { get; set; } = 0;
         public Int64 TotalPopulation { get; set; }
         //public int Active => (Confirmed - Recovered) - Deaths;
         public double ConfirmedPerRecovered => (double) Recovered / Confirmed * 100;

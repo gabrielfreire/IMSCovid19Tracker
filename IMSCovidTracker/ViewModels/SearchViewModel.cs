@@ -50,10 +50,10 @@ namespace IMSCovidTracker.ViewModels
 
                 try
                 {
-                    _resultCountry.TotalPopulation = await App.CountryService.GetTotalPopulation(_resultCountry);
+                    //_resultCountry.TotalPopulation = await App.CountryService.GetTotalPopulation(_resultCountry);
 
-                    var deathsPerPop = (double) _resultCountry.Deaths / _resultCountry.TotalPopulation;
-                    _resultCountry.DeathsPerMillion = (int) (deathsPerPop * 1000000d);
+                    //var deathsPerPop = (double) _resultCountry.Deaths / _resultCountry.TotalPopulation;
+                   // _resultCountry.DeathsPerMillion = (int) (deathsPerPop * 1000000d);
                 }
                 catch (Exception ex)
                 {
