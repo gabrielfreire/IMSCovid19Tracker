@@ -20,7 +20,10 @@ namespace IMSCovidTracker.Views
         {
             BindingContext = _viewModel = new HomeViewModel(this);
             InitializeComponent();
-            
+
+            // where to display tutorial
+            navbarComponent.AbsoluteLayoutElement = homeLayout;
+
             RefreshData(false, true);
         }
 
@@ -37,7 +40,7 @@ namespace IMSCovidTracker.Views
                 await _viewModel.LoadCovidData(IsRefresh);
                 if (displayTutorialAfterRefresh)
                 {
-                    await App.MessageDialogService.DisplayTutorial(countryWidgetInfo);
+                    await navbarComponent.ShowTutorial();
                 }
             });
         }

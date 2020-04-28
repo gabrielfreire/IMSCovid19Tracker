@@ -23,10 +23,17 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+                
                 <StackLayout Grid.Row="0" Orientation="Horizontal">
                     <Image Source="{Binding Source={x:Reference CovidCardView}, Path=CountryFlag}" Aspect="AspectFit" WidthRequest="20"/>
-                    <Label FontSize="12" Text="{Binding Source={x:Reference CovidCardView}, Path=CountryName}" TextColor="Gray"/>
+                    <Label FontSize="12" Text="{Binding Source={x:Reference CovidCardView}, Path=CountryName}" TextColor="Gray" HorizontalOptions="StartAndExpand"/>
+
+                    <StackLayout Spacing="1" Orientation="Vertical">
+                        <Image Source="swipeleft.png" Aspect="AspectFit" WidthRequest="12"/>
+                        <Image Source="swiperight.png" Aspect="AspectFit" WidthRequest="12"/>
+                    </StackLayout>
                 </StackLayout>
 
                 <StackLayout Grid.Row="1" Orientation="Horizontal">

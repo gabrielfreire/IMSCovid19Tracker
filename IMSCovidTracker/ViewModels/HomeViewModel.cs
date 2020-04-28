@@ -35,9 +35,6 @@ namespace IMSCovidTracker.ViewModels
         public ICommand DeleteWidgetCommand => new Command<CovidLocation>((cLoc) => DeleteWidget(cLoc));
         public ICommand AddWidgetCommand => new Command(async () => await OpenAddWidgetModal());
         public ICommand ViewWidgetCommand => new Command<CovidLocation>(async (loc) => await ViewWidget(loc));
-        public ICommand ShowTutorialCommand => new Command(async () => await ShowTutorial());
-
-
 
         #endregion
 
@@ -50,10 +47,7 @@ namespace IMSCovidTracker.ViewModels
         }
         #endregion
 
-        private async Task ShowTutorial()
-        {
-            await App.MessageDialogService.DisplayTutorial(_homePage.countryWidgetInfo);
-        }
+        
 
         public async Task LoadCovidData(bool isRefresh=false)
         {
@@ -67,6 +61,7 @@ namespace IMSCovidTracker.ViewModels
                     return;
                 }
 
+                // only reload data if user is refreshing the page
                 if (isRefresh)
                     _ = App.LoadData();
 
@@ -139,7 +134,7 @@ namespace IMSCovidTracker.ViewModels
                         CountryWidgets.Add(App.CovidService.Find("Brazil"));
                         CountryWidgets.Add(App.CovidService.Find("Italy"));
                         CountryWidgets.Add(App.CovidService.Find("Romania"));
-                        CountryWidgets.Add(App.CovidService.Find("usa"));
+                        CountryWidgets.Add(App.CovidService.Find("united states"));
                     }
                     else
                     {
@@ -147,7 +142,8 @@ namespace IMSCovidTracker.ViewModels
                     }
 
 
-                    _homePage.WidgetCollection.HeightRequest = 3 * 120;
+                    _ = ForceCollectionLayout(0);
+
                 });
                 SetBusy(false);
             }
@@ -221,13 +217,20 @@ namespace IMSCovidTracker.ViewModels
         /// Force layout for collectionview
         /// </summary>
         /// <returns></returns>
-        private async Task ForceCollectionLayout()
+        private async Task ForceCollectionLayout(int delay=400)
         {
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                _homePage.ForceLayout();
+                return;
+            }
             await Device.InvokeOnMainThreadAsync(async () =>
             {
-                await Task.Delay(400);
+                await Task.Delay(delay);
                 _homePage.WidgetCollection.ItemsSource = null;
                 _homePage.WidgetCollection.ItemsSource = CountryWidgets;
+
+                _homePage.WidgetCollection.HeightRequest = 3 * 120;
             });
         }
     }

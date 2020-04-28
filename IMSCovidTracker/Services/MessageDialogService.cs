@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IMSCovidTracker.Components;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace IMSCovidTracker.Services
 {
     public class MessageDialogService
     {
-
+        public bool IsDisplayingTutorial = false;
         public void Display(string Title, string Message)
         {
             Device.BeginInvokeOnMainThread(async () =>
@@ -30,14 +31,19 @@ namespace IMSCovidTracker.Services
             return App.Current.MainPage.DisplayPromptAsync(Title, Message);
         }
 
-        public async Task DisplayTutorial(Frame countryWidgetInfo, int displayTime = 4000)
+        public async Task DisplayTutorial(AbsoluteLayout parentView, Tutorial tutorialComponent, int displayTime = 4000)
         {
+            if (IsDisplayingTutorial) return;
             await Device.InvokeOnMainThreadAsync(async () =>
             {
+                IsDisplayingTutorial = true;
+                parentView.Children.Add(tutorialComponent);
                 await Task.Delay(500);
-                await countryWidgetInfo.FadeTo(0.8, 300);
+                await tutorialComponent.FadeTo(0.8, 300);
                 await Task.Delay(displayTime);
-                await countryWidgetInfo.FadeTo(0, 300);
+                await tutorialComponent.FadeTo(0, 300);
+                parentView.Children.Remove(tutorialComponent);
+                IsDisplayingTutorial = false;
             });
         }
     }

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Name="navbarView"
+             x:Class="IMSCovidTracker.Components.Navbar">
+
+    <AbsoluteLayout>
+
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">-->
+            <Image Source="coronavirus.png" Aspect="AspectFit" WidthRequest="25" HorizontalOptions="Center"/>
+            <Label Grid.Column="1" Text="IMS COVID-19" FontSize="20" FontAttributes="Bold" TextColor="Gray" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Frame Grid.Column="2" Padding="10" Margin="0" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="CenterAndExpand">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ShowTutorialCommand}"/>
+                </Frame.GestureRecognizers>
+                <StackLayout x:Name="helpButton" Spacing="1" IsVisible="{Binding ShowHelp}">
+                    <Image Source="questionmark.png" Aspect="AspectFit" WidthRequest="20"/>
+                    <Label Text="Help" FontSize="11" TextColor="Black"/>
+                </StackLayout>
+            </Frame>
+            <!--</StackLayout>-->
+        </Grid>
+    </AbsoluteLayout>
+</ContentView>
