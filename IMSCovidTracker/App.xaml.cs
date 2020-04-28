@@ -34,15 +34,13 @@ namespace IMSCovidTracker
             CountryService = DependencyService.Get<CountryService>();
             WorldmeterScraperService = DependencyService.Get<WorldmeterScraperService>();
 
+            _ = LoadData();
+
             MainPage = new AppShell();
         }
 
         protected override void OnStart()
         {
-            _ = Task.Run(async () =>
-            {
-                await LoadData();
-            });
         }
 
         protected override void OnSleep()
