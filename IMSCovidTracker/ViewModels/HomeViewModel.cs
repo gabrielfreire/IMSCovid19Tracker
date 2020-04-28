@@ -230,7 +230,7 @@ namespace IMSCovidTracker.ViewModels
                 _homePage.WidgetCollection.ItemsSource = null;
                 _homePage.WidgetCollection.ItemsSource = CountryWidgets;
 
-                _homePage.WidgetCollection.HeightRequest = 3 * 120;
+                _homePage.WidgetCollection.HeightRequest = 3 * 130;
             });
         }
     }

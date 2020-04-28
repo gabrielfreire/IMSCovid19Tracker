@@ -15,7 +15,6 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">-->
             <Image Source="coronavirus.png" Aspect="AspectFit" WidthRequest="25" HorizontalOptions="Center"/>
             <Label Grid.Column="1" Text="IMS COVID-19" FontSize="20" FontAttributes="Bold" TextColor="Gray" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             <Frame Grid.Column="2" Padding="10" Margin="0" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="CenterAndExpand">
@@ -27,7 +26,6 @@
                     <Label Text="Help" FontSize="11" TextColor="Black"/>
                 </StackLayout>
             </Frame>
-            <!--</StackLayout>-->
         </Grid>
     </AbsoluteLayout>
 </ContentView>

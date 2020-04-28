@@ -12,7 +12,6 @@ namespace IMSCovidTracker
         public static bool DataLoaded = false;
         public static MessageDialogService MessageDialogService { get; set; }
         public static CovidService CovidService { get; set; }
-        public static CountryService CountryService { get; set; }
         public static WorldmeterScraperService WorldmeterScraperService { get; set; }
         public static NavigationService NavigationService{ get; set; }
         public static StorageService StorageService { get; set; }
@@ -24,14 +23,12 @@ namespace IMSCovidTracker
             DependencyService.Register<CovidService>();
             DependencyService.Register<NavigationService>();
             DependencyService.Register<StorageService>();
-            DependencyService.Register<CountryService>();
             DependencyService.Register<WorldmeterScraperService>();
 
             MessageDialogService = DependencyService.Get<MessageDialogService>();
             CovidService = DependencyService.Get<CovidService>();
             NavigationService = DependencyService.Get<NavigationService>();
             StorageService = DependencyService.Get<StorageService>();
-            CountryService = DependencyService.Get<CountryService>();
             WorldmeterScraperService = DependencyService.Get<WorldmeterScraperService>();
 
             _ = LoadData();
@@ -56,9 +53,6 @@ namespace IMSCovidTracker
             try
             {
                 DataLoaded = false;
-
-                // store all countries populations data
-                // await App.WorldmeterScraperService.ScrapePopulationDataForAllCountries();
 
                 // Get all countries covid cases
                 await App.CovidService.GetLocationsAsync();

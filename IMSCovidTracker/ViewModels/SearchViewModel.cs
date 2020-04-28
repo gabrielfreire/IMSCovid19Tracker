@@ -28,7 +28,7 @@ namespace IMSCovidTracker.ViewModels
             this.searchPage = searchPage;
         }
 
-        public async Task DisplaySearchResult(string countryName)
+        public void DisplaySearchResult(string countryName)
         {
             try
             {
@@ -46,18 +46,6 @@ namespace IMSCovidTracker.ViewModels
                 {
                     App.MessageDialogService.Display("Error", $"Country {countryName} not found");
                     return;
-                }
-
-                try
-                {
-                    //_resultCountry.TotalPopulation = await App.CountryService.GetTotalPopulation(_resultCountry);
-
-                    //var deathsPerPop = (double) _resultCountry.Deaths / _resultCountry.TotalPopulation;
-                   // _resultCountry.DeathsPerMillion = (int) (deathsPerPop * 1000000d);
-                }
-                catch (Exception ex)
-                {
-
                 }
 
                 Device.BeginInvokeOnMainThread(() =>

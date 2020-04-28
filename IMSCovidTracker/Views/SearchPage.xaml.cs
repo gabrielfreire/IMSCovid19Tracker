@@ -26,7 +26,7 @@ namespace IMSCovidTracker.Views
         private void SearchField_OnCountrySelected(string countryName)
         {
             _viewModel.ResetSearch();
-            _ = _viewModel.DisplaySearchResult(countryName);
+            _viewModel.DisplaySearchResult(countryName);
         }
 
         protected override void OnAppearing()
