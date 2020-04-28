@@ -1,18 +1,14 @@
-# IMS COVID-19 Tracker
-This is a simple COVID-19 Tracker mobile app available for iOS and Android
+# IMS COVID-19
+This is a simple COVID-19 mobile app available for iOS and Android
 
 ![App Images](Assets/app.jpg)
 
 # Installation
 
+Open the following links from your phone to install the app:
+- **iOS (from v12.4)**: https://install.appcenter.ms/orgs/imsmaxims/apps/ims-covid-19-tracker-ios/distribution_groups/allpublic
+- **Android (from v5)**: https://install.appcenter.ms/orgs/imsmaxims/apps/ims-covid-19-tracker-android/distribution_groups/allpublic
 [Click here to install the App](https://appcenter.ms/orgs/imsmaxims/applications)
-
-Once clicked:
-
-  1. Sign into the Micrsoft App center with your company credentials and then choose **IMS COVID-19 Tracker for Android or iOS**.
-  2. Click the 'download' arrow icon next to the latest release
-  3. A QR code will appear in a new window
-  4. Take a picture of this with your mobile device
 
 You should now be able to download the app directly onto your mobile
 
@@ -56,3 +52,7 @@ You should now be able to download the app directly onto your mobile
     - Small country widgets are bigger and now have slide indicators and the country flag.
     - Got rid of third party country info/covid APIs and created new web scraper APIs
     - Remove web scraping code from Mobile sources and move it to a Web API server deployed in Azure.
+
+
+# License
+IMS COVID-19 is MIT Licensed
