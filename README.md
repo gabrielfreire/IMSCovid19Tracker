@@ -51,3 +51,8 @@ You should now be able to download the app directly onto your mobile
     - Fix population bugs and improve population by country API.
   - **2.1.3** 
     - Change country population API.
+  - **2.2.0** 
+    - Overall UI clean up and performance improvements.
+    - Small country widgets are bigger and now have slide indicators and the country flag.
+    - Got rid of third party country info/covid APIs and created new web scraper APIs
+    - Remove web scraping code from Mobile sources and move it to a Web API server deployed in Azure.

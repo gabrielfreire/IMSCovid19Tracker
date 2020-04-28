@@ -216,4 +216,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\world.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\widgets.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tab_search.png" />
+  </ItemGroup>
 </Project>

@@ -191,7 +191,9 @@
     <Content Include="swiperight.png" />
     <Content Include="tab_about.png" />
     <Content Include="tab_feed.png" />
+    <Content Include="tab_search.png" />
     <Content Include="warning.png" />
+    <Content Include="widgets.jpg" />
     <Content Include="world.png" />
     <Content Include="wreath_gray.png" />
     <Content Include="wreath_nc_gray.png" />

@@ -10,12 +10,7 @@
              x:Name="SearchPageView"
              x:Class="IMSCovidTracker.Views.SearchPage">
     <Shell.TitleView>
-        <StackLayout HorizontalOptions="FillAndExpand">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                <Image Source="coronavirus.png" Aspect="AspectFit" WidthRequest="25"/>
-                <Label Text="Corona Meter" FontSize="20" FontAttributes="Bold"/>
-            </StackLayout>
-        </StackLayout>
+        <components:Navbar x:Name="navbarComponent" ShowHelp="False"/>
     </Shell.TitleView>
     <ContentPage.Content>
         <ScrollView Padding="10">

@@ -1,6 +1,4 @@
 ﻿using IMSCovidTracker.Models;
-using AngleSharp;
-using AngleSharp.Html.Dom;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -11,7 +9,6 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using AngleSharp.Dom;
 using System.Diagnostics;
 
 namespace IMSCovidTracker.Services
@@ -22,8 +19,6 @@ namespace IMSCovidTracker.Services
         private HttpClient _httpClient;
         private string _apiEndpoint = "https://restcountries.eu/rest/v2";
         private string _queryParams = "?fullText=true";
-
-        private IBrowsingContext _context;
 
         public Dictionary<string, Int64> _CountryPopulationDict = new Dictionary<string, Int64>();
 

@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:IMSCovidTracker.ViewModels"
+             xmlns:components="clr-namespace:IMSCovidTracker.Components"
              mc:Ignorable="d"
              BackgroundColor="#eee"
              
@@ -12,14 +13,9 @@
     <ContentPage.BindingContext>
         <vm:AboutViewModel />
     </ContentPage.BindingContext>
-    
+
     <Shell.TitleView>
-        <StackLayout HorizontalOptions="FillAndExpand">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                <Image Source="coronavirus.png" Aspect="AspectFit" WidthRequest="25"/>
-                <Label Text="Corona Meter" FontSize="20" FontAttributes="Bold"/>
-            </StackLayout>
-        </StackLayout>
+        <components:Navbar x:Name="navbarComponent" ShowHelp="False"/>
     </Shell.TitleView>
     
     <ContentPage.Resources>
@@ -31,6 +27,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
+        
         <ScrollView>
 
             <StackLayout>
@@ -43,13 +40,14 @@
                         </Label.GestureRecognizers>
                     </Label>
                     <Label TextColor="Gray" Text="{Binding CurrentVersion, StringFormat='Version {0}'}" HorizontalTextAlignment="Center"/>
+
                 </StackLayout>
                 <Frame BackgroundColor="White" Padding="15" Margin="10" HasShadow="{OnPlatform iOS=false, Default=true}">
                 
                     <StackLayout Spacing="20">
                         <Label FontSize="18" Text="Custom Country Widgets" TextColor="Black" FontAttributes="Bold"/>
                         <Label FontSize="15" Text="Your widget configuration will be stored locally and removed when the app is uninstalled" TextColor="Gray"/>
-                        <Image Source="country_widgets.jpg" Aspect="AspectFit" WidthRequest="180"/>
+                        <Image Source="widgets.jpg" Aspect="AspectFit" WidthRequest="130"/>
                         <StackLayout Orientation="Horizontal">
                             <Image Source="swipeleft.png" Aspect="AspectFit" WidthRequest="30"/>
                             <Label FontSize="16" TextColor="Black" Text="Swipe left in a widget to view details"/>

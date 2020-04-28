@@ -50,24 +50,26 @@ namespace IMSCovidTracker.Services
             if (string.IsNullOrEmpty(countryName)) return default(CovidLocation);
 
             var _results = CovidLocations.Where(l => l.Country.ToLower() == countryName.ToLower());
-            if (_results.Count() == 0) return default(CovidLocation);
+
+            return _results.FirstOrDefault();
+            //if (_results.Count() == 0) return default(CovidLocation);
             
-            var _final = new CovidLocation() { Country = countryName };
-            _final.Country = _results.First().Country;
-            _final.CountryCode = _results.First().CountryCode;
-            _final.FlagImageUrl = _results.First().FlagImageUrl;
+            //var _final = new CovidLocation() { Country = countryName };
+            //_final.Country = _results.First().Country;
+            //_final.CountryCode = _results.First().CountryCode;
+            //_final.FlagImageUrl = _results.First().FlagImageUrl;
 
-            foreach (var res in _results)
-            {
-                _final.Confirmed += res.Confirmed;
-                _final.Deaths += res.Deaths;
-                _final.Recovered += res.Recovered;
-                _final.Active += res.Active;
-                _final.DeathsPerMillion += res.DeathsPerMillion;
-                _final.TotalPopulation += res.TotalPopulation;
-            }
+            //foreach (var res in _results)
+            //{
+            //    _final.Confirmed += res.Confirmed;
+            //    _final.Deaths += res.Deaths;
+            //    _final.Recovered += res.Recovered;
+            //    _final.Active += res.Active;
+            //    _final.DeathsPerMillion += res.DeathsPerMillion;
+            //    _final.TotalPopulation += res.TotalPopulation;
+            //}
 
-            return _final;
+            //return _final;
         }
 
         public IEnumerable<CovidLocation> FindPartial(string searchQuery)

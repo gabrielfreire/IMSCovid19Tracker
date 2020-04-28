@@ -11,26 +11,7 @@
              x:Name="HomePageView"
              x:Class="IMSCovidTracker.Views.HomePage">
     <Shell.TitleView>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">-->
-            <Image Source="coronavirus.png" Aspect="AspectFit" WidthRequest="25" HorizontalOptions="Center"/>
-            <Label Grid.Column="1" Text="Corona Meter" FontSize="20" FontAttributes="Bold" TextColor="Gray" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-            <Frame Grid.Column="2" Padding="10" Margin="0" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="CenterAndExpand">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding Source={x:Reference HomePageView}, Path=BindingContext.ShowTutorialCommand}"/>
-                </Frame.GestureRecognizers>
-                <StackLayout Spacing="1">
-                    <Image Source="questionmark.png" Aspect="AspectFit" WidthRequest="20"/>
-                    <Label Text="Help" FontSize="11" TextColor="Black"/>
-                </StackLayout>
-            </Frame>
-            <!--</StackLayout>-->
-        </Grid>
+        <components:Navbar x:Name="navbarComponent" ShowHelp="True"/>
     </Shell.TitleView>
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -38,7 +19,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <AbsoluteLayout>
+        <AbsoluteLayout x:Name="homeLayout">
 
             <ScrollView Padding="4"
                         AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
@@ -74,8 +55,7 @@
                             </Image>
                         </StackLayout>
 
-                        <CollectionView Grid.Row="3" BackgroundColor="Transparent" x:Name="WidgetCollection" x:FieldModifier="public" HorizontalOptions="Fill"
-                                        SelectionMode="None"
+                        <CollectionView Grid.Row="3" BackgroundColor="Transparent" x:Name="WidgetCollection" x:FieldModifier="public"
                                         ItemsSource="{Binding Source={x:Reference HomePageView}, Path=BindingContext.CountryWidgets}">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="10" VerticalItemSpacing="10" Span="2"/>
@@ -99,9 +79,10 @@
                                                             BackgroundColor="Green"/>
                                             </SwipeItems>
                                         </SwipeView.RightItems>
-                                        <components:CovidInformationCard MinimumHeightRequest="100" HeightRequest="110"
-                                            CountryName="{Binding Country}" Small="True"
-                                                                         CountryFlag="{Binding FlagImageUrl}"
+                                        <components:CovidInformationCard MinimumHeightRequest="100"
+                                            CountryName="{Binding Country}" 
+                                            Small="True"
+                                            CountryFlag="{Binding FlagImageUrl}"
                                             Confirmed="{Binding Confirmed}"
                                             Deaths="{Binding Deaths}"
                                             Recovered="{Binding Recovered}"/>
@@ -121,30 +102,7 @@
                 VerticalOptions="CenterAndExpand" 
                 Color="Black"/>
             
-            <Frame x:Name="countryWidgetInfo" x:FieldModifier="public" BackgroundColor="#333" 
-                   Padding="15,20" 
-                   CornerRadius="5" 
-                   Opacity="0" 
-                   HasShadow="False"
-                   InputTransparent="True" 
-                   AbsoluteLayout.LayoutBounds="{OnPlatform Android='0.9, 0.1, 280, AutoSize', iOS='0.9, 0.2, 280, AutoSize'}" AbsoluteLayout.LayoutFlags="PositionProportional">
-                <StackLayout Spacing="6">
-                    <Label Text="Custom Country Widgets" TextColor="White" FontAttributes="Bold"/>
-                    <StackLayout Orientation="Horizontal">
-                        <Image Source="swipeleft.png" Aspect="AspectFit" WidthRequest="30"/>
-                        <Label TextColor="White" Text="Swipe left to view a country details"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label TextColor="White" Text="Swipe right to remove a country widget"/>
-                        <Image Source="swiperight.png" Aspect="AspectFit" WidthRequest="30"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Image Source="plus.png" Aspect="AspectFit" WidthRequest="30"/>
-                        <Label TextColor="White" Text="Tap the '+' button to add a new widget"/>
-                    </StackLayout>
-                    <Label TextColor="White" FontAttributes="Bold" Text="Go to the About page for more information"/>
-                </StackLayout>
-            </Frame>
+            
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

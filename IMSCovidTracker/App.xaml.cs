@@ -60,7 +60,7 @@ namespace IMSCovidTracker
                 DataLoaded = false;
 
                 // store all countries populations data
-                await App.WorldmeterScraperService.ScrapePopulationDataForAllCountries();
+                // await App.WorldmeterScraperService.ScrapePopulationDataForAllCountries();
 
                 // Get all countries covid cases
                 await App.CovidService.GetLocationsAsync();
