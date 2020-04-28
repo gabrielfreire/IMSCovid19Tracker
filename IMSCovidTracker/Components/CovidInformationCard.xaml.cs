@@ -15,6 +15,9 @@ namespace IMSCovidTracker.Components
         public static readonly BindableProperty CountryNameProperty = BindableProperty.Create(nameof(CountryName), typeof(string), typeof(string), default(string));
         public string CountryName { get => (string)GetValue(CountryNameProperty); set => SetValue(CountryNameProperty, value); }
 
+        public static readonly BindableProperty CountryFlagProperty = BindableProperty.Create(nameof(CountryFlag), typeof(string), typeof(string), default(string));
+        public string CountryFlag { get => (string)GetValue(CountryFlagProperty); set => SetValue(CountryFlagProperty, value); }
+
 
         public static readonly BindableProperty ConfirmedProperty = BindableProperty.Create(nameof(Confirmed), typeof(int), typeof(int), default(int));
         public int Confirmed { get => (int)GetValue(ConfirmedProperty); set => SetValue(ConfirmedProperty, value); }

@@ -213,4 +213,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\questionmark.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\world.png" />
+  </ItemGroup>
 </Project>

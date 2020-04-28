@@ -1,6 +1,7 @@
 ﻿using IMSCovidTracker.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,21 +20,31 @@ namespace IMSCovidTracker.Views
         {
             BindingContext = _viewModel = new HomeViewModel(this);
             InitializeComponent();
-            _ = Task.Run(async () =>
-            {
-                await _viewModel.LoadCovidData();
-                await _viewModel.LoadDefaultWidgets();
-                await App.MessageDialogService.DisplayTutorial(countryWidgetInfo);
-            });
+            
+            RefreshData(false, true);
         }
+
 
         private void RefreshButton_Clicked(object sender, EventArgs e)
         {
+            RefreshData(true, false);
+        }
+
+        private void RefreshData(bool IsRefresh, bool displayTutorialAfterRefresh=false)
+        {
             _ = Task.Run(async () =>
             {
-                await _viewModel.LoadCovidData();
-                await _viewModel.LoadDefaultWidgets();
+                await _viewModel.LoadCovidData(IsRefresh);
+                if (displayTutorialAfterRefresh)
+                {
+                    await App.MessageDialogService.DisplayTutorial(countryWidgetInfo);
+                }
             });
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
         }
 
         protected override void OnAppearing()

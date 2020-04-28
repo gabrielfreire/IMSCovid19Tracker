@@ -22,7 +22,10 @@
                 <StackLayout Orientation="Horizontal">
                     <StackLayout Spacing="6" HorizontalOptions="FillAndExpand">
 
-                        <Label FontSize="14" Text="{Binding Source={x:Reference LargeCovidCardView}, Path=CountryName, StringFormat='{0}'}" FontAttributes="Bold" TextColor="Gray"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.FlagImageUrl}" Aspect="AspectFit" WidthRequest="20"/>
+                            <Label FontSize="14" Text="{Binding Source={x:Reference LargeCovidCardView}, Path=CountryName, StringFormat='{0}'}" FontAttributes="Bold" TextColor="Gray"/>
+                        </StackLayout>
                    
 
                         <Frame Padding="9" BackgroundColor="#f0f4ff" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
@@ -48,7 +51,10 @@
                         </Frame>
                         <Frame Padding="9" BackgroundColor="#f0fff4" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
                             <StackLayout>
+                                <Label IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Recovered, Converter={StaticResource IsZero}}"
+                                       TextColor="Green" Text="N/A" FontSize="22" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
                                 <Label  TextColor="Green"
+                                        IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Recovered, Converter={StaticResource NotZero}}"
                                             Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Recovered, StringFormat='{0:#,##0}'}" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
                                 <Label Text="Recovered" TextColor="Green" HorizontalOptions="CenterAndExpand"/>
                             </StackLayout>
