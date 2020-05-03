@@ -30,7 +30,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="40"/>
                             <RowDefinition Height="110"/>
                             <RowDefinition Height="110"/>
                             <RowDefinition Height="110"/>
@@ -39,11 +39,11 @@
 
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="20"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Image Grid.Column="0" WidthRequest="20" Source="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.FlagImageUrl}" Aspect="AspectFit" VerticalOptions="Start"/>
-                            <Label Grid.Column="1" FontSize="14" Text="{Binding Source={x:Reference LargeCovidCardView}, Path=CountryName, StringFormat='{0}'}" 
+                            <Label Grid.Column="1" FontSize="13" Text="{Binding Source={x:Reference LargeCovidCardView}, Path=CountryName, StringFormat='{0}'}" VerticalTextAlignment="Start" HorizontalTextAlignment="Start"
                                    FontAttributes="Bold" TextColor="Gray"/>
                         </Grid>
 

@@ -61,7 +61,7 @@
                             </Image>
                         </Grid>
 
-                        <CollectionView Grid.Row="3" BackgroundColor="Transparent" x:Name="WidgetCollection" x:FieldModifier="public"
+                        <CollectionView Grid.Row="3" BackgroundColor="Transparent" x:Name="WidgetCollection" x:FieldModifier="public" VerticalScrollBarVisibility="Never"
                                         IsVisible="{Binding Source={x:Reference HomePageView}, Path=BindingContext.IsBusy, Converter={StaticResource BoolInvert}}"
                                         ItemsSource="{Binding Source={x:Reference HomePageView}, Path=BindingContext.CountryWidgets}">
                             <CollectionView.ItemsLayout>

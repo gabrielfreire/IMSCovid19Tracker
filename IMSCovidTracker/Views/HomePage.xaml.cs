@@ -56,19 +56,22 @@ namespace IMSCovidTracker.Views
         /// <returns></returns>
         private async Task ForceCollectionLayout(int delay = 400)
         {
-            if (Device.RuntimePlatform == Device.iOS)
-            {
-                ForceLayout();
-                return;
-            }
+            
 
             await Device.InvokeOnMainThreadAsync(async () =>
             {
+
+                WidgetCollection.HeightRequest = 3 * 145;
+
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    ForceLayout();
+                    return;
+                }
+
                 await Task.Delay(delay);
                 WidgetCollection.ItemsSource = null;
                 WidgetCollection.ItemsSource = _viewModel.CountryWidgets;
-
-                WidgetCollection.HeightRequest = 3 * 145;
 
             });
             
