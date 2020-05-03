@@ -18,15 +18,9 @@ namespace IMSCovidTracker.ViewModels
 
         public ViewWidgetPage ViewWidgetPage { get; }
 
-        public ViewWidgetViewModel(Views.ViewWidgetPage viewWidgetPage, CovidLocation country)
+        public ViewWidgetViewModel(CovidLocation country)
         {
             Init(country);
-            ViewWidgetPage = viewWidgetPage;
-        }
-
-        private async Task CloseModal()
-        {
-            await App.NavigationService.NavigateBack(ViewWidgetPage, true);
         }
 
         public void Init(CovidLocation country)
@@ -36,6 +30,11 @@ namespace IMSCovidTracker.ViewModels
                 CountryWidget = country;
             });
 
+        }
+
+        private async Task CloseModal()
+        {
+            await App.NavigationService.NavigateBack(true);
         }
     }
 }

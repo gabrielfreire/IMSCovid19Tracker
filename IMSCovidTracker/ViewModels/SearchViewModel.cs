@@ -15,18 +15,12 @@ namespace IMSCovidTracker.ViewModels
         private CovidLocation _resultCountry;
         private bool _searchSuccess = false;
         private bool _isSearching = false;
-        private SearchPage searchPage;
 
 
         public bool SearchSuccess { get => _searchSuccess; set => RaiseIfPropertyChanged(ref _searchSuccess, value); }
         public CovidLocation ResultCountry { get => _resultCountry; set => RaiseIfPropertyChanged(ref _resultCountry, value); }
         public bool IsSearching { get => _isSearching; set => RaiseIfPropertyChanged(ref _isSearching, value); }
 
-
-        public SearchViewModel(SearchPage searchPage)
-        {
-            this.searchPage = searchPage;
-        }
 
         public void DisplaySearchResult(string countryName)
         {

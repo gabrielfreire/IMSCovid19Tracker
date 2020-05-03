@@ -20,11 +20,12 @@ namespace IMSCovidTracker.ViewModels
         private ObservableCollection<CovidLocation> _countryWidgets = new ObservableCollection<CovidLocation>();
         private string _searchQuery;
         private bool _searchSuccess = false;
-        private HomePage _homePage;
-        private int _widgetsCount => CountryWidgets.Count; 
+        private int _widgetsCount => CountryWidgets.Count;
         #endregion
 
         #region Public members
+        public event EventHandler<int> WidgetCollectionChanged;
+
         public bool SearchSuccess { get => _searchSuccess; set => RaiseIfPropertyChanged(ref _searchSuccess, value); }
         public ObservableCollection<CovidLocation> CountryWidgets { get => _countryWidgets; set => RaiseIfPropertyChanged(ref _countryWidgets, value); }
         public string SearchQuery { get => _searchQuery; set => RaiseIfPropertyChanged(ref _searchQuery, value); }
@@ -43,10 +44,8 @@ namespace IMSCovidTracker.ViewModels
 
         #region Default constructor
 
-        public HomeViewModel(HomePage homePage)
+        public HomeViewModel()
         {
-            _homePage = homePage;
-
             RefreshDataCommand.Execute(null);
         }
         #endregion
@@ -157,7 +156,7 @@ namespace IMSCovidTracker.ViewModels
                         CountryWidgets = _storedWidgets;
                     }
 
-                    _ = ForceCollectionLayout(0);
+                    WidgetCollectionChanged?.Invoke(this, 0);
 
                     IsBusy = false;
                 });
@@ -175,7 +174,7 @@ namespace IMSCovidTracker.ViewModels
             MessagingCenter.Unsubscribe<SearchModalViewModel, string>(this, "receivedCountryName");
             MessagingCenter.Subscribe<SearchModalViewModel, string>(this, "receivedCountryName", AddCountryWidget);
 
-            await App.NavigationService.Navigate(_homePage, new SearchModalPage(), true);
+            await App.NavigationService.Navigate(new SearchModalPage(), true);
         }
 
         private void AddCountryWidget(SearchModalViewModel sender, string countryName)
@@ -199,8 +198,7 @@ namespace IMSCovidTracker.ViewModels
                 CountryWidgets.Add(_country);
                 await App.StorageService.StoreWidgetPreferences(CountryWidgets.Select(c => c.Country).ToList());
 
-                // force layout of collectionview
-                _ = ForceCollectionLayout();
+                WidgetCollectionChanged?.Invoke(this, 200);
             });
         }
 
@@ -214,8 +212,7 @@ namespace IMSCovidTracker.ViewModels
 
                 _ = App.StorageService.StoreWidgetPreferences(CountryWidgets.Select(c => c.Country).ToList());
 
-                // force layout of collectionview
-                _ = ForceCollectionLayout();
+                WidgetCollectionChanged?.Invoke(this, 395);
 
             }
             catch (Exception ex)
@@ -226,29 +223,7 @@ namespace IMSCovidTracker.ViewModels
 
         private async Task ViewWidget(CovidLocation location)
         {
-            await App.NavigationService.Navigate(_homePage, new ViewWidgetPage(location), true);
-        }
-
-        /// <summary>
-        /// <i>CollectionLayout is a bit buggy when adding/removing items so we must force some kind of re-layout</i> <br/>
-        /// Force layout for collectionview
-        /// </summary>
-        /// <returns></returns>
-        private async Task ForceCollectionLayout(int delay=400)
-        {
-            if (Device.RuntimePlatform == Device.iOS)
-            {
-                _homePage.ForceLayout();
-                return;
-            }
-            await Device.InvokeOnMainThreadAsync(async () =>
-            {
-                await Task.Delay(delay);
-                _homePage.WidgetCollection.ItemsSource = null;
-                _homePage.WidgetCollection.ItemsSource = CountryWidgets;
-
-                _homePage.WidgetCollection.HeightRequest = 3 * 145;
-            });
+            await App.NavigationService.Navigate(new ViewWidgetPage(location), true);
         }
     }
 

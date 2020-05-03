@@ -19,7 +19,7 @@ namespace IMSCovidTracker.Views
         
         public SearchPage()
         {
-            BindingContext = _viewModel = new SearchViewModel(this);
+            BindingContext = _viewModel = new SearchViewModel();
             InitializeComponent();
         }
 

@@ -14,18 +14,10 @@ namespace IMSCovidTracker.ViewModels
 {
     public class SearchModalViewModel : BaseViewModel
     {
-        private SearchModalPage _searchModalPage;
-
-
-        public SearchModalViewModel(SearchModalPage searchModalPage)
-        {
-            _searchModalPage = searchModalPage;
-        }
-
         public void SendResult(string countryName)
         {
             MessagingCenter.Send<SearchModalViewModel, string>(this, "receivedCountryName", countryName);
-            _ = App.NavigationService.NavigateBack(_searchModalPage, true);
+            _ = App.NavigationService.NavigateBack(true);
         }
 
     }

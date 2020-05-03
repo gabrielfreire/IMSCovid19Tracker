@@ -17,14 +17,9 @@ namespace IMSCovidTracker.Views
 
         public SearchModalPage()
         {
-            BindingContext = _viewModel = new SearchModalViewModel(this);
             InitializeComponent();
+            BindingContext = _viewModel = new SearchModalViewModel();
         }
-
-        //public void SearchField_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    //_viewModel.SearchPartial();
-        //}
 
         protected override void OnAppearing()
         {
