@@ -145,7 +145,6 @@ namespace IMSCovidTracker.ViewModels
                         CountryWidgets = _storedWidgets;
                     }
 
-
                     _ = ForceCollectionLayout(0);
 
                 });
@@ -234,7 +233,7 @@ namespace IMSCovidTracker.ViewModels
                 _homePage.WidgetCollection.ItemsSource = null;
                 _homePage.WidgetCollection.ItemsSource = CountryWidgets;
 
-                _homePage.WidgetCollection.HeightRequest = 3 * 130;
+                _homePage.WidgetCollection.HeightRequest = 3 * 140;
             });
         }
     }

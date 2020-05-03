@@ -17,49 +17,72 @@
     </ContentView.Resources>
   <ContentView.Content>
         <Frame Padding="6" BackgroundColor="White" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
-            <Grid>
+            <Grid HeightRequest="120">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height=".5*"/>
+                    <RowDefinition Height=".3*"/>
+                    <RowDefinition Height=".3*"/>
+                    <RowDefinition Height=".3*"/>
                 </Grid.RowDefinitions>
                 
-                <StackLayout Grid.Row="0" Orientation="Horizontal">
-                    <Image Source="{Binding Source={x:Reference CovidCardView}, Path=CountryFlag}" Aspect="AspectFit" WidthRequest="20"/>
-                    <Label FontSize="12" Text="{Binding Source={x:Reference CovidCardView}, Path=CountryName}" TextColor="Gray" HorizontalOptions="StartAndExpand"/>
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Row="0" Grid.Column="0" Source="{Binding Source={x:Reference CovidCardView}, Path=CountryFlag}" Aspect="AspectFit" VerticalOptions="StartAndExpand"/>
+                    <Label Grid.Row="0" Grid.Column="1" FontSize="12" Text="{Binding Source={x:Reference CovidCardView}, Path=CountryName}" VerticalTextAlignment="Start" TextColor="Gray"/>
 
-                    <StackLayout Spacing="1" Orientation="Vertical">
-                        <Image Source="swipeleft.png" Aspect="AspectFit" WidthRequest="12"/>
-                        <Image Source="swiperight.png" Aspect="AspectFit" WidthRequest="12"/>
+                    <StackLayout Grid.Row="0" Grid.Column="2" Spacing="1" Orientation="Vertical">
+                        <Image Source="swipeleft.png" Aspect="AspectFit"/>
+                        <Image Source="swiperight.png" Aspect="AspectFit"/>
                     </StackLayout>
-                </StackLayout>
+                </Grid>
 
-                <StackLayout Grid.Row="1" Orientation="Horizontal">
-                    <Image Source="confirmed.png" Aspect="AspectFit" WidthRequest="18" HorizontalOptions="StartAndExpand"
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="18"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="confirmed.png" Aspect="AspectFit" WidthRequest="18"
                            IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small}"/>
-                    <Label IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}" Text="Confirmed:" TextColor="Orange" HorizontalOptions="Fill"/>
-                    <Label  TextColor="CadetBlue" FontAttributes="Bold" FontSize="13"
+                    <Label Grid.Column="2" IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}" HorizontalTextAlignment="End" Text="Confirmed:" TextColor="Orange"/>
+                    <Label Grid.Column="2" TextColor="CadetBlue" FontAttributes="Bold" FontSize="13" HorizontalTextAlignment="End"
                                 Text="{Binding Source={x:Reference CovidCardView}, Path=Confirmed, StringFormat='{0:#,##0}'}"/>
-                </StackLayout>
-                <StackLayout Grid.Row="2" Orientation="Horizontal">
-                    <Image Source="wreath_nc_gray.png" Aspect="AspectFit" WidthRequest="15" HorizontalOptions="StartAndExpand"
+                </Grid>
+                
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="wreath_nc_gray.png" Aspect="AspectFit" WidthRequest="15"
                            IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small}"/>
-                    <Label IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}" Text="Deaths:" TextColor="Gray" HorizontalOptions="Fill"/>
-                    <Label TextColor="Gray" FontAttributes="Bold" FontSize="13"
+                    <Label Grid.Column="2" IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}" HorizontalTextAlignment="End" Text="Deaths:" TextColor="Gray"/>
+                    <Label Grid.Column="2" TextColor="Gray" FontAttributes="Bold" FontSize="13" HorizontalTextAlignment="End"
                                 Text="{Binding Source={x:Reference CovidCardView}, Path=Deaths, StringFormat='{0:#,##0}'}"/>
-                </StackLayout>
-                <StackLayout Grid.Row="3" Orientation="Horizontal">
-                    <Image Source="heal.png" Aspect="AspectFit" WidthRequest="15" HorizontalOptions="StartAndExpand"
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="heal.png" Aspect="AspectFit" WidthRequest="15"
                            IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small}"/>
-                    <Label IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}" Text="Recovered:" TextColor="Green" HorizontalOptions="Fill"/>
-                    <Label TextColor="Green" FontAttributes="Bold" FontSize="13"
+                    <Label Grid.Column="2" IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Small, Converter={StaticResource BoolInvert}}" HorizontalTextAlignment="End" Text="Recovered:" TextColor="Green"/>
+                    <Label Grid.Column="2" TextColor="Green" FontAttributes="Bold" FontSize="13" HorizontalTextAlignment="End"
                            IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Recovered, Converter={StaticResource NotZero}}"
                                Text="{Binding Source={x:Reference CovidCardView}, Path=Recovered, StringFormat='{0:#,##0}'}"/>
-                    <Label IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Recovered, Converter={StaticResource IsZero}}"
-                                       TextColor="Green" Text="N/A" FontSize="12" FontAttributes="Bold"/>
-                </StackLayout>
+                    <Label Grid.Column="2" IsVisible="{Binding Source={x:Reference CovidCardView}, Path=Recovered, Converter={StaticResource IsZero}}"
+                                       TextColor="Green" Text="N/A" FontSize="12" FontAttributes="Bold" HorizontalTextAlignment="End"/>
+                </Grid>
             </Grid>
         </Frame>
     </ContentView.Content>
