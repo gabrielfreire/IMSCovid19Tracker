@@ -127,7 +127,7 @@ namespace IMSCovidTracker.ViewModels
 
                     await Task.Delay(10);
 
-                    if (_storedWidgets.Count == 0)
+                    if (_storedWidgets != null)
                     {
                         CountryWidgets.Add(App.CovidService.Find("Ireland"));
                         CountryWidgets.Add(App.CovidService.Find("united kingdom"));

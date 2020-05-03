@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{04E75593-BB47-4E8A-90B9-A29AFEC00028}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		LICENSE.txt = LICENSE.txt
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -19,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMSCovidTracker.WPF", "IMSC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMSCovidTracker.UWP", "IMSCovidTracker.UWP\IMSCovidTracker.UWP.csproj", "{A85841E0-023F-4F08-8898-BEDE390A88DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMSCovidTracker.Wasm", "IMSCovidTracker.Wasm\IMSCovidTracker.Wasm.csproj", "{2CC405D7-F8B8-4312-97BB-C4224EE25C29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IMSCovidTracker.Wasm", "IMSCovidTracker.Wasm\IMSCovidTracker.Wasm.csproj", "{2CC405D7-F8B8-4312-97BB-C4224EE25C29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

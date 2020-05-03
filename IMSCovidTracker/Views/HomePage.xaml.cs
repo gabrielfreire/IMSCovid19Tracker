@@ -38,7 +38,9 @@ namespace IMSCovidTracker.Views
             _ = Task.Run(async () =>
             {
                 await _viewModel.LoadCovidData(IsRefresh);
-                if (displayTutorialAfterRefresh)
+
+                // show only in first launch
+                if (displayTutorialAfterRefresh && !App.AppLaunchedFirstTime)
                 {
                     await navbarComponent.ShowTutorial();
                 }
