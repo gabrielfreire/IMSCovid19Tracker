@@ -18,8 +18,8 @@ namespace IMSCovidTracker.Views
 
         public ViewWidgetPage(CovidLocation ountryWidget)
         {
-            BindingContext = _viewModel = new ViewWidgetViewModel(this, ountryWidget);
             InitializeComponent();
+            BindingContext = _viewModel = new ViewWidgetViewModel(this, ountryWidget);
         }
     }
 }

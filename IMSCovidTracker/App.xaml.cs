@@ -10,7 +10,6 @@ namespace IMSCovidTracker
 {
     public partial class App : Application
     {
-        public static bool DataLoaded = false;
         public static MessageDialogService MessageDialogService { get; set; }
         public static CovidService CovidService { get; set; }
         public static WorldmeterScraperService WorldmeterScraperService { get; set; }
@@ -53,16 +52,12 @@ namespace IMSCovidTracker
         {
             try
             {
-                DataLoaded = false;
 
                 // Get all countries covid cases
                 await App.CovidService.GetLocationsAsync();
-
-                DataLoaded = true;
             }
             catch (Exception ex)
-            {
-                DataLoaded = false;
+            { 
                 MessageDialogService.Display("Error", "Could not get latest informations! check your internet connection.");
             }
         }

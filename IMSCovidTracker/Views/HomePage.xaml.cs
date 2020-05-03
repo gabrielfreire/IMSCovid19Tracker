@@ -18,44 +18,28 @@ namespace IMSCovidTracker.Views
 
         public HomePage()
         {
-            BindingContext = _viewModel = new HomeViewModel(this);
             InitializeComponent();
 
+            BindingContext = _viewModel = new HomeViewModel(this);
             // where to display tutorial
             navbarComponent.AbsoluteLayoutElement = homeLayout;
-
-            RefreshData(false, true);
-        }
-
-
-        private void RefreshButton_Clicked(object sender, EventArgs e)
-        {
-            RefreshData(true, false);
-        }
-
-        private void RefreshData(bool IsRefresh, bool displayTutorialAfterRefresh=false)
-        {
-            _ = Task.Run(async () =>
-            {
-                await _viewModel.LoadCovidData(IsRefresh);
-
-                // show only in first launch
-                if (displayTutorialAfterRefresh && VersionTracking.IsFirstLaunchEver)
-                {
-                    await navbarComponent.ShowTutorial();
-                }
-            });
-        }
-
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            base.OnSizeAllocated(width, height);
         }
 
         protected override void OnAppearing()
         {
-            ForceLayout();
+            
+
             base.OnAppearing();
+            
+            // CollectionView in iOS is a bit buggy but forcing layout after rendering seems to solve some issues
+            //if (Device.RuntimePlatform == Device.iOS)
+            ForceLayout();
+
+            // show only in first launch
+            if (VersionTracking.IsFirstLaunchEver)
+            {
+                _ = navbarComponent.ShowTutorial();
+            }
         }
 
 

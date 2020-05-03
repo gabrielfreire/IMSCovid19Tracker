@@ -35,6 +35,8 @@ namespace IMSCovidTracker.ViewModels
         public ICommand DeleteWidgetCommand => new Command<CovidLocation>((cLoc) => DeleteWidget(cLoc));
         public ICommand AddWidgetCommand => new Command(async () => await OpenAddWidgetModal());
         public ICommand ViewWidgetCommand => new Command<CovidLocation>(async (loc) => await ViewWidget(loc));
+        public ICommand RefreshDataCommand => new Command(async () => await RefreshData());
+
 
         #endregion
 
@@ -44,10 +46,16 @@ namespace IMSCovidTracker.ViewModels
         public HomeViewModel(HomePage homePage)
         {
             _homePage = homePage;
+
+            RefreshDataCommand.Execute(null);
         }
         #endregion
 
-        
+
+        private async Task RefreshData()
+        {
+            await LoadCovidData(true);
+        }
 
         public async Task LoadCovidData(bool isRefresh=false)
         {
@@ -63,13 +71,17 @@ namespace IMSCovidTracker.ViewModels
 
                 // only reload data if user is refreshing the page
                 if (isRefresh)
-                    _ = App.LoadData();
+                    await App.LoadData();
 
-                while (!App.DataLoaded) await Task.Delay(10);
 
                 // Get total covid cases in the world
-                TotalCases = await App.CovidService.GetTotalCases();
-                TotalCases.FlagImageUrl = "world.png";
+                var _totalCase = await App.CovidService.GetTotalCases();
+                _totalCase.FlagImageUrl = "world.png";
+
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    TotalCases = _totalCase;
+                });
 
                 await LoadDefaultWidgets();
 
@@ -147,8 +159,8 @@ namespace IMSCovidTracker.ViewModels
 
                     _ = ForceCollectionLayout(0);
 
+                    IsBusy = false;
                 });
-                SetBusy(false);
             }
         }
 
@@ -199,6 +211,7 @@ namespace IMSCovidTracker.ViewModels
                 if (!CountryWidgets.Any()) return;
 
                 CountryWidgets.Remove(cLoc);
+
                 _ = App.StorageService.StoreWidgetPreferences(CountryWidgets.Select(c => c.Country).ToList());
 
                 // force layout of collectionview
@@ -217,6 +230,7 @@ namespace IMSCovidTracker.ViewModels
         }
 
         /// <summary>
+        /// <i>CollectionLayout is a bit buggy when adding/removing items so we must force some kind of re-layout</i> <br/>
         /// Force layout for collectionview
         /// </summary>
         /// <returns></returns>

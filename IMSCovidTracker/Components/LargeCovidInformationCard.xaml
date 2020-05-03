@@ -30,7 +30,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="30"/>
                             <RowDefinition Height="110"/>
                             <RowDefinition Height="110"/>
                             <RowDefinition Height="110"/>
@@ -39,14 +39,13 @@
 
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.FlagImageUrl}" Aspect="AspectFit"/>
+                            <Image Grid.Column="0" WidthRequest="20" Source="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.FlagImageUrl}" Aspect="AspectFit" VerticalOptions="Start"/>
                             <Label Grid.Column="1" FontSize="14" Text="{Binding Source={x:Reference LargeCovidCardView}, Path=CountryName, StringFormat='{0}'}" 
                                    FontAttributes="Bold" TextColor="Gray"/>
                         </Grid>
-                   
 
                         <Frame Grid.Row="1" Padding="9" BackgroundColor="#f0f4ff" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
                             <StackLayout>
@@ -87,7 +86,7 @@
                             <RowDefinition Height="60"/>
                             <RowDefinition Height="80"/>
                             <RowDefinition Height="80"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="125"/>
                             <RowDefinition Height="100"/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" FontSize="14" Text="Ratios" FontAttributes="Bold" TextColor="Gray"/>

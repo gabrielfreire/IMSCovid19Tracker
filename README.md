@@ -52,7 +52,10 @@ You should now be able to download the app directly onto your mobile
     - Small country widgets are bigger and now have slide indicators and the country flag.
     - Got rid of third party country info/covid APIs and created new web scraper APIs
     - Remove web scraping code from Mobile sources and move it to a Web API server deployed in Azure.
-
+  - **2.2.1**
+    - Android performance improvements ( [github issue #1](https://github.com/gabrielfreire/IMSCovid19Tracker/issues/1) ) 
+    - Fix Widget reload to default on refresh or closing/opening app when no widget was registered ( [github issue #3](https://github.com/gabrielfreire/IMSCovid19Tracker/issues/3) ) 
+    - Enhancement where help shows on every launch, now it shows only on first launch ( [github issue #2](https://github.com/gabrielfreire/IMSCovid19Tracker/issues/2) ) 
 
 # License
 IMS COVID-19 is MIT Licensed

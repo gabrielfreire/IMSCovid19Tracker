@@ -20,7 +20,7 @@ namespace IMSCovidTracker.ViewModels
 
         public ViewWidgetViewModel(Views.ViewWidgetPage viewWidgetPage, CovidLocation country)
         {
-            _ = Init(country);
+            Init(country);
             ViewWidgetPage = viewWidgetPage;
         }
 
@@ -29,31 +29,12 @@ namespace IMSCovidTracker.ViewModels
             await App.NavigationService.NavigateBack(ViewWidgetPage, true);
         }
 
-
-        public Task Init(CovidLocation country)
+        public void Init(CovidLocation country)
         {
-            try
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
             {
-                SetBusy(true);
-
-                //country.TotalPopulation = await App.CountryService.GetTotalPopulation(country);
-                //var deathsPerPop = (double)country.Deaths / country.TotalPopulation;
-                //country.DeathsPerMillion = (int)(deathsPerPop * 1000000d);
-            }
-            catch
-            {
-                // App.MessageDialogService.Display("Population", "Failed to get total population");
-            }
-            finally
-            {
-
-                Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
-                {
-                    CountryWidget = country;
-                });
-                SetBusy(false);
-            }
-            return Task.CompletedTask;
+                CountryWidget = country;
+            });
 
         }
     }

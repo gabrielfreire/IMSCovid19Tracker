@@ -12,17 +12,8 @@ namespace IMSCovidTracker.Services
 {
     public class CovidService
     {
-        private HttpClient _httpClient;
         public IEnumerable<CovidLocation> CovidLocations { get; set; }
         
-        
-        public CovidService()
-        {
-            _httpClient = new HttpClient();
-            _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
-
-        }
-
         public async Task GetLocationsAsync()
         {
             try

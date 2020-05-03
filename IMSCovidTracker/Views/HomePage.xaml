@@ -21,28 +21,31 @@
     <ContentPage.Content>
         <AbsoluteLayout x:Name="homeLayout">
 
-            <ScrollView Padding="4"
+            <ScrollView Padding="2" IsVisible="{Binding Source={x:Reference HomePageView}, Path=BindingContext.IsBusy, Converter={StaticResource BoolInvert}}"
                         AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
                 <Frame Padding="5" BackgroundColor="#ddd" HasShadow="{OnPlatform iOS=false, Default=true}">
-                    <Grid IsVisible="{Binding Source={x:Reference HomePageView}, Path=BindingContext.IsBusy, Converter={StaticResource BoolInvert}}">
+                    <Grid >
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height=".5*"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height=".5*"/>
                         </Grid.RowDefinitions>
                         
-                        <Grid>
+                        <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="20"/>
                             </Grid.ColumnDefinitions>
-                            <!--<Image Source="important.png" Aspect="AspectFit" WidthRequest="20" HorizontalOptions="StartAndExpand"/>-->
-                            <ImageButton Grid.Column="1" Aspect="AspectFit" WidthRequest="20" Source="refresh.png" Clicked="RefreshButton_Clicked"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference HomePageView}, Path=BindingContext.RefreshDataCommand}"/>
+                            </Grid.GestureRecognizers>
+                            <Image Grid.Column="1" Source="refresh.png" Aspect="AspectFit"/>
                         </Grid>
 
-                        <components:LargeCovidInformationCard Grid.Row="1" CountryName="Total Cases" 
-                                            Country="{Binding Source={x:Reference HomePageView}, Path=BindingContext.TotalCases}"/>
+                        <components:LargeCovidInformationCard
+                            Grid.Row="1" CountryName="Total Cases" 
+                            Country="{Binding Source={x:Reference HomePageView}, Path=BindingContext.TotalCases}"/>
 
                         <Grid Grid.Row="2">
                             <Grid.ColumnDefinitions>
@@ -59,6 +62,7 @@
                         </Grid>
 
                         <CollectionView Grid.Row="3" BackgroundColor="Transparent" x:Name="WidgetCollection" x:FieldModifier="public"
+                                        IsVisible="{Binding Source={x:Reference HomePageView}, Path=BindingContext.IsBusy, Converter={StaticResource BoolInvert}}"
                                         ItemsSource="{Binding Source={x:Reference HomePageView}, Path=BindingContext.CountryWidgets}">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="10" VerticalItemSpacing="10" Span="2"/>
