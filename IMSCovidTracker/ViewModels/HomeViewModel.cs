@@ -127,17 +127,21 @@ namespace IMSCovidTracker.ViewModels
 
                     await Task.Delay(10);
 
-                    if (_storedWidgets != null)
+                    // no widget config found
+                    if (_storedCountries == null)
                     {
-                        CountryWidgets.Add(App.CovidService.Find("Ireland"));
-                        CountryWidgets.Add(App.CovidService.Find("united kingdom"));
-                        CountryWidgets.Add(App.CovidService.Find("Brazil"));
-                        CountryWidgets.Add(App.CovidService.Find("Italy"));
-                        CountryWidgets.Add(App.CovidService.Find("Romania"));
-                        CountryWidgets.Add(App.CovidService.Find("united states"));
+                        // add default widgets
+                        _storedWidgets.Add(App.CovidService.Find("Ireland"));
+                        _storedWidgets.Add(App.CovidService.Find("united kingdom"));
+                        _storedWidgets.Add(App.CovidService.Find("Brazil"));
+                        _storedWidgets.Add(App.CovidService.Find("Italy"));
+                        _storedWidgets.Add(App.CovidService.Find("Romania"));
+                        _storedWidgets.Add(App.CovidService.Find("united states"));
+                        CountryWidgets = _storedWidgets;
                     }
                     else
                     {
+                        // config was found, we add it
                         CountryWidgets = _storedWidgets;
                     }
 
