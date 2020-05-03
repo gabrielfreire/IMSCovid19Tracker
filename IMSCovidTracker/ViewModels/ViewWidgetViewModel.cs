@@ -1,8 +1,11 @@
 ﻿using IMSCovidTracker.Models;
+using IMSCovidTracker.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace IMSCovidTracker.ViewModels
 {
@@ -10,12 +13,24 @@ namespace IMSCovidTracker.ViewModels
     {
         private CovidLocation _countryWidget;
         public CovidLocation CountryWidget { get => _countryWidget; set => RaiseIfPropertyChanged(ref _countryWidget, value); }
-        public ViewWidgetViewModel(CovidLocation country)
+
+        public ICommand CloseModalCommand => new Command(async() => await CloseModal());
+
+        public ViewWidgetPage ViewWidgetPage { get; }
+
+        public ViewWidgetViewModel(Views.ViewWidgetPage viewWidgetPage, CovidLocation country)
         {
             _ = Init(country);
+            ViewWidgetPage = viewWidgetPage;
         }
 
-        public async Task Init(CovidLocation country)
+        private async Task CloseModal()
+        {
+            await App.NavigationService.NavigateBack(ViewWidgetPage, true);
+        }
+
+
+        public Task Init(CovidLocation country)
         {
             try
             {
@@ -38,6 +53,7 @@ namespace IMSCovidTracker.ViewModels
                 });
                 SetBusy(false);
             }
+            return Task.CompletedTask;
 
         }
     }

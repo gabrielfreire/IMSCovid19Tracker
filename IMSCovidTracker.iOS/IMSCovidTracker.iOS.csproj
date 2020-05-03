@@ -222,4 +222,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\tab_search.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\backarrow.png" />
+  </ItemGroup>
 </Project>

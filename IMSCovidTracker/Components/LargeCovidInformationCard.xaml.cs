@@ -78,7 +78,7 @@ namespace IMSCovidTracker.Components
                             Color = SKColor.Parse(Color.PaleVioletRed.ToHex())
                         }
                     };
-                    var chart = new DonutChart() { Entries = entries, BackgroundColor = SKColor.Parse(Color.Transparent.ToHex())};
+                    var chart = new DonutChart() { Entries = entries, BackgroundColor = SKColor.Parse(Color.Transparent.ToHex()) };
                     donutView.Chart = chart;
                     donutViewBigger.Chart = chart;
                 }

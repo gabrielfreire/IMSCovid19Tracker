@@ -213,7 +213,7 @@ namespace IMSCovidTracker.ViewModels
 
         private async Task ViewWidget(CovidLocation location)
         {
-            await App.NavigationService.Navigate(_homePage, new ViewWidgetPage(location), false);
+            await App.NavigationService.Navigate(_homePage, new ViewWidgetPage(location), true);
         }
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace IMSCovidTracker.ViewModels
                 _homePage.WidgetCollection.ItemsSource = null;
                 _homePage.WidgetCollection.ItemsSource = CountryWidgets;
 
-                _homePage.WidgetCollection.HeightRequest = 3 * 140;
+                _homePage.WidgetCollection.HeightRequest = 3 * 145;
             });
         }
     }

@@ -44,15 +44,19 @@
                         <components:LargeCovidInformationCard Grid.Row="1" CountryName="Total Cases" 
                                             Country="{Binding Source={x:Reference HomePageView}, Path=BindingContext.TotalCases}"/>
 
-                        <StackLayout Grid.Row="2" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                            <Label FontSize="14" HorizontalOptions="StartAndExpand" FontAttributes="Bold" TextColor="Gray" VerticalOptions="CenterAndExpand"
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" FontSize="14" FontAttributes="Bold" TextColor="Gray"
                                     Text="{Binding Source={x:Reference HomePageView}, Path=BindingContext.CountryWidgets.Count, StringFormat='{0} of 6 widgets'}"/>
-                            <Image Source="plus.png" Aspect="AspectFit" WidthRequest="30" BackgroundColor="Transparent" HorizontalOptions="End">
+                            <Image Grid.Column="1" Source="plus.png" Aspect="AspectFit" BackgroundColor="Transparent">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={x:Reference HomePageView}, Path=BindingContext.AddWidgetCommand}"/>
                                 </Image.GestureRecognizers>
                             </Image>
-                        </StackLayout>
+                        </Grid>
 
                         <CollectionView Grid.Row="3" BackgroundColor="Transparent" x:Name="WidgetCollection" x:FieldModifier="public"
                                         ItemsSource="{Binding Source={x:Reference HomePageView}, Path=BindingContext.CountryWidgets}">

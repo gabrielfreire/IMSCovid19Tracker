@@ -25,20 +25,40 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView Padding="10">
-            <StackLayout>
+            <Grid>
 
-                <ActivityIndicator IsRunning="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.IsBusy}"
-                            IsVisible="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.IsBusy}"
-                            HorizontalOptions="CenterAndExpand" 
-                            VerticalOptions="CenterAndExpand" 
-                            Color="Black"/>
-                <Frame Padding="5"  VerticalOptions="Fill" BackgroundColor="#ddd" HasShadow="{OnPlatform iOS=false, Default=true}"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="120"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CloseModalCommand}"/>
+                    </Grid.GestureRecognizers>
+                    <Image Grid.Column="0" Aspect="AspectFit" Source="backarrow.png"/>
+                    <Label Grid.Column="1" VerticalTextAlignment="Center" FontSize="16" TextColor="Black" Text="Back"/>
+                </Grid>
+                
+                <ActivityIndicator Grid.Row="1" 
+                                   IsRunning="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.IsBusy}"
+                                    IsVisible="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.IsBusy}"
+                                   HorizontalOptions="CenterAndExpand" 
+                                    VerticalOptions="CenterAndExpand" 
+                                    Color="Black"/>
+                
+                <Frame Grid.Row="1" Padding="5" BackgroundColor="#ddd" HasShadow="{OnPlatform iOS=false, Default=true}"
                        IsVisible="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.IsBusy, Converter={StaticResource BoolInvert}}">
                     <components:LargeCovidInformationCard Small="False"
                         CountryName="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget.Country}" 
                         Country="{Binding Source={x:Reference viewWidgetPage}, Path=BindingContext.CountryWidget}"/>
                 </Frame>
-            </StackLayout>
+                
+            </Grid>
             
         </ScrollView>
     </ContentPage.Content>

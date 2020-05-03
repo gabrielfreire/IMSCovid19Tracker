@@ -13,20 +13,30 @@
             InputTransparent="True"
              x:Class="IMSCovidTracker.Components.Tutorial">
     
-    <StackLayout Spacing="4">
-        <Label Text="Custom Country Widgets" TextColor="White" FontAttributes="Bold"/>
-        <StackLayout Orientation="Horizontal">
-            <Image Source="swipeleft.png" Aspect="AspectFit" WidthRequest="30"/>
-            <Label TextColor="White" Text="Swipe left to view a country details" FontSize="Small"/>
-        </StackLayout>
-        <StackLayout Orientation="Horizontal">
-            <Label TextColor="White" Text="Swipe right to remove a country widget" FontSize="Small"/>
-            <Image Source="swiperight.png" Aspect="AspectFit" WidthRequest="30"/>
-        </StackLayout>
-        <StackLayout Orientation="Horizontal">
-            <Image Source="plus.png" Aspect="AspectFit" WidthRequest="30"/>
-            <Label TextColor="White" Text="Tap the '+' button to add a new widget" FontSize="Small"/>
-        </StackLayout>
-        <Label TextColor="White" FontAttributes="Bold" Text="Go to the About page for more information" FontSize="Small"/>
-    </StackLayout>
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Custom Country Widgets" TextColor="White" FontAttributes="Bold" FontSize="13"/>
+        
+        <Image Grid.Row="1" Grid.Column="0" Source="swipeleft.png" Aspect="AspectFit" WidthRequest="20"/>
+        <Label Grid.Row="1" Grid.Column="1" TextColor="White" Text="Swipe left to view a country details" FontSize="13"/>
+
+        <Image Grid.Row="2" Grid.Column="0" Source="swiperight.png" Aspect="AspectFit" WidthRequest="20"/>
+        <Label Grid.Row="2" Grid.Column="1" TextColor="White" Text="Swipe right to remove a country widget" FontSize="13"/>
+
+        <Image Grid.Row="3" Grid.Column="0" Source="plus.png" Aspect="AspectFit" WidthRequest="30"/>
+        <Label Grid.Row="3" Grid.Column="1" TextColor="White" Text="Tap the '+' button to add a new widget" FontSize="13"/>
+
+        <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" TextColor="White" FontAttributes="Bold" Text="Go to the About page for more information" FontSize="13"/>
+    </Grid>
 </Frame>

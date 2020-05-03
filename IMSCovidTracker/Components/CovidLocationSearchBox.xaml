@@ -23,11 +23,15 @@
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={x:Reference searchBoxView}, Path=BindingContext.SelectCountryCommand}" CommandParameter="{Binding .}"/>
                             </Frame.GestureRecognizers>
-                            <StackLayout Orientation="Horizontal">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
                                 <!--<Image Source="coronavirus.png" Aspect="AspectFit" WidthRequest="15"/>-->
-                                <BoxView BackgroundColor="DarkOliveGreen" HeightRequest="5" WidthRequest="3"/>
-                                <Label Text="{Binding .}" FontSize="18" HorizontalOptions="FillAndExpand" TextColor="#777"/>
-                            </StackLayout>
+                                <BoxView Grid.Column="0" BackgroundColor="DarkOliveGreen" HeightRequest="5"/>
+                                <Label Grid.Column="1" Text="{Binding .}" FontSize="18" TextColor="#777"/>
+                            </Grid>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

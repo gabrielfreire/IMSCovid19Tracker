@@ -54,6 +54,7 @@ namespace IMSCovidTracker.Views
 
         protected override void OnAppearing()
         {
+            ForceLayout();
             base.OnAppearing();
         }
 
