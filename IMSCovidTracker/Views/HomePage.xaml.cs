@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -40,7 +40,7 @@ namespace IMSCovidTracker.Views
                 await _viewModel.LoadCovidData(IsRefresh);
 
                 // show only in first launch
-                if (displayTutorialAfterRefresh && !App.AppLaunchedFirstTime)
+                if (displayTutorialAfterRefresh && VersionTracking.IsFirstLaunchEver)
                 {
                     await navbarComponent.ShowTutorial();
                 }
