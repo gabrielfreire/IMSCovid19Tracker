@@ -56,6 +56,8 @@ You should now be able to download the app directly onto your mobile
     - Android performance improvements ( [github issue #1](https://github.com/gabrielfreire/IMSCovid19Tracker/issues/1) ) 
     - Fix Widget reload to default on refresh or closing/opening app when no widget was registered ( [github issue #3](https://github.com/gabrielfreire/IMSCovid19Tracker/issues/3) ) 
     - Enhancement where help shows on every launch, now it shows only on first launch ( [github issue #2](https://github.com/gabrielfreire/IMSCovid19Tracker/issues/2) ) 
+    - Use Shell navigation ( [github issue #5](https://github.com/gabrielfreire/IMSCovid19Tracker/issues/5) ) 
+    - View reference in ViewModel ( [github issue #4](https://github.com/gabrielfreire/IMSCovid19Tracker/issues/4) ) 
 
 # License
 IMS COVID-19 is MIT Licensed
