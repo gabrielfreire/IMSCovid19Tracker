@@ -61,7 +61,7 @@ namespace IMSCovidTracker.Views
             await Device.InvokeOnMainThreadAsync(async () =>
             {
 
-                WidgetCollection.HeightRequest = 3 * 145;
+                WidgetCollection.HeightRequest = 3 * 155;
 
                 if (Device.RuntimePlatform == Device.iOS)
                 {
