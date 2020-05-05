@@ -58,6 +58,8 @@ You should now be able to download the app directly onto your mobile
     - Enhancement where help shows on every launch, now it shows only on first launch ( [github issue #2](https://github.com/gabrielfreire/IMSCovid19Tracker/issues/2) ) 
     - Use Shell navigation ( [github issue #5](https://github.com/gabrielfreire/IMSCovid19Tracker/issues/5) ) 
     - View reference in ViewModel ( [github issue #4](https://github.com/gabrielfreire/IMSCovid19Tracker/issues/4) ) 
+  - **2.2.2**
+    - Small *(big)* improvements - Merged from @domagojmedo [PR #6](https://github.com/gabrielfreire/IMSCovid19Tracker/pull/6)
 
 # License
 IMS COVID-19 is MIT Licensed
