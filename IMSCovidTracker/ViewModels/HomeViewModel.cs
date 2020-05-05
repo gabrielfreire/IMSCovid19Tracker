@@ -1,12 +1,12 @@
-﻿using IMSCovidTracker.Models;
-using IMSCovidTracker.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using IMSCovidTracker.Models;
+using IMSCovidTracker.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -17,17 +17,15 @@ namespace IMSCovidTracker.ViewModels
         #region Private members
         private CovidLocation _totalCases;
         private CovidLocation _resultCountry;
-        private ObservableCollection<CovidLocation> _countryWidgets = new ObservableCollection<CovidLocation>();
         private string _searchQuery;
         private bool _searchSuccess = false;
-        private int _widgetsCount => CountryWidgets.Count;
         #endregion
 
         #region Public members
         public event EventHandler<int> WidgetCollectionChanged;
 
         public bool SearchSuccess { get => _searchSuccess; set => RaiseIfPropertyChanged(ref _searchSuccess, value); }
-        public ObservableCollection<CovidLocation> CountryWidgets { get => _countryWidgets; set => RaiseIfPropertyChanged(ref _countryWidgets, value); }
+        public ObservableCollection<CovidLocation> CountryWidgets { get; } = new ObservableCollection<CovidLocation>();
         public string SearchQuery { get => _searchQuery; set => RaiseIfPropertyChanged(ref _searchQuery, value); }
         public CovidLocation TotalCases { get => _totalCases; set => RaiseIfPropertyChanged(ref _totalCases, value); }
 
@@ -56,7 +54,7 @@ namespace IMSCovidTracker.ViewModels
             await LoadCovidData(true);
         }
 
-        public async Task LoadCovidData(bool isRefresh=false)
+        public async Task LoadCovidData(bool isRefresh = false)
         {
             try
             {
@@ -98,7 +96,7 @@ namespace IMSCovidTracker.ViewModels
 
         public async Task LoadDefaultWidgets()
         {
-            ObservableCollection<CovidLocation> _storedWidgets = new ObservableCollection< CovidLocation>();
+            ObservableCollection<CovidLocation> _storedWidgets = new ObservableCollection<CovidLocation>();
             IEnumerable<string> _storedCountries = new List<string>();
             try
             {
@@ -111,7 +109,7 @@ namespace IMSCovidTracker.ViewModels
                 }
 
                 _storedCountries = await App.StorageService.GetWidgetPreferences();
-                
+
                 if (_storedCountries != null)
                 {
                     foreach (var country in _storedCountries)
@@ -148,15 +146,12 @@ namespace IMSCovidTracker.ViewModels
                         _storedWidgets.Add(App.CovidService.Find("Italy"));
                         _storedWidgets.Add(App.CovidService.Find("Romania"));
                         _storedWidgets.Add(App.CovidService.Find("united states"));
-                        CountryWidgets = _storedWidgets;
-                    }
-                    else
-                    {
-                        // config was found, we add it
-                        CountryWidgets = _storedWidgets;
                     }
 
-                    WidgetCollectionChanged?.Invoke(this, 0);
+                    foreach (var item in _storedWidgets)
+                    {
+                        CountryWidgets.Add(item);
+                    }
 
                     IsBusy = false;
                 });
@@ -198,7 +193,6 @@ namespace IMSCovidTracker.ViewModels
                 CountryWidgets.Add(_country);
                 await App.StorageService.StoreWidgetPreferences(CountryWidgets.Select(c => c.Country).ToList());
 
-                WidgetCollectionChanged?.Invoke(this, 200);
             });
         }
 
@@ -212,7 +206,6 @@ namespace IMSCovidTracker.ViewModels
 
                 _ = App.StorageService.StoreWidgetPreferences(CountryWidgets.Select(c => c.Country).ToList());
 
-                WidgetCollectionChanged?.Invoke(this, 395);
 
             }
             catch (Exception ex)

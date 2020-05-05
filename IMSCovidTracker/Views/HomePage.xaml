@@ -107,8 +107,7 @@
                 IsVisible="{Binding Source={x:Reference HomePageView}, Path=BindingContext.IsBusy}"
                 HorizontalOptions="CenterAndExpand" 
                 VerticalOptions="CenterAndExpand" 
-                Color="Black"/>
-            
+                Color="Black"/>           
             
         </AbsoluteLayout>
     </ContentPage.Content>
