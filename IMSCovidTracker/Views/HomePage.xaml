@@ -18,10 +18,13 @@
             <converters:BoolInvertConverter x:Key="BoolInvert"/>
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <vm:HomeViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <AbsoluteLayout x:Name="homeLayout">
 
-            <ScrollView Padding="2" IsVisible="{Binding Source={x:Reference HomePageView}, Path=BindingContext.IsBusy, Converter={StaticResource BoolInvert}}"
+            <ScrollView Padding="2" IsVisible="{Binding IsBusy, Converter={StaticResource BoolInvert}}"
                         AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
                 <Frame Padding="5" BackgroundColor="#ddd" HasShadow="{OnPlatform iOS=false, Default=true}">
                     <Grid >
@@ -38,14 +41,14 @@
                                 <ColumnDefinition Width="20"/>
                             </Grid.ColumnDefinitions>
                             <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={x:Reference HomePageView}, Path=BindingContext.RefreshDataCommand}"/>
+                                <TapGestureRecognizer Command="{Binding RefreshDataCommand}"/>
                             </Grid.GestureRecognizers>
                             <Image Grid.Column="1" Source="refresh.png" Aspect="AspectFit"/>
                         </Grid>
 
                         <components:LargeCovidInformationCard
                             Grid.Row="1" CountryName="Total Cases" 
-                            Country="{Binding Source={x:Reference HomePageView}, Path=BindingContext.TotalCases}"/>
+                            Country="{Binding TotalCases}"/>
 
                         <Grid Grid.Row="2">
                             <Grid.ColumnDefinitions>
@@ -53,27 +56,33 @@
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" FontSize="14" FontAttributes="Bold" TextColor="Gray"
-                                    Text="{Binding Source={x:Reference HomePageView}, Path=BindingContext.CountryWidgets.Count, StringFormat='{0} of 6 widgets'}"/>
+                                    Text="{Binding CountryWidgets.Count, StringFormat='{0} of 6 widgets'}"/>
                             <Image Grid.Column="1" Source="plus.png" Aspect="AspectFit" BackgroundColor="Transparent">
                                 <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={x:Reference HomePageView}, Path=BindingContext.AddWidgetCommand}"/>
+                                    <TapGestureRecognizer Command="{Binding AddWidgetCommand}"/>
                                 </Image.GestureRecognizers>
                             </Image>
                         </Grid>
 
-                        <CollectionView Grid.Row="3" BackgroundColor="Transparent" x:Name="WidgetCollection" x:FieldModifier="public" VerticalScrollBarVisibility="Never"
-                                        IsVisible="{Binding Source={x:Reference HomePageView}, Path=BindingContext.IsBusy, Converter={StaticResource BoolInvert}}"
-                                        ItemsSource="{Binding Source={x:Reference HomePageView}, Path=BindingContext.CountryWidgets}">
+                        <CollectionView Grid.Row="3"
+                                        BackgroundColor="Transparent" 
+                                        x:Name="WidgetCollection"
+                                        x:FieldModifier="public"
+                                        VerticalScrollBarVisibility="Never"
+                                        IsVisible="{Binding IsBusy, Converter={StaticResource BoolInvert}}"
+                                        ItemsSource="{Binding CountryWidgets}"
+                                        ItemSizingStrategy="MeasureFirstItem">
                             <CollectionView.ItemsLayout>
-                                <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="10" VerticalItemSpacing="10" Span="2"/>
+                                <GridItemsLayout Orientation="Vertical" Span="2"/>
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <SwipeView BackgroundColor="Transparent">
+                                    <ContentView>
+                                    <SwipeView Margin="5">
                                         <SwipeView.LeftItems>
                                             <SwipeItems Mode="Execute">
                                                 <SwipeItem Text="Delete"
-                                                            Command="{Binding Source={x:Reference HomePageView}, Path=BindingContext.DeleteWidgetCommand}"
+                                                            Command="{Binding Source={x:Reference WidgetCollection}, Path=BindingContext.DeleteWidgetCommand}"
                                                             CommandParameter="{Binding .}"
                                                             BackgroundColor="Red"/>
                                             </SwipeItems>
@@ -81,12 +90,12 @@
                                         <SwipeView.RightItems>
                                             <SwipeItems Mode="Execute">
                                                 <SwipeItem Text="View" 
-                                                            Command="{Binding Source={x:Reference HomePageView}, Path=BindingContext.ViewWidgetCommand}" 
+                                                            Command="{Binding Source={x:Reference WidgetCollection}, Path=BindingContext.ViewWidgetCommand}" 
                                                             CommandParameter="{Binding .}"
                                                             BackgroundColor="Green"/>
                                             </SwipeItems>
                                         </SwipeView.RightItems>
-                                        <components:CovidInformationCard MinimumHeightRequest="100"
+                                        <components:CovidInformationCard 
                                             CountryName="{Binding Country}" 
                                             Small="True"
                                             CountryFlag="{Binding FlagImageUrl}"
@@ -94,6 +103,7 @@
                                             Deaths="{Binding Deaths}"
                                             Recovered="{Binding Recovered}"/>
                                     </SwipeView>
+                                    </ContentView>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
@@ -103,12 +113,11 @@
 
             <ActivityIndicator 
                 AbsoluteLayout.LayoutBounds=".5, .5, 1, 1" AbsoluteLayout.LayoutFlags="All"
-                IsRunning="{Binding Source={x:Reference HomePageView}, Path=BindingContext.IsBusy}"
-                IsVisible="{Binding Source={x:Reference HomePageView}, Path=BindingContext.IsBusy}"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
                 HorizontalOptions="CenterAndExpand" 
                 VerticalOptions="CenterAndExpand" 
-                Color="Black"/>
-            
+                Color="Black"/>           
             
         </AbsoluteLayout>
     </ContentPage.Content>
