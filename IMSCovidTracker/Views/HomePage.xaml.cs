@@ -1,5 +1,4 @@
-﻿using IMSCovidTracker.ViewModels;
-using Xamarin.Essentials;
+﻿using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,13 +7,9 @@ namespace IMSCovidTracker.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
-        private HomeViewModel _viewModel;
-
         public HomePage()
         {
             InitializeComponent();
-
-            BindingContext = _viewModel = new HomeViewModel();
 
             // where to display tutorial
             navbarComponent.AbsoluteLayoutElement = homeLayout;

@@ -22,7 +22,6 @@ namespace IMSCovidTracker.ViewModels
         #endregion
 
         #region Public members
-        public event EventHandler<int> WidgetCollectionChanged;
 
         public bool SearchSuccess { get => _searchSuccess; set => RaiseIfPropertyChanged(ref _searchSuccess, value); }
         public ObservableCollection<CovidLocation> CountryWidgets { get; } = new ObservableCollection<CovidLocation>();
