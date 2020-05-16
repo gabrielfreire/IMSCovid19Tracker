@@ -13,11 +13,6 @@ namespace IMSCovidTracker.Views
 
             // where to display tutorial
             navbarComponent.AbsoluteLayoutElement = homeLayout;
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
 
             // show only in first launch
             if (VersionTracking.IsFirstLaunchEver)
