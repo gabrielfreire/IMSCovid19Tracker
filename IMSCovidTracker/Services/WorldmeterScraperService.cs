@@ -14,12 +14,14 @@ namespace IMSCovidTracker.Services
     public class WorldmeterScraperService
     {
         private string _host = "http://covidrest.azurewebsites.net";
+        //private string _host = "http://192.168.0.220";
         //private IBrowsingContext _context;
         private HttpClient _httpClient;
 
         public WorldmeterScraperService()
         {
             _httpClient = new HttpClient();
+            _httpClient.Timeout = TimeSpan.FromSeconds(20);
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
 
         }

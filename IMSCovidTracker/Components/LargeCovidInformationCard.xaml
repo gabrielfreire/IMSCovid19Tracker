@@ -49,33 +49,70 @@
 
                         <Frame Grid.Row="1" Padding="9" BackgroundColor="#f0f4ff" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
                             <StackLayout>
+                                <Label IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Confirmed, Converter={StaticResource IsZero}}"
+                                       TextColor="CadetBlue" 
+                                       Text="N/A" 
+                                       FontSize="22" 
+                                       FontAttributes="Bold" 
+                                       HorizontalTextAlignment="Center"/>
                                 <Label  TextColor="CadetBlue"
-                                            Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Confirmed, StringFormat='{0:#,##0}'}" FontSize="28" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                                        IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Confirmed, Converter={StaticResource NotZero}}"
+                                            Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Confirmed, StringFormat='{0:#,##0}'}" 
+                                        FontSize="28" 
+                                        FontAttributes="Bold" 
+                                        HorizontalTextAlignment="Center"/>
                                 <Label Text="Confirmed" TextColor="CadetBlue" HorizontalTextAlignment="Center"/>
                             </StackLayout>
                         </Frame>
                         <Frame Grid.Row="2" Padding="9" BackgroundColor="#fefbd7" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
                             <StackLayout>
+                                <Label IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Active, Converter={StaticResource IsZero}}"
+                                       TextColor="Orange" 
+                                       Text="N/A" 
+                                       FontSize="22" 
+                                       FontAttributes="Bold" 
+                                       HorizontalTextAlignment="Center"/>
                                 <Label  TextColor="Orange"
-                                            Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Active, StringFormat='{0:#,##0}'}" FontSize="28" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                                        IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Active, Converter={StaticResource NotZero}}"
+                                            Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Active, StringFormat='{0:#,##0}'}" 
+                                        FontSize="28" 
+                                        FontAttributes="Bold" 
+                                        HorizontalTextAlignment="Center"/>
                                 <Label Text="Active cases" TextColor="Orange" HorizontalTextAlignment="Center"/>
                             </StackLayout>
                         </Frame>
                         <Frame Grid.Row="3" Padding="9" BackgroundColor="#eee" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
                             <StackLayout>
+                                <Label IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Deaths, Converter={StaticResource IsZero}}"
+                                       TextColor="Gray" 
+                                       Text="N/A" 
+                                       FontSize="22" 
+                                       FontAttributes="Bold" 
+                                       HorizontalTextAlignment="Center"/>
                                 <Label  TextColor="Gray"
-                                            Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Deaths, StringFormat='{0:#,##0}'}" FontSize="28" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                                        IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Deaths, Converter={StaticResource NotZero}}"
+                                            Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Deaths, StringFormat='{0:#,##0}'}" 
+                                        FontSize="28" 
+                                        FontAttributes="Bold" 
+                                        HorizontalTextAlignment="Center"/>
                                 <Label Text="Deceased" TextColor="Gray" HorizontalTextAlignment="Center"/>
                             </StackLayout>
                         </Frame>
                         <Frame Grid.Row="4" Padding="9" BackgroundColor="#f0fff4" CornerRadius="5" HasShadow="{OnPlatform iOS=false, Default=true}">
                             <StackLayout>
                                 <Label IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Recovered, Converter={StaticResource IsZero}}"
-                                       TextColor="Green" Text="N/A" FontSize="22" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                                       TextColor="Green" 
+                                       Text="N/A" 
+                                       FontSize="22" 
+                                       FontAttributes="Bold" 
+                                       HorizontalTextAlignment="Center"/>
                                 <Label  TextColor="Green"
                                         IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Recovered, Converter={StaticResource NotZero}}"
-                                            Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Recovered, StringFormat='{0:#,##0}'}" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
-                                <Label Text="Recovered" TextColor="Green" HorizontalOptions="CenterAndExpand"/>
+                                            Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.Recovered, StringFormat='{0:#,##0}'}" 
+                                        FontSize="28" 
+                                        FontAttributes="Bold" 
+                                        HorizontalTextAlignment="Center"/>
+                                <Label Text="Recovered" TextColor="Green" VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
                             </StackLayout>
                         </Frame>
                     </Grid>
@@ -107,9 +144,15 @@
                                 <Label TextColor="GreenYellow" Padding="0" Margin="0"
                                        IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.ConfirmedPerRecovered, Converter={StaticResource NotZero}}"
                                        Text="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.ConfirmedPerRecovered, StringFormat='{0:f2} %'}" 
-                                       FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                                       FontSize="15" 
+                                       FontAttributes="Bold" 
+                                       HorizontalTextAlignment="Center"/>
                                 <Label IsVisible="{Binding Source={x:Reference LargeCovidCardView}, Path=Country.ConfirmedPerRecovered, Converter={StaticResource IsZero}}"
-                                       TextColor="#eee" Text="N/A" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                                       TextColor="#eee" 
+                                       Text="N/A" 
+                                       FontSize="15" 
+                                       FontAttributes="Bold" 
+                                       HorizontalTextAlignment="Center"/>
                                 <Label Text="Recovered" TextColor="GreenYellow" HorizontalTextAlignment="Center" FontSize="12" Padding="0" Margin="0"/>
                             </StackLayout>
                         </Frame>

@@ -27,7 +27,8 @@
                     </Frame>
                     
                     <!--Result display-->
-                    <Frame Margin="0" Padding="0" IsVisible="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SearchSuccess}" BackgroundColor="Transparent" HasShadow="False">
+                    <Frame Margin="0" Padding="0" IsVisible="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SearchSuccess}" 
+                           BackgroundColor="Transparent" HasShadow="False">
                         
                         <components:LargeCovidInformationCard Small="False"
                             CountryName="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.ResultCountry.Country}" 

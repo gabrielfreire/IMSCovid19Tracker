@@ -60,6 +60,9 @@ You should now be able to download the app directly onto your mobile
     - View reference in ViewModel ( [github issue #4](https://github.com/gabrielfreire/IMSCovid19Tracker/issues/4) ) 
   - **2.2.2**
     - Small *(big)* improvements - Merged from @domagojmedo [PR #6](https://github.com/gabrielfreire/IMSCovid19Tracker/pull/6)
+  - **2.2.3**
+    - UI Improvements, image optimization and performance improvements in general
+    - Better error handling
 
 # License
 IMS COVID-19 is MIT Licensed

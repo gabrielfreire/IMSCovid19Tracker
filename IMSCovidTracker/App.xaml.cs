@@ -57,8 +57,8 @@ namespace IMSCovidTracker
                 await App.CovidService.GetLocationsAsync();
             }
             catch (Exception ex)
-            { 
-                MessageDialogService.Display("Error", "Could not get latest informations! check your internet connection.");
+            {
+                throw ex;
             }
         }
     }

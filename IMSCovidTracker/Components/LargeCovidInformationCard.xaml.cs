@@ -67,12 +67,12 @@ namespace IMSCovidTracker.Components
                 {
                     var entries = new[]
                     {
-                        new Microcharts.Entry(Country.Recovered)
+                        new Microcharts.ChartEntry(Country.Recovered)
                         {
                             TextColor = SKColor.Parse(Color.White.ToHex()),
                             Color = SKColor.Parse(Color.LightGreen.ToHex())
                         },
-                        new Microcharts.Entry(Country.Deaths)
+                        new Microcharts.ChartEntry(Country.Deaths)
                         {
                             TextColor = SKColor.Parse(Color.White.ToHex()),
                             Color = SKColor.Parse(Color.PaleVioletRed.ToHex())
@@ -87,28 +87,28 @@ namespace IMSCovidTracker.Components
                 {
                     var entries = new[]
                     {
-                        new Microcharts.Entry(Country.Confirmed)
+                        new Microcharts.ChartEntry(Country.Confirmed)
                         {
                             Label = "Confirmed",
                             ValueLabel = $"{Country.Confirmed}",
                             TextColor = SKColor.Parse(Color.White.ToHex()),
                             Color = SKColor.Parse(Color.Orange.ToHex())
                         },
-                        new Microcharts.Entry(Country.Active)
+                        new Microcharts.ChartEntry(Country.Active)
                         {
                             Label = "Active",
                             ValueLabel = $"{Country.Active}",
                             TextColor = SKColor.Parse(Color.White.ToHex()),
                             Color = SKColor.Parse(Color.Yellow.ToHex())
                         },
-                        new Microcharts.Entry(Country.Deaths)
+                        new Microcharts.ChartEntry(Country.Deaths)
                         {
                             Label = "Deaths",
                             ValueLabel = $"{Country.Deaths}",
                             TextColor = SKColor.Parse(Color.White.ToHex()),
                             Color = SKColor.Parse(Color.PaleVioletRed.ToHex())
                         },
-                        new Microcharts.Entry(Country.Recovered)
+                        new Microcharts.ChartEntry(Country.Recovered)
                         {
                             Label = "Recovered",
                             ValueLabel = $"{Country.Recovered}",

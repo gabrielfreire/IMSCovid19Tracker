@@ -102,8 +102,8 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.616-pre4" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.773-pre1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -111,9 +111,6 @@
       <Project>{43EC4075-59B2-427B-A563-07A6F224B878}</Project>
       <Name>IMSCovidTracker</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\death.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\heal.png" />
@@ -206,9 +203,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\swiperight.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\country_widgets.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\questionmark.png" />

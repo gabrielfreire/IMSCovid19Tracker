@@ -22,14 +22,25 @@ namespace IMSCovidTracker.Services
             }
             catch (Exception ex)
             {
-                //TODO: Notify error
-                App.MessageDialogService.Display("Error", $"An exception was thrown {ex.ToString()}");
+                Debug.Write(ex.ToString());
+                throw ex;
             }
         }
 
-        public Task<CovidLocation> GetTotalCases()
+        public async Task<CovidLocation> GetTotalCases()
         {
-            return App.WorldmeterScraperService.ScrapeTotalCovidCases();
+            var cLoc = default(CovidLocation);
+            try
+            {
+                cLoc = await App.WorldmeterScraperService.ScrapeTotalCovidCases();
+            }
+            catch (Exception ex)
+            {
+                Debug.Write(ex.ToString());
+                throw ex;
+            }
+
+            return cLoc;
         }
 
         public CovidLocation Find(string countryName)
@@ -37,18 +48,17 @@ namespace IMSCovidTracker.Services
             if (CovidLocations == null) return default(CovidLocation);
             if (string.IsNullOrEmpty(countryName)) return default(CovidLocation);
 
-            var _results = CovidLocations.Where(l => l.Country.ToLower() == countryName.ToLower());
+            var _results = CovidLocations
+                            .Where(l => l.Country.ToLower() == countryName.ToLower());
 
             return _results.FirstOrDefault();
         }
 
         public IEnumerable<CovidLocation> FindPartial(string searchQuery)
         {
-            var _results = new List<CovidLocation>();
-
-            if (string.IsNullOrEmpty(searchQuery)) return _results;
+            if (CovidLocations == null) return new List<CovidLocation>();
+            if (string.IsNullOrEmpty(searchQuery)) return new List<CovidLocation>();
             
-            _results = CovidLocations.Where(l => l.Country.ToLower().Contains(searchQuery.ToLower())).ToList();
             return CovidLocations.Where(l => l.Country.ToLower()
                                             .Contains(searchQuery.ToLower()))
                                             .ToList();

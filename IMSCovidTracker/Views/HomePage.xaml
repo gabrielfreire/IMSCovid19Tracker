@@ -69,6 +69,7 @@
                                         x:Name="WidgetCollection"
                                         x:FieldModifier="public"
                                         VerticalScrollBarVisibility="Never"
+                                        HeightRequest="500"
                                         IsVisible="{Binding IsBusy, Converter={StaticResource BoolInvert}}"
                                         ItemsSource="{Binding CountryWidgets}"
                                         ItemSizingStrategy="MeasureFirstItem">
@@ -84,7 +85,7 @@
                                                 <SwipeItem Text="Delete"
                                                             Command="{Binding Source={x:Reference WidgetCollection}, Path=BindingContext.DeleteWidgetCommand}"
                                                             CommandParameter="{Binding .}"
-                                                            BackgroundColor="Red"/>
+                                                            BackgroundColor="DarkRed"/>
                                             </SwipeItems>
                                         </SwipeView.LeftItems>
                                         <SwipeView.RightItems>
@@ -92,7 +93,7 @@
                                                 <SwipeItem Text="View" 
                                                             Command="{Binding Source={x:Reference WidgetCollection}, Path=BindingContext.ViewWidgetCommand}" 
                                                             CommandParameter="{Binding .}"
-                                                            BackgroundColor="Green"/>
+                                                            BackgroundColor="DarkGreen"/>
                                             </SwipeItems>
                                         </SwipeView.RightItems>
                                         <components:CovidInformationCard 

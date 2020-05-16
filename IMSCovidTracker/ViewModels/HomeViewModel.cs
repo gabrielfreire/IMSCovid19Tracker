@@ -85,7 +85,7 @@ namespace IMSCovidTracker.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                App.MessageDialogService.Display("Error", "Failed to load COVID-19 Data, check your internet connection.");
+                App.MessageDialogService.Display("Connection Error", "Failed to load COVID-19 Data, check your internet connection and refresh.");
             }
             finally
             {
@@ -119,13 +119,27 @@ namespace IMSCovidTracker.ViewModels
                             _storedWidgets.Add(_countryLocation);
                         }
                     }
+                } 
+                else
+                {
+                    // no widget config found
+                    // add default widgets
+                    _storedWidgets.Add(App.CovidService.Find("Ireland"));
+                    _storedWidgets.Add(App.CovidService.Find("united kingdom"));
+                    _storedWidgets.Add(App.CovidService.Find("Brazil"));
+                    _storedWidgets.Add(App.CovidService.Find("Italy"));
+                    _storedWidgets.Add(App.CovidService.Find("Romania"));
+                    _storedWidgets.Add(App.CovidService.Find("united states"));
+                
                 }
+
+
 
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                App.MessageDialogService.Display("Error", ex.ToString());
+                App.MessageDialogService.Display("Error", "Something wrong happened");
             }
             finally
             {
@@ -135,25 +149,13 @@ namespace IMSCovidTracker.ViewModels
 
                     await Task.Delay(10);
 
-                    // no widget config found
-                    if (_storedCountries == null)
-                    {
-                        // add default widgets
-                        _storedWidgets.Add(App.CovidService.Find("Ireland"));
-                        _storedWidgets.Add(App.CovidService.Find("united kingdom"));
-                        _storedWidgets.Add(App.CovidService.Find("Brazil"));
-                        _storedWidgets.Add(App.CovidService.Find("Italy"));
-                        _storedWidgets.Add(App.CovidService.Find("Romania"));
-                        _storedWidgets.Add(App.CovidService.Find("united states"));
-                    }
-
                     foreach (var item in _storedWidgets)
                     {
                         CountryWidgets.Add(item);
                     }
-
-                    IsBusy = false;
                 });
+
+                SetBusy(false);
             }
         }
 
@@ -204,8 +206,6 @@ namespace IMSCovidTracker.ViewModels
                 CountryWidgets.Remove(cLoc);
 
                 _ = App.StorageService.StoreWidgetPreferences(CountryWidgets.Select(c => c.Country).ToList());
-
-
             }
             catch (Exception ex)
             {
