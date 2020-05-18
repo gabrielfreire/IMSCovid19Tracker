@@ -4,9 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:components="clr-namespace:IMSCovidTracker.Components"
+             xmlns:vm="clr-namespace:IMSCovidTracker.ViewModels"
              mc:Ignorable="d"
              x:Name="SearchModalPageView"
              x:Class="IMSCovidTracker.Views.SearchModalPage">
+    <ContentPage.BindingContext>
+        <vm:SearchModalViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <ScrollView Padding="10">
             <Frame Padding="5" BackgroundColor="#ddd" HasShadow="{OnPlatform iOS=false, Default=true}">
@@ -15,7 +19,8 @@
                     <Frame BackgroundColor="White" Padding="5" HasShadow="{OnPlatform iOS=false, Default=true}">
                         <StackLayout>
                             <Label Text="Search for a country" FontAttributes="Bold" TextColor="Gray"/>
-                            <components:CovidLocationSearchBox x:Name="locationSearchField" x:FieldModifier="public"/>
+                            <components:CovidLocationSearchBox x:Name="locationSearchField" x:FieldModifier="public" 
+                                                               OnCountrySelected="{Binding BindingContext.CountrySelectedCommand, Source={x:Reference SearchModalPageView}}"/>
                                 
                         </StackLayout>
                     </Frame>

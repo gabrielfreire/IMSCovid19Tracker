@@ -20,8 +20,9 @@ namespace IMSCovidTracker.Components
         private bool _isSearching = false;
         private ObservableCollection<string> _searchPartialResults = new ObservableCollection<string>();
 
-        
-        public event Action<string> OnCountrySelected;
+
+        public static readonly BindableProperty OnCountrySelectedProperty = BindableProperty.Create(nameof(OnCountrySelected), typeof(ICommand), typeof(CovidLocationSearchBox),null);
+        public ICommand OnCountrySelected { get => (ICommand)GetValue(OnCountrySelectedProperty); set => SetValue(OnCountrySelectedProperty, value); }
 
         public bool IsSearching { get => _isSearching; set => RaiseIfPropertyChanged(ref _isSearching, value); }
 
@@ -110,7 +111,7 @@ namespace IMSCovidTracker.Components
                 SearchField.TextChanged += SearchField_TextChanged;
             });
 
-            OnCountrySelected?.Invoke(countryName);
+            OnCountrySelected?.Execute(countryName);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

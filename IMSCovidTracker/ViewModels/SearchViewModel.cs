@@ -14,13 +14,18 @@ namespace IMSCovidTracker.ViewModels
 
         private CovidLocation _resultCountry;
         private bool _searchSuccess = false;
-        private bool _isSearching = false;
-
 
         public bool SearchSuccess { get => _searchSuccess; set => RaiseIfPropertyChanged(ref _searchSuccess, value); }
         public CovidLocation ResultCountry { get => _resultCountry; set => RaiseIfPropertyChanged(ref _resultCountry, value); }
-        public bool IsSearching { get => _isSearching; set => RaiseIfPropertyChanged(ref _isSearching, value); }
 
+        public ICommand CountrySelectedCommand => new Command<string>(async (cName) => await HandleCountrySelected(cName));
+
+        private Task HandleCountrySelected(string cName)
+        {
+            ResetSearch();
+            DisplaySearchResult(cName);
+            return Task.CompletedTask;
+        }
 
         public void DisplaySearchResult(string countryName)
         {

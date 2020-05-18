@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
     </Reference>
@@ -46,6 +49,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,6 +65,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xamarin.Essentials, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Essentials.1.5.3.2\lib\netstandard2.0\Xamarin.Essentials.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Forms.4.7.0.773-pre1\lib\netstandard2.0\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
@@ -127,7 +137,6 @@
     <Resource Include="coronavirus.png" />
     <Resource Include="coronavirus_black.png" />
     <Resource Include="coronavirus_white.png" />
-    <Resource Include="death.png" />
     <Resource Include="heal.png" />
     <Resource Include="important.png" />
     <Resource Include="refresh.png" />
@@ -139,6 +148,17 @@
     <Resource Include="wreath_nc_gray.png" />
     <Resource Include="wreath_red.png" />
     <Resource Include="xamarin_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="backarrow.png" />
+    <Resource Include="confirmed.png" />
+    <Resource Include="plus.png" />
+    <Resource Include="questionmark.png" />
+    <Resource Include="swipeleft.png" />
+    <Resource Include="swiperight.png" />
+    <Resource Include="tab_search.png" />
+    <Resource Include="widgets.jpg" />
+    <Resource Include="world.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

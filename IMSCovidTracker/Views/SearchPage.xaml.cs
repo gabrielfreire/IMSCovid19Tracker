@@ -15,31 +15,21 @@ namespace IMSCovidTracker.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SearchPage : ContentPage
     {
-        private SearchViewModel _viewModel;
         
         public SearchPage()
         {
-            BindingContext = _viewModel = new SearchViewModel();
             InitializeComponent();
-        }
-
-        private void SearchField_OnCountrySelected(string countryName)
-        {
-            _viewModel.ResetSearch();
-            _viewModel.DisplaySearchResult(countryName);
         }
 
         protected override void OnAppearing()
         {
             SearchField.Clear();
-            SearchField.OnCountrySelected -= SearchField_OnCountrySelected;
-            SearchField.OnCountrySelected += SearchField_OnCountrySelected;
             base.OnAppearing();
         }
 
         protected override void OnDisappearing()
         {
-            _viewModel.ResetSearch();
+            ((SearchViewModel)BindingContext).ResetSearch();
             SearchField.Clear();
             base.OnDisappearing();
         }

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 using Xamarin.Forms.Platform.WPF;
 
 namespace IMSCovidTracker.WPF
@@ -13,6 +14,7 @@ namespace IMSCovidTracker.WPF
         {
             InitializeComponent();
 
+            global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental", "SwipeView_Experimental");
             Xamarin.Forms.Forms.Init();
 
             LoadApplication(new IMSCovidTracker.App());

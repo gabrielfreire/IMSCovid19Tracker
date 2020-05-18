@@ -12,6 +12,9 @@
     <Shell.TitleView>
         <components:Navbar x:Name="navbarComponent" ShowHelp="False"/>
     </Shell.TitleView>
+    <ContentPage.BindingContext>
+        <vm:SearchViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <ScrollView Padding="10">
             <Frame Padding="5" BackgroundColor="#ddd" HasShadow="{OnPlatform iOS=false, Default=true}">
@@ -22,21 +25,23 @@
                     <Frame BackgroundColor="White" Padding="5" HasShadow="{OnPlatform iOS=false, Default=true}">
                         <StackLayout>
                             <Label Text="Search for a country" FontAttributes="Bold" TextColor="Gray"/>
-                            <components:CovidLocationSearchBox HorizontalOptions="FillAndExpand" x:Name="SearchField" x:FieldModifier="public"/>
+                            <components:CovidLocationSearchBox HorizontalOptions="FillAndExpand" x:Name="SearchField" x:FieldModifier="public" 
+                                                               OnCountrySelected="{Binding BindingContext.CountrySelectedCommand, Source={x:Reference SearchPageView} }"/>
+
                         </StackLayout>
                     </Frame>
                     
                     <!--Result display-->
-                    <Frame Margin="0" Padding="0" IsVisible="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.SearchSuccess}" 
+                    <Frame Margin="0" Padding="0" IsVisible="{Binding SearchSuccess}" 
                            BackgroundColor="Transparent" HasShadow="False">
                         
                         <components:LargeCovidInformationCard Small="False"
-                            CountryName="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.ResultCountry.Country}" 
-                            Country="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.ResultCountry}"/>
+                            CountryName="{Binding ResultCountry.Country}" 
+                            Country="{Binding ResultCountry}"/>
                     </Frame>
 
-                    <ActivityIndicator IsRunning="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.IsBusy}"
-                            IsVisible="{Binding Source={x:Reference SearchPageView}, Path=BindingContext.IsBusy}"
+                    <ActivityIndicator IsRunning="{Binding IsBusy}"
+                            IsVisible="{Binding IsBusy}"
                             HorizontalOptions="CenterAndExpand" 
                             VerticalOptions="CenterAndExpand" 
                             Color="Black"/>

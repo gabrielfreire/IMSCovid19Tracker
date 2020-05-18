@@ -14,6 +14,14 @@ namespace IMSCovidTracker.ViewModels
 {
     public class SearchModalViewModel : BaseViewModel
     {
+        public Command<string> CountrySelectedCommand => new Command<string>(async (cName) => await HandleCountrySelected(cName));
+
+        private Task HandleCountrySelected(string cName)
+        {
+            SendResult(cName);
+            return Task.CompletedTask;
+        }
+
         public void SendResult(string countryName)
         {
             MessagingCenter.Send<SearchModalViewModel, string>(this, "receivedCountryName", countryName);
